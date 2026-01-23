@@ -12,8 +12,8 @@
             theme: {
                 extend: {
                     colors: {
-                        'nj-blue': '#0B2F5C', /* Azul extraído do logo */
-                        'nj-silver': '#808080', /* Cinza/Prata do logo */
+                        'nj-blue': '#0B2F5C',
+                        'nj-silver': '#808080',
                         'nj-dark': '#1a1a1a', 
                         'nj-bg': '#f8f9fa'
                     },
@@ -27,9 +27,20 @@
     </script>
 
     <style>
+        /* Regras de Impressão (Mantém o A4 Fixo) */
         @media print {
             .no-print { display: none !important; }
-            body { background: white; -webkit-print-color-adjust: exact; }
+            body { background: white; -webkit-print-color-adjust: exact; padding: 0 !important; }
+            /* Força o container a ser A4 na impressão */
+            .page-container {
+                width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                padding: 15mm !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            /* Remove estilos de input na impressão */
             input, textarea, select { 
                 border: none !important; 
                 background: transparent !important; 
@@ -37,12 +48,23 @@
                 padding: 0; 
                 margin: 0;
             }
-            /* Estilo dos checkboxes na impressão */
             input[type="checkbox"] { appearance: none; }
             input[type="checkbox"]:checked:after { content: '☒'; font-size: 14px; color: #0B2F5C; font-weight: bold; }
             input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 14px; color: #333; }
-            
             ::placeholder { color: transparent; }
+            
+            /* Garante que grids funcionem no papel */
+            .print-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+            .print-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .print-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .print-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
+            .print-col-span-8 { grid-column: span 8 / span 8 !important; }
+            .print-col-span-4 { grid-column: span 4 / span 4 !important; }
+            .print-col-span-3 { grid-column: span 3 / span 3 !important; }
+            .print-col-span-2 { grid-column: span 2 / span 2 !important; }
+            .print-flex-row { flex-direction: row !important; }
+            .print-w-half { width: 50% !important; }
+            .print-text-right { text-align: right !important; }
         }
 
         /* Estilos de tela */
@@ -69,28 +91,28 @@
         }
     </style>
 </head>
-<body class="bg-gray-200 min-h-screen flex flex-col items-center py-8 print:py-0 print:bg-white">
+<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white">
 
     <div class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-3 shadow-lg z-50 flex justify-between items-center text-sm">
-        <div class="font-bold tracking-widest pl-4">SISTEMA DE PROPOSTAS</div>
-        <button onclick="window.print()" class="bg-white text-nj-blue px-4 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition mr-4 shadow">
+        <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm">SISTEMA DE PROPOSTAS</div>
+        <button onclick="window.print()" class="bg-white text-nj-blue px-3 py-1 md:px-4 md:py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition mr-2 md:mr-4 shadow text-xs md:text-sm">
             🖨️ Gerar PDF
         </button>
     </div>
 
-    <div class="bg-white w-[210mm] min-h-[297mm] shadow-2xl print:shadow-none p-[15mm] mt-8 print:mt-0 print:w-full box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
+    <div class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-12 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
 
-        <header class="flex justify-between items-end border-b-4 border-nj-blue pb-4 mb-6">
-            <div class="w-1/2">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-20 object-contain">
+        <header class="flex flex-col md:flex-row print:flex-row justify-between items-center md:items-end border-b-4 border-nj-blue pb-4 mb-6 text-center md:text-left print:text-left">
+            <div class="w-full md:w-1/2 print:w-half mb-4 md:mb-0">
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-16 md:h-20 object-contain mx-auto md:mx-0 print:mx-0">
             </div>
-            <div class="w-1/2 text-right">
-                <h1 class="text-xl font-bold uppercase text-nj-blue tracking-wide">Proposta para Locação</h1>
-                <p class="text-xs text-nj-silver font-bold uppercase tracking-widest">Investimentos Imobiliários</p>
+            <div class="w-full md:w-1/2 print:w-half md:text-right print:text-right">
+                <h1 class="text-lg md:text-xl font-bold uppercase text-nj-blue tracking-wide">Proposta para Locação</h1>
+                <p class="text-[10px] md:text-xs text-nj-silver font-bold uppercase tracking-widest">Investimentos Imobiliários</p>
             </div>
         </header>
 
-        <div class="grid grid-cols-4 gap-4 mb-6 bg-slate-50 p-3 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
+        <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 mb-6 bg-slate-50 p-3 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
             <div>
                 <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
                 <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700" placeholder="Nome">
@@ -113,39 +135,41 @@
             <p class="mb-2">
                 Autorizo a empresa <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a levar ao Proprietário do imóvel sito à:
             </p>
-            <div class="grid grid-cols-12 gap-2 mb-2 items-end">
-                <div class="col-span-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 mb-2 items-end">
+                <div class="md:col-span-8 print:col-span-8">
                     <input type="text" class="input-inline w-full text-left uppercase" placeholder="ENDEREÇO COMPLETO">
                 </div>
-                <div class="col-span-2">
-                    <span class="text-xs text-gray-500">Nº</span>
+                <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
+                    <span class="text-xs text-gray-500 md:block">Nº</span>
                     <input type="text" class="input-inline w-full" placeholder="000">
                 </div>
-                <div class="col-span-2">
-                    <span class="text-xs text-gray-500">Compl.</span>
+                <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
+                    <span class="text-xs text-gray-500 md:block">Compl.</span>
                     <input type="text" class="input-inline w-full" placeholder="Conj/Apto">
                 </div>
             </div>
-            <div class="grid grid-cols-12 gap-2 mb-4 items-end">
-                <div class="col-span-3">
-                    <span class="text-xs text-gray-500">CEP</span>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 mb-4 items-end">
+                <div class="md:col-span-3 print:col-span-3 flex gap-2 items-center md:block">
+                    <span class="text-xs text-gray-500 md:block">CEP</span>
                     <input type="text" class="input-inline w-full" placeholder="00000-000">
                 </div>
-                <div class="col-span-4">
-                    <span class="text-xs text-gray-500">Cidade</span>
+                <div class="md:col-span-4 print:col-span-4 flex gap-2 items-center md:block">
+                    <span class="text-xs text-gray-500 md:block">Cidade</span>
                     <input type="text" value="SÃO PAULO" class="input-inline w-full uppercase">
                 </div>
-                <div class="col-span-2">
-                    <span class="text-xs text-gray-500">UF</span>
+                <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
+                    <span class="text-xs text-gray-500 md:block">UF</span>
                     <input type="text" value="SP" class="input-inline w-full uppercase">
                 </div>
-                <div class="col-span-3 text-right text-xs italic text-gray-400 self-center">
+                <div class="md:col-span-3 print:col-span-3 md:text-right print:text-right text-xs italic text-gray-400 self-center hidden md:block print:block">
                     esta Proposta para alugar o referido imóvel.
                 </div>
             </div>
 
             <div class="border-l-4 border-nj-blue pl-4 py-3 bg-slate-50 print:bg-transparent print:p-0 my-5">
-                <div class="grid grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8">
                     <div>
                         <span class="text-nj-blue font-bold block text-xs uppercase mb-1">Aluguel Mensal (R$)</span>
                         <input type="text" class="text-2xl font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0.000,00">
@@ -155,10 +179,10 @@
                         <input type="text" class="text-2xl font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="36 meses">
                     </div>
                 </div>
-                <p class="text-[10px] text-gray-500 mt-2 italic">*Acrescido das despesas condominiais e impostos que recaem sobre o imóvel. Reajuste conforme Lei.</p>
-                <div class="flex items-center gap-2 mt-2">
+                <p class="text-[10px] text-gray-500 mt-2 italic">*Acrescido das despesas condominiais e impostos.</p>
+                <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-2">
                     <span class="text-xs text-gray-600 font-bold uppercase">Proposta Válida até:</span>
-                    <input type="date" class="bg-transparent border-b border-gray-300 text-sm w-32 text-gray-700">
+                    <input type="date" class="bg-transparent border-b border-gray-300 text-sm w-full md:w-32 text-gray-700">
                 </div>
             </div>
         </div>
@@ -171,50 +195,50 @@
         <div class="mb-6">
             <div class="section-title">Informações do Proponente</div>
             <div class="grid grid-cols-1 gap-y-2 text-sm p-2 border border-gray-100 rounded print:border-none print:p-0">
-                <div class="flex gap-2 items-center">
-                    <span class="font-bold text-gray-700 w-24">Proponente:</span>
-                    <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="NOME COMPLETO OU RAZÃO SOCIAL">
+                <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
+                    <span class="font-bold text-gray-700 md:w-24">Proponente:</span>
+                    <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="NOME COMPLETO">
                 </div>
-                <div class="flex gap-4">
-                    <div class="flex gap-2 flex-1 items-center">
+                <div class="flex flex-col md:flex-row print:flex-row gap-2 md:gap-4">
+                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 flex-1 md:items-center">
                         <span class="font-bold text-gray-700">CNPJ/CPF:</span>
                         <input type="text" class="input-inline flex-1 text-left">
                     </div>
-                    <div class="flex gap-2 flex-1 items-center">
+                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 flex-1 md:items-center">
                         <span class="font-bold text-gray-700">I.E/RG:</span>
                         <input type="text" class="input-inline flex-1 text-left">
                     </div>
                 </div>
-                <div class="flex gap-2 items-center">
-                    <span class="font-bold text-gray-700 w-24">Endereço:</span>
+                <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
+                    <span class="font-bold text-gray-700 md:w-24">Endereço:</span>
                     <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="RUA, Nº, BAIRRO">
                 </div>
-                <div class="flex gap-2 items-center">
-                    <span class="font-bold text-gray-700 w-24">Ramo Ativ.:</span>
+                <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
+                    <span class="font-bold text-gray-700 md:w-24">Ramo Ativ.:</span>
                     <input type="text" class="input-inline flex-1 text-left uppercase">
                 </div>
                 
                 <div class="mt-2 pt-2 border-t border-gray-200">
-                    <div class="flex gap-2 items-center">
-                        <span class="font-bold text-gray-700 w-24">Responsável:</span>
+                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center mb-2 md:mb-0">
+                        <span class="font-bold text-gray-700 md:w-24">Responsável:</span>
                         <input type="text" class="input-inline flex-1 text-left uppercase">
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mt-1">
-                        <div class="flex gap-2 items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 md:gap-4 mt-1">
+                        <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
                             <span class="font-bold text-gray-700">Nacionalidade:</span>
                             <input type="text" class="input-inline flex-1" value="BRASILEIRO(A)">
                         </div>
-                        <div class="flex gap-2 items-center">
+                        <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
                             <span class="font-bold text-gray-700">Profissão:</span>
                             <input type="text" class="input-inline flex-1 uppercase">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mt-1">
-                        <div class="flex gap-2 items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 md:gap-4 mt-1">
+                        <div class="flex flex-row md:items-center gap-2">
                             <span class="font-bold text-gray-700 text-xs">Possui Imóvel?</span>
                             <input type="text" class="input-inline flex-1" placeholder="SIM/NÃO">
                         </div>
-                        <div class="flex gap-2 items-center">
+                        <div class="flex flex-row md:items-center gap-2">
                             <span class="font-bold text-gray-700 text-xs">Local Alugado?</span>
                             <input type="text" class="input-inline flex-1" placeholder="SIM/NÃO">
                         </div>
@@ -225,30 +249,30 @@
 
         <div class="mb-4">
             <div class="section-title">Garantia Locatícia</div>
-            <div class="grid grid-cols-3 gap-x-4 gap-y-2 p-2">
+            <div class="grid grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-x-4 gap-y-4 md:gap-y-2 p-2">
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Caução em Dinheiro</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Caução em Dinheiro</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Fiador</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Fiador</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Seguro Fiança</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Seguro Fiança</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Capitalização</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Capitalização</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Caução Imobiliária</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Caução Imobiliária</span>
                 </label>
                 <label class="flex items-center space-x-2 cursor-pointer group">
                     <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
-                    <span class="group-hover:text-nj-blue transition">Carta Fiança</span>
+                    <span class="text-xs md:text-sm group-hover:text-nj-blue transition">Carta Fiança</span>
                 </label>
             </div>
         </div>
@@ -272,7 +296,7 @@
                 <input type="text" class="border-b border-black text-center w-12" value="2026">
             </div>
 
-            <div class="grid grid-cols-2 gap-16 text-center">
+            <div class="grid grid-cols-2 gap-4 md:gap-16 text-center">
                 <div>
                     <div class="h-12 border-b border-black mb-1 flex items-end justify-center"></div>
                     <p class="font-bold text-sm text-nj-blue">PROPRIETÁRIO</p>
@@ -287,12 +311,12 @@
         </div>
 
         <footer class="mt-8 text-center border-t-2 border-nj-silver pt-3">
-            <div class="flex justify-center gap-6 text-xs font-bold text-nj-blue mb-1">
+            <div class="flex flex-col md:flex-row print:flex-row justify-center gap-2 md:gap-6 text-xs font-bold text-nj-blue mb-1">
                 <span>📧 contato@netojunior.com.br</span>
                 <span>📞 (11) 2609-4093</span>
                 <span>📷 @netojunior.realestate</span>
             </div>
-            <div class="text-[10px] text-gray-500 uppercase tracking-wide">
+            <div class="text-[10px] text-gray-500 uppercase tracking-wide px-4 md:px-0">
                 Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP • CEP: 04709-110
             </div>
         </footer>
