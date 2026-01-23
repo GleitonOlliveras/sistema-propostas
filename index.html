@@ -45,10 +45,8 @@
             
             .page-container {
                 width: 210mm !important;
-                /* Altura máxima fixa para forçar 1 página */
                 max-height: 297mm !important; 
                 margin: 0 !important;
-                /* Margens reduzidas para caber mais conteúdo */
                 padding: 8mm 12mm !important; 
                 box-shadow: none !important;
                 border: none !important;
@@ -246,10 +244,11 @@
             </div>
 
             <div class="mb-3 print:mb-1">
-                <div class="section-title">Informações do Proponente / Comprador</div>
+                <div id="prop-title" class="section-title">Informações do Proponente</div>
+                
                 <div class="grid grid-cols-1 gap-y-1 text-xs print:text-[9px] p-2 border border-gray-100 rounded print:border-none print:p-0">
                     <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                        <span class="font-bold text-gray-700 md:w-20">Proponente:</span>
+                        <span id="prop-label" class="font-bold text-gray-700 md:w-20">Proponente:</span>
                         <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="NOME COMPLETO">
                     </div>
                     <div class="flex flex-col md:flex-row print:flex-row gap-2 md:gap-4">
@@ -344,9 +343,9 @@
                     </div>
                     <div class="flex flex-col items-center">
                         <div class="h-6 border-b border-black mb-1 w-full"></div>
-                        <input type="text" class="w-full text-center font-bold text-[9px] uppercase bg-transparent outline-none placeholder-gray-300 text-nj-blue" placeholder="PROPONENTE">
+                        <input id="prop-sign-input" type="text" class="w-full text-center font-bold text-[9px] uppercase bg-transparent outline-none placeholder-gray-300 text-nj-blue" placeholder="PROPONENTE">
                         <input type="text" class="w-full text-center text-[8px] bg-transparent outline-none placeholder-gray-300 text-gray-600" placeholder="CPF/CNPJ">
-                        <p class="text-[0.5rem] text-gray-400 uppercase mt-0">PROPONENTE - DE ACORDO</p>
+                        <p id="prop-sign-label" class="text-[0.5rem] text-gray-400 uppercase mt-0">PROPONENTE - DE ACORDO</p>
                     </div>
                 </div>
             </div>
@@ -376,29 +375,53 @@
             const termsVenda = document.getElementById('terms-venda');
             const btnLocacao = document.getElementById('btn-locacao');
             const btnVenda = document.getElementById('btn-venda');
+            
+            // Elementos Dinâmicos de Título e Assinatura
+            const propTitle = document.getElementById('prop-title');
+            const propLabel = document.getElementById('prop-label');
+            const propSignInput = document.getElementById('prop-sign-input');
+            const propSignLabel = document.getElementById('prop-sign-label');
 
             if (mode === 'locacao') {
+                // Textos Locação
                 title.textContent = 'Proposta para Locação';
                 actionText.textContent = 'alugar';
+                propTitle.textContent = 'Informações do Proponente';
+                propLabel.textContent = 'Proponente:';
+                propSignInput.placeholder = 'PROPONENTE';
+                propSignLabel.textContent = 'PROPONENTE - DE ACORDO';
+
+                // Exibir/Ocultar
                 boxLocacao.classList.remove('hidden');
                 detailsLocacao.classList.remove('hidden');
                 termsLocacao.classList.remove('hidden');
                 boxVenda.classList.add('hidden');
                 detailsVenda.classList.add('hidden');
                 termsVenda.classList.add('hidden');
+                
+                // Botões
                 btnLocacao.classList.add('active', 'bg-white', 'text-nj-blue');
                 btnLocacao.classList.remove('text-white');
                 btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue');
                 btnVenda.classList.add('text-white');
             } else {
+                // Textos Venda
                 title.textContent = 'Proposta de Compra';
                 actionText.textContent = 'adquirir';
+                propTitle.textContent = 'Informações do Comprador';
+                propLabel.textContent = 'Comprador:';
+                propSignInput.placeholder = 'COMPRADOR';
+                propSignLabel.textContent = 'COMPRADOR - DE ACORDO';
+
+                // Exibir/Ocultar
                 boxVenda.classList.remove('hidden');
                 detailsVenda.classList.remove('hidden');
                 termsVenda.classList.remove('hidden');
                 boxLocacao.classList.add('hidden');
                 detailsLocacao.classList.add('hidden');
                 termsLocacao.classList.add('hidden');
+                
+                // Botões
                 btnVenda.classList.add('active', 'bg-white', 'text-nj-blue');
                 btnVenda.classList.remove('text-white');
                 btnLocacao.classList.remove('active', 'bg-white', 'text-nj-blue');
