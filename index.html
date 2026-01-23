@@ -37,10 +37,10 @@
     </script>
 
     <style>
-        /* --- REGRAS DE IMPRESSÃO (CORREÇÃO DE FORMATAÇÃO) --- */
+        /* --- REGRAS DE IMPRESSÃO --- */
         @media print {
             @page { 
-                margin: 0mm; /* Remove cabeçalhos/rodapés do navegador */
+                margin: 0mm; 
                 size: A4; 
             }
             .no-print { display: none !important; }
@@ -50,12 +50,12 @@
                 -webkit-print-color-adjust: exact; 
                 padding: 0 !important; 
                 margin: 0 !important;
-                zoom: 82%; /* Ajuste de escala para caber em 1 página */
+                zoom: 82%; 
             }
             
             .page-container {
                 width: 210mm !important;
-                height: 296mm !important; /* Altura fixa A4 */
+                height: 296mm !important;
                 margin: 0 auto !important;
                 padding: 6mm 12mm !important; 
                 box-shadow: none !important;
@@ -63,26 +63,30 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                overflow: hidden; /* Evita vazamento de conteúdo */
+                overflow: hidden;
             }
 
             input, textarea, select { 
                 border: none !important; 
                 background: transparent !important; 
                 resize: none; 
-                padding: 0 4px !important; /* Adiciona respiro lateral no texto */
                 margin: 0;
+            }
+
+            /* Correção do Espaçamento nos Boxes Azuis */
+            .box-input-print {
+                padding-left: 12px !important; /* Espaço generoso da borda azul */
             }
             
             ::placeholder { color: transparent; }
             .hidden-print { display: none !important; }
 
-            /* Fontes Otimizadas */
+            /* Fontes */
             .print-text-xs { font-size: 9px !important; line-height: 1.1 !important; }
             .print-text-tiny { font-size: 8px !important; line-height: 1 !important; }
             .print-text-lg { font-size: 13px !important; }
             
-            /* Grids Precisos */
+            /* Grids */
             .print-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
             .print-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
             .print-col-span-8 { grid-column: span 8 / span 8 !important; }
@@ -93,18 +97,26 @@
             .print-w-half { width: 50% !important; }
             .print-text-right { text-align: right !important; }
             
-            /* Ajustes Finos de Espaço */
-            .print-mb-0 { margin-bottom: 0 !important; }
-            .print-mb-1 { margin-bottom: 3px !important; }
-            .print-gap-1 { gap: 4px !important; }
-            .print-p-0 { padding: 0 !important; }
+            /* Correção de Alinhamento das Garantias */
+            .print-flex-center { 
+                display: flex !important; 
+                align-items: center !important; 
+                margin-bottom: 4px !important;
+            }
             
-            input[type="checkbox"] { appearance: none; display: inline-block; margin-right: 2px; }
-            input[type="checkbox"]:checked:after { content: '☒'; font-size: 11px; color: #0B2F5C; font-weight: bold; }
-            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 11px; color: #333; }
+            /* Checkbox Customizado na Impressão */
+            input[type="checkbox"] { 
+                appearance: none; 
+                display: inline-block; 
+                margin-right: 6px !important; /* Distância do texto */
+                position: relative;
+                top: 1px;
+            }
+            input[type="checkbox"]:checked:after { content: '☒'; font-size: 12px; color: #0B2F5C; font-weight: bold; }
+            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 12px; color: #333; }
         }
 
-        /* Estilo dos Inputs na Tela */
+        /* Estilos de Tela */
         .input-inline {
             border-bottom: 1px dashed #ccc;
             color: #000;
@@ -112,7 +124,7 @@
             text-align: center;
             outline: none;
             transition: all 0.3s;
-            padding-left: 4px; /* Espaço para não grudar no label */
+            padding-left: 4px;
         }
         .input-inline:focus { border-bottom: 2px solid #0B2F5C; background-color: #eef2ff; }
 
@@ -218,15 +230,15 @@
                 <div id="box-locacao" class="mode-section border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
                     <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8 print:gap-4">
                         <div>
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Aluguel Mensal (R$)</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0.000,00">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Aluguel Mensal (R$)</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0.000,00">
                         </div>
                         <div>
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Prazo do Contrato</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="36 meses">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Prazo do Contrato</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="36 meses">
                         </div>
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-1">
+                    <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-1 box-input-print">
                         <span class="text-[10px] text-gray-600 font-bold uppercase">Proposta Válida até:</span>
                         <input type="date" class="bg-transparent border-b border-gray-300 text-xs w-full md:w-32 text-gray-700 pl-1">
                     </div>
@@ -235,19 +247,19 @@
                  <div id="box-venda" class="mode-section hidden border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
                     <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-2">
                         <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Valor Compra (R$)</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0.000,00">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Valor Compra (R$)</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0.000,00">
                         </div>
                         <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Entrada (R$)</span>
-                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0,00">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Entrada (R$)</span>
+                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0,00">
                         </div>
                         <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Financiamento (R$)</span>
-                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0,00">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Financiamento (R$)</span>
+                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0,00">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1">
+                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1 box-input-print">
                          <div>
                             <span class="text-[10px] text-nj-blue font-bold uppercase block">FGTS</span>
                             <input type="text" class="input-inline w-full text-xs text-left pl-1" placeholder="Valor ou Não">
@@ -308,12 +320,12 @@
             <div id="details-locacao" class="mode-section mb-3 print:mb-2">
                 <div class="section-title">Garantia Locatícia</div>
                 <div class="grid grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-x-4 gap-y-1 p-2 print:p-0">
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução em Dinheiro</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Fiador</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Seguro Fiança</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Capitalização</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução Imobiliária</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Carta Fiança</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução em Dinheiro</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Fiador</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Seguro Fiança</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Capitalização</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução Imobiliária</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Carta Fiança</span></label>
                 </div>
             </div>
 
@@ -381,15 +393,15 @@
     </div>
 
     <script>
-        // Função para gerar o Nome do Arquivo dinâmico
         function updateDocTitle(type) {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = String(today.getFullYear()).slice(-2);
             
-            // Ex: Proposta Locação NJ230126
-            const newTitle = `Proposta ${type} NJ${day}${month}${year}`;
+            // FORMATAÇÃO DO NOME DO ARQUIVO: Proposta [Tipo] NJRE[Data]
+            // Exemplo: Proposta Locacao NJRE230126
+            const newTitle = `Proposta ${type} NJRE${day}${month}${year}`;
             document.title = newTitle;
         }
 
@@ -430,7 +442,7 @@
                 btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue');
                 btnVenda.classList.add('text-white');
                 
-                updateDocTitle('Locação');
+                updateDocTitle('Locacao');
             } else {
                 title.textContent = 'Proposta de Compra';
                 actionText.textContent = 'adquirir';
@@ -455,8 +467,7 @@
             }
         }
 
-        // Garante que o título esteja correto ao carregar e imprimir
-        window.addEventListener('load', () => updateDocTitle('Locação'));
+        window.addEventListener('load', () => updateDocTitle('Locacao'));
         
         window.addEventListener('beforeprint', () => {
             const dateInputs = document.querySelectorAll('input[type="date"]');
