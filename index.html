@@ -37,17 +37,26 @@
     </script>
 
     <style>
-        /* Regras de Impressão Otimizadas para 1 Página */
+        /* --- REGRAS DE IMPRESSÃO OTIMIZADAS PARA MOBILE --- */
         @media print {
             @page { margin: 0; size: A4; }
             .no-print { display: none !important; }
-            body { background: white; -webkit-print-color-adjust: exact; padding: 0 !important; }
+            
+            body { 
+                background: white; 
+                -webkit-print-color-adjust: exact; 
+                padding: 0 !important; 
+                /* O SEGREDO DO MOBILE: Zoom out para garantir 1 página */
+                zoom: 88%; 
+            }
             
             .page-container {
                 width: 210mm !important;
-                max-height: 297mm !important; 
+                /* Altura livre para deixar o zoom agir */
+                min-height: 297mm !important; 
                 margin: 0 !important;
-                padding: 8mm 12mm !important; 
+                /* Margens laterais mais seguras para impresoras domésticas */
+                padding: 5mm 10mm !important; 
                 box-shadow: none !important;
                 border: none !important;
                 display: flex;
@@ -66,12 +75,12 @@
             ::placeholder { color: transparent; }
             .hidden-print { display: none !important; }
 
-            /* Força fontes menores na impressão */
+            /* Fontes e Espaçamentos Compactos */
             .print-text-xs { font-size: 9px !important; line-height: 1.1 !important; }
             .print-text-tiny { font-size: 8px !important; line-height: 1 !important; }
-            .print-text-lg { font-size: 14px !important; }
+            .print-text-lg { font-size: 13px !important; } /* Reduzido levemente */
             
-            /* Compactação de Grids */
+            /* Grids */
             .print-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
             .print-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
             .print-col-span-8 { grid-column: span 8 / span 8 !important; }
@@ -81,13 +90,16 @@
             .print-flex-row { flex-direction: row !important; }
             .print-w-half { width: 50% !important; }
             .print-text-right { text-align: right !important; }
-            .print-mb-1 { margin-bottom: 2px !important; }
+            
+            /* Margens Verticais Quase Zeradas */
             .print-mb-0 { margin-bottom: 0 !important; }
+            .print-mb-1 { margin-bottom: 2px !important; }
+            .print-gap-1 { gap: 2px !important; }
             .print-p-0 { padding: 0 !important; }
             
             input[type="checkbox"] { appearance: none; display: inline-block; }
-            input[type="checkbox"]:checked:after { content: '☒'; font-size: 12px; color: #0B2F5C; font-weight: bold; }
-            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 12px; color: #333; }
+            input[type="checkbox"]:checked:after { content: '☒'; font-size: 11px; color: #0B2F5C; font-weight: bold; }
+            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 11px; color: #333; }
         }
 
         .input-inline {
@@ -136,15 +148,15 @@
 
         <div>
             <header class="flex flex-col md:flex-row print:flex-row justify-between items-center md:items-end border-b-2 border-nj-blue pb-2 mb-3 text-center md:text-left print:text-left print:pb-1 print:mb-1">
-                <div class="w-full md:w-1/2 print:w-half mb-2 md:mb-0">
-                    <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-16 md:h-16 print:h-12 object-contain mx-auto md:mx-0 print:mx-0">
+                <div class="w-full md:w-1/2 print:w-half mb-2 md:mb-0 print:mb-0">
+                    <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-16 md:h-16 print:h-10 object-contain mx-auto md:mx-0 print:mx-0">
                 </div>
                 <div class="w-full md:w-1/2 print:w-half md:text-right print:text-right">
                     <h1 id="doc-title" class="text-lg md:text-xl print:text-lg font-bold uppercase text-nj-blue tracking-wide">Proposta para Locação</h1>
                 </div>
             </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-2 mb-3 print:mb-1 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
+            <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-1 mb-3 print:mb-1 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
                     <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs" placeholder="Nome">
@@ -167,7 +179,7 @@
                 <p class="mb-1 print:mb-0">
                     Autorizo a <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a levar ao Proprietário do imóvel sito à:
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 mb-1 print:mb-0 items-end">
+                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-1 print:mb-0 items-end">
                     <div class="md:col-span-8 print:col-span-8">
                         <input type="text" class="input-inline w-full text-left uppercase text-xs" placeholder="ENDEREÇO COMPLETO">
                     </div>
@@ -180,7 +192,7 @@
                         <input type="text" class="input-inline w-full text-xs" placeholder="Conj/Apto">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 mb-2 print:mb-1 items-end">
+                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-2 print:mb-1 items-end">
                     <div class="md:col-span-3 print:col-span-3 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">CEP</span>
                         <input type="text" class="input-inline w-full text-xs" placeholder="00000-000">
@@ -216,7 +228,7 @@
                 </div>
 
                  <div id="box-venda" class="mode-section hidden border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-1">
-                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-2">
                         <div class="md:col-span-1 print:col-span-1">
                             <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Valor Compra (R$)</span>
                             <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0.000,00">
@@ -230,7 +242,7 @@
                             <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0,00">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mt-1">
+                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1">
                          <div>
                             <span class="text-[10px] text-nj-blue font-bold uppercase block">FGTS</span>
                             <input type="text" class="input-inline w-full text-xs text-left" placeholder="Valor ou Não">
@@ -251,7 +263,7 @@
                         <span id="prop-label" class="font-bold text-gray-700 md:w-20">Proponente:</span>
                         <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="NOME COMPLETO">
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row gap-2 md:gap-4">
+                    <div class="flex flex-col md:flex-row print:flex-row gap-2 print:gap-1 md:gap-4">
                         <div class="flex flex-col md:flex-row print:flex-row md:gap-2 flex-1 md:items-center">
                             <span class="font-bold text-gray-700">CNPJ/CPF:</span>
                             <input type="text" class="input-inline flex-1 text-left">
