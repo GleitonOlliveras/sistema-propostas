@@ -50,14 +50,15 @@
                 -webkit-print-color-adjust: exact; 
                 padding: 0 !important; 
                 margin: 0 !important;
-                zoom: 82%; 
+                zoom: 82%; /* Mantém o zoom de segurança para Mobile */
             }
             
             .page-container {
                 width: 210mm !important;
                 height: 296mm !important;
                 margin: 0 auto !important;
-                padding: 6mm 12mm !important; 
+                /* Reduzi margem para 5mm para caber a letra maior */
+                padding: 5mm 10mm !important; 
                 box-shadow: none !important;
                 border: none !important;
                 display: flex;
@@ -71,20 +72,24 @@
                 background: transparent !important; 
                 resize: none; 
                 margin: 0;
+                padding: 0;
             }
 
-            /* Correção do Espaçamento nos Boxes Azuis */
-            .box-input-print {
-                padding-left: 12px !important; /* Espaço generoso da borda azul */
+            /* Espaçamento Extra na Borda Azul */
+            .box-indent-print {
+                padding-left: 8px !important; 
             }
             
             ::placeholder { color: transparent; }
             .hidden-print { display: none !important; }
 
-            /* Fontes */
-            .print-text-xs { font-size: 9px !important; line-height: 1.1 !important; }
-            .print-text-tiny { font-size: 8px !important; line-height: 1 !important; }
-            .print-text-lg { font-size: 13px !important; }
+            /* --- FONTES AUMENTADAS --- */
+            /* De 9px para 10px */
+            .print-text-xs { font-size: 10px !important; line-height: 1.2 !important; }
+            /* De 8px para 9px */
+            .print-text-tiny { font-size: 9px !important; line-height: 1.1 !important; }
+            /* De 13px para 14px */
+            .print-text-lg { font-size: 14px !important; }
             
             /* Grids */
             .print-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
@@ -97,23 +102,25 @@
             .print-w-half { width: 50% !important; }
             .print-text-right { text-align: right !important; }
             
-            /* Correção de Alinhamento das Garantias */
-            .print-flex-center { 
+            /* Correção Checkboxes */
+            .print-checkbox-container { 
                 display: flex !important; 
+                flex-direction: row !important;
                 align-items: center !important; 
+                white-space: nowrap !important;
                 margin-bottom: 4px !important;
             }
             
-            /* Checkbox Customizado na Impressão */
             input[type="checkbox"] { 
                 appearance: none; 
                 display: inline-block; 
-                margin-right: 6px !important; /* Distância do texto */
+                margin-right: 6px !important;
                 position: relative;
-                top: 1px;
+                top: 0px;
+                flex-shrink: 0 !important;
             }
-            input[type="checkbox"]:checked:after { content: '☒'; font-size: 12px; color: #0B2F5C; font-weight: bold; }
-            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 12px; color: #333; }
+            input[type="checkbox"]:checked:after { content: '☒'; font-size: 14px; color: #0B2F5C; font-weight: bold; line-height: 1; }
+            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 14px; color: #333; line-height: 1; }
         }
 
         /* Estilos de Tela */
@@ -131,10 +138,10 @@
         .section-title {
             background-color: #0B2F5C;
             color: white;
-            padding: 1px 6px;
+            padding: 2px 6px;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.7rem;
+            font-size: 0.75rem; /* Aumentei um pouco na tela tbm */
             margin-bottom: 3px;
             letter-spacing: 1px;
             border-radius: 2px;
@@ -176,19 +183,19 @@
             <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-2 mb-3 print:mb-2 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
-                    <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs pl-1" placeholder="Nome">
+                    <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1" placeholder="Nome">
                 </div>
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Edifício</label>
-                    <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs pl-1" placeholder="Nome">
+                    <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1" placeholder="Nome">
                 </div>
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Local</label>
-                    <input type="text" value="São Paulo" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs pl-1">
+                    <input type="text" value="São Paulo" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1">
                 </div>
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Data</label>
-                    <input type="date" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs pl-1">
+                    <input type="date" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1">
                 </div>
             </div>
 
@@ -198,29 +205,29 @@
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-1 print:mb-1 items-end">
                     <div class="md:col-span-8 print:col-span-8">
-                        <input type="text" class="input-inline w-full text-left uppercase text-xs pl-1" placeholder="ENDEREÇO COMPLETO">
+                        <input type="text" class="input-inline w-full text-left uppercase text-xs print:text-xs pl-1" placeholder="ENDEREÇO COMPLETO">
                     </div>
                     <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">Nº</span>
-                        <input type="text" class="input-inline w-full text-xs pl-1" placeholder="000">
+                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1" placeholder="000">
                     </div>
                     <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">Compl.</span>
-                        <input type="text" class="input-inline w-full text-xs pl-1" placeholder="Conj/Apto">
+                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1" placeholder="Conj/Apto">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-2 print:mb-2 items-end">
                     <div class="md:col-span-3 print:col-span-3 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">CEP</span>
-                        <input type="text" class="input-inline w-full text-xs pl-1" placeholder="00000-000">
+                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1" placeholder="00000-000">
                     </div>
                     <div class="md:col-span-4 print:col-span-4 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">Cidade</span>
-                        <input type="text" value="SÃO PAULO" class="input-inline w-full uppercase text-xs pl-1">
+                        <input type="text" value="SÃO PAULO" class="input-inline w-full uppercase text-xs print:text-xs pl-1">
                     </div>
                     <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">UF</span>
-                        <input type="text" value="SP" class="input-inline w-full uppercase text-xs pl-1">
+                        <input type="text" value="SP" class="input-inline w-full uppercase text-xs print:text-xs pl-1">
                     </div>
                     <div class="md:col-span-3 print:col-span-3 md:text-right print:text-right text-[10px] italic text-gray-400 self-center hidden md:block print:block">
                         esta Proposta para <span id="doc-action-text">alugar</span> o imóvel.
@@ -229,44 +236,44 @@
 
                 <div id="box-locacao" class="mode-section border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
                     <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8 print:gap-4">
-                        <div>
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Aluguel Mensal (R$)</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0.000,00">
+                        <div class="box-indent-print">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Aluguel Mensal (R$)</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0.000,00">
                         </div>
-                        <div>
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Prazo do Contrato</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="36 meses">
+                        <div class="box-indent-print">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Prazo do Contrato</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="36 meses">
                         </div>
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-1 box-input-print">
+                    <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-1 box-indent-print">
                         <span class="text-[10px] text-gray-600 font-bold uppercase">Proposta Válida até:</span>
-                        <input type="date" class="bg-transparent border-b border-gray-300 text-xs w-full md:w-32 text-gray-700 pl-1">
+                        <input type="date" class="bg-transparent border-b border-gray-300 text-xs print:text-xs w-full md:w-32 text-gray-700 pl-1">
                     </div>
                 </div>
 
                  <div id="box-venda" class="mode-section hidden border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
                     <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-2">
-                        <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Valor Compra (R$)</span>
-                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0.000,00">
+                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Valor Compra (R$)</span>
+                            <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0.000,00">
                         </div>
-                        <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Entrada (R$)</span>
-                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0,00">
+                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Entrada (R$)</span>
+                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0,00">
                         </div>
-                        <div class="md:col-span-1 print:col-span-1">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1 box-input-print">Financiamento (R$)</span>
-                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1 box-input-print" placeholder="0,00">
+                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
+                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Financiamento (R$)</span>
+                            <input type="text" class="text-lg print:text-base font-serif font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1" placeholder="0,00">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1 box-input-print">
+                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1 box-indent-print">
                          <div>
                             <span class="text-[10px] text-nj-blue font-bold uppercase block">FGTS</span>
-                            <input type="text" class="input-inline w-full text-xs text-left pl-1" placeholder="Valor ou Não">
+                            <input type="text" class="input-inline w-full text-xs print:text-xs text-left pl-1" placeholder="Valor ou Não">
                         </div>
                         <div>
                             <span class="text-[10px] text-nj-blue font-bold uppercase block">Permuta</span>
-                            <input type="text" class="input-inline w-full text-xs text-left pl-1" placeholder="Descreva ou Não">
+                            <input type="text" class="input-inline w-full text-xs print:text-xs text-left pl-1" placeholder="Descreva ou Não">
                         </div>
                     </div>
                 </div>
@@ -275,7 +282,7 @@
             <div class="mb-3 print:mb-1">
                 <div id="prop-title" class="section-title">Informações do Proponente</div>
                 
-                <div class="grid grid-cols-1 gap-y-1 text-xs print:text-[9px] p-2 border border-gray-100 rounded print:border-none print:p-0">
+                <div class="grid grid-cols-1 gap-y-1 text-xs print:text-xs p-2 border border-gray-100 rounded print:border-none print:p-0">
                     <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
                         <span id="prop-label" class="font-bold text-gray-700 md:w-20 whitespace-nowrap">Proponente:</span>
                         <input type="text" class="input-inline flex-1 text-left uppercase pl-1" placeholder="NOME COMPLETO">
@@ -320,23 +327,23 @@
             <div id="details-locacao" class="mode-section mb-3 print:mb-2">
                 <div class="section-title">Garantia Locatícia</div>
                 <div class="grid grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-x-4 gap-y-1 p-2 print:p-0">
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução em Dinheiro</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Fiador</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Seguro Fiança</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Capitalização</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução Imobiliária</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-flex-center"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Carta Fiança</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Caução em Dinheiro</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Fiador</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Seguro Fiança</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Capitalização</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Caução Imobiliária</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Carta Fiança</span></label>
                 </div>
             </div>
 
              <div id="details-venda" class="mode-section hidden mb-3 print:mb-2">
                 <div class="section-title">Condições de Pagamento</div>
-                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 print:h-10 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue" placeholder="Descreva aqui o fluxo de pagamento..."></textarea>
+                <textarea class="w-full border border-gray-300 p-2 rounded text-xs print:text-xs h-12 print:h-10 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue" placeholder="Descreva aqui o fluxo de pagamento..."></textarea>
             </div>
 
             <div class="mb-3 print:mb-2">
                 <h3 class="font-bold text-nj-blue mb-0 text-[10px] uppercase">Observações:</h3>
-                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 print:h-10 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue shadow-sm print:shadow-none" placeholder="Digite aqui..."></textarea>
+                <textarea class="w-full border border-gray-300 p-2 rounded text-xs print:text-xs h-12 print:h-10 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue shadow-sm print:shadow-none" placeholder="Digite aqui..."></textarea>
             </div>
         </div>
 
@@ -354,7 +361,7 @@
             </div>
 
             <div class="mb-1 print:mt-2">
-                <div class="flex justify-center items-center gap-2 mb-3 print:mb-2 text-xs print:text-[10px]">
+                <div class="flex justify-center items-center gap-2 mb-3 print:mb-2 text-xs print:text-xs">
                     <span>São Paulo,</span>
                     <input type="text" class="border-b border-black text-center w-6" placeholder="DD">
                     <span>de</span>
@@ -399,8 +406,6 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = String(today.getFullYear()).slice(-2);
             
-            // FORMATAÇÃO DO NOME DO ARQUIVO: Proposta [Tipo] NJRE[Data]
-            // Exemplo: Proposta Locacao NJRE230126
             const newTitle = `Proposta ${type} NJRE${day}${month}${year}`;
             document.title = newTitle;
         }
