@@ -50,14 +50,13 @@
                 -webkit-print-color-adjust: exact; 
                 padding: 0 !important; 
                 margin: 0 !important;
-                zoom: 82%; /* Mantém o zoom de segurança para Mobile */
+                zoom: 82%; 
             }
             
             .page-container {
                 width: 210mm !important;
                 height: 296mm !important;
                 margin: 0 auto !important;
-                /* Reduzi margem para 5mm para caber a letra maior */
                 padding: 5mm 10mm !important; 
                 box-shadow: none !important;
                 border: none !important;
@@ -75,20 +74,17 @@
                 padding: 0;
             }
 
-            /* Espaçamento Extra na Borda Azul */
+            /* Espaçamento Extra na Borda Azul (Padding Esquerdo) */
             .box-indent-print {
-                padding-left: 8px !important; 
+                padding-left: 10px !important; 
             }
             
             ::placeholder { color: transparent; }
             .hidden-print { display: none !important; }
 
-            /* --- FONTES AUMENTADAS --- */
-            /* De 9px para 10px */
+            /* Fontes */
             .print-text-xs { font-size: 10px !important; line-height: 1.2 !important; }
-            /* De 8px para 9px */
             .print-text-tiny { font-size: 9px !important; line-height: 1.1 !important; }
-            /* De 13px para 14px */
             .print-text-lg { font-size: 14px !important; }
             
             /* Grids */
@@ -102,25 +98,52 @@
             .print-w-half { width: 50% !important; }
             .print-text-right { text-align: right !important; }
             
-            /* Correção Checkboxes */
+            /* --- CORREÇÃO DEFINITIVA DAS GARANTIAS (Caixa CSS) --- */
             .print-checkbox-container { 
                 display: flex !important; 
                 flex-direction: row !important;
                 align-items: center !important; 
-                white-space: nowrap !important;
+                white-space: nowrap !important; /* Impede quebra de linha */
                 margin-bottom: 4px !important;
+                width: 100% !important;
             }
             
+            /* O Quadrado do Checkbox (Desenhado com Borda) */
             input[type="checkbox"] { 
-                appearance: none; 
-                display: inline-block; 
-                margin-right: 6px !important;
-                position: relative;
-                top: 0px;
-                flex-shrink: 0 !important;
+                appearance: none !important; 
+                -webkit-appearance: none !important;
+                display: inline-flex !important;
+                align-items: center;
+                justify-content: center;
+                
+                width: 12px !important;  /* Tamanho fixo */
+                height: 12px !important; /* Tamanho fixo */
+                
+                border: 1px solid #333 !important; /* Borda visível */
+                border-radius: 2px !important;
+                margin-right: 6px !important; /* Distância do texto */
+                flex-shrink: 0 !important; /* Impede amassar */
+                background-color: transparent !important;
             }
-            input[type="checkbox"]:checked:after { content: '☒'; font-size: 14px; color: #0B2F5C; font-weight: bold; line-height: 1; }
-            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 14px; color: #333; line-height: 1; }
+
+            /* Quando Marcado: Fica Azul e ganha um 'check' branco */
+            input[type="checkbox"]:checked {
+                background-color: #0B2F5C !important;
+                border-color: #0B2F5C !important;
+            }
+            
+            /* O 'V' de verificação desenhado com CSS */
+            input[type="checkbox"]:checked:after {
+                content: '✔'; /* Caractere de check simples */
+                font-size: 8px !important;
+                color: white !important;
+                display: block;
+                line-height: 1;
+            }
+            /* Remove caracteres fantasmas de não-marcado */
+            input[type="checkbox"]:not(:checked):after {
+                content: '';
+            }
         }
 
         /* Estilos de Tela */
@@ -141,7 +164,7 @@
             padding: 2px 6px;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.75rem; /* Aumentei um pouco na tela tbm */
+            font-size: 0.75rem; 
             margin-bottom: 3px;
             letter-spacing: 1px;
             border-radius: 2px;
@@ -406,6 +429,7 @@
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = String(today.getFullYear()).slice(-2);
             
+            // FORMATAÇÃO DO NOME DO ARQUIVO: Proposta [Tipo] NJRE[Data]
             const newTitle = `Proposta ${type} NJRE${day}${month}${year}`;
             document.title = newTitle;
         }
