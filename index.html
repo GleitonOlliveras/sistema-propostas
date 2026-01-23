@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Locação - Neto Junior</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nj-blue': '#0B2F5C', /* Azul extraído do logo */
+                        'nj-silver': '#808080', /* Cinza/Prata do logo */
+                        'nj-dark': '#1a1a1a', 
+                        'nj-bg': '#f8f9fa'
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; -webkit-print-color-adjust: exact; }
+            input, textarea, select { 
+                border: none !important; 
+                background: transparent !important; 
+                resize: none; 
+                padding: 0; 
+                margin: 0;
+            }
+            /* Estilo dos checkboxes na impressão */
+            input[type="checkbox"] { appearance: none; }
+            input[type="checkbox"]:checked:after { content: '☒'; font-size: 14px; color: #0B2F5C; font-weight: bold; }
+            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 14px; color: #333; }
+            
+            ::placeholder { color: transparent; }
+        }
+
+        /* Estilos de tela */
+        .input-inline {
+            border-bottom: 1px dashed #ccc;
+            color: #000;
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .input-inline:focus { border-bottom: 2px solid #0B2F5C; background-color: #eef2ff; }
+
+        .section-title {
+            background-color: #0B2F5C;
+            color: white;
+            padding: 4px 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen flex flex-col items-center py-8 print:py-0 print:bg-white">
+
+    <div class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-3 shadow-lg z-50 flex justify-between items-center text-sm">
+        <div class="font-bold tracking-widest pl-4">SISTEMA DE PROPOSTAS</div>
+        <button onclick="window.print()" class="bg-white text-nj-blue px-4 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition mr-4 shadow">
+            🖨️ Gerar PDF
+        </button>
+    </div>
+
+    <div class="bg-white w-[210mm] min-h-[297mm] shadow-2xl print:shadow-none p-[15mm] mt-8 print:mt-0 print:w-full box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
+
+        <header class="flex justify-between items-end border-b-4 border-nj-blue pb-4 mb-6">
+            <div class="w-1/2">
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-20 object-contain">
+            </div>
+            <div class="w-1/2 text-right">
+                <h1 class="text-xl font-bold uppercase text-nj-blue tracking-wide">Proposta para Locação</h1>
+                <p class="text-xs text-nj-silver font-bold uppercase tracking-widest">Investimentos Imobiliários</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-4 gap-4 mb-6 bg-slate-50 p-3 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
+            <div>
+                <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
+                <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700" placeholder="Nome">
+            </div>
+            <div>
+                <label class="block text-[10px] text-nj-blue font-bold uppercase">Edifício</label>
+                <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700" placeholder="Nome do Edifício">
+            </div>
+            <div>
+                <label class="block text-[10px] text-nj-blue font-bold uppercase">Local</label>
+                <input type="text" value="São Paulo" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700">
+            </div>
+            <div>
+                <label class="block text-[10px] text-nj-blue font-bold uppercase">Data</label>
+                <input type="date" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700">
+            </div>
+        </div>
+
+        <div class="mb-6 text-justify">
+            <p class="mb-2">
+                Autorizo a empresa <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a levar ao Proprietário do imóvel sito à:
+            </p>
+            <div class="grid grid-cols-12 gap-2 mb-2 items-end">
+                <div class="col-span-8">
+                    <input type="text" class="input-inline w-full text-left uppercase" placeholder="ENDEREÇO COMPLETO">
+                </div>
+                <div class="col-span-2">
+                    <span class="text-xs text-gray-500">Nº</span>
+                    <input type="text" class="input-inline w-full" placeholder="000">
+                </div>
+                <div class="col-span-2">
+                    <span class="text-xs text-gray-500">Compl.</span>
+                    <input type="text" class="input-inline w-full" placeholder="Conj/Apto">
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-2 mb-4 items-end">
+                <div class="col-span-3">
+                    <span class="text-xs text-gray-500">CEP</span>
+                    <input type="text" class="input-inline w-full" placeholder="00000-000">
+                </div>
+                <div class="col-span-4">
+                    <span class="text-xs text-gray-500">Cidade</span>
+                    <input type="text" value="SÃO PAULO" class="input-inline w-full uppercase">
+                </div>
+                <div class="col-span-2">
+                    <span class="text-xs text-gray-500">UF</span>
+                    <input type="text" value="SP" class="input-inline w-full uppercase">
+                </div>
+                <div class="col-span-3 text-right text-xs italic text-gray-400 self-center">
+                    esta Proposta para alugar o referido imóvel.
+                </div>
+            </div>
+
+            <div class="border-l-4 border-nj-blue pl-4 py-3 bg-slate-50 print:bg-transparent print:p-0 my-5">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <span class="text-nj-blue font-bold block text-xs uppercase mb-1">Aluguel Mensal (R$)</span>
+                        <input type="text" class="text-2xl font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0.000,00">
+                    </div>
+                    <div>
+                        <span class="text-nj-blue font-bold block text-xs uppercase mb-1">Prazo do Contrato</span>
+                        <input type="text" class="text-2xl font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="36 meses">
+                    </div>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-2 italic">*Acrescido das despesas condominiais e impostos que recaem sobre o imóvel. Reajuste conforme Lei.</p>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="text-xs text-gray-600 font-bold uppercase">Proposta Válida até:</span>
+                    <input type="date" class="bg-transparent border-b border-gray-300 text-sm w-32 text-gray-700">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h3 class="font-bold text-nj-blue mb-1 text-xs uppercase">Observações / Condições Especiais:</h3>
+            <textarea class="w-full border border-gray-300 p-2 rounded text-sm h-20 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue shadow-sm print:shadow-none" placeholder="Digite aqui..."></textarea>
+        </div>
+
+        <div class="mb-6">
+            <div class="section-title">Informações do Proponente</div>
+            <div class="grid grid-cols-1 gap-y-2 text-sm p-2 border border-gray-100 rounded print:border-none print:p-0">
+                <div class="flex gap-2 items-center">
+                    <span class="font-bold text-gray-700 w-24">Proponente:</span>
+                    <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="NOME COMPLETO OU RAZÃO SOCIAL">
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex gap-2 flex-1 items-center">
+                        <span class="font-bold text-gray-700">CNPJ/CPF:</span>
+                        <input type="text" class="input-inline flex-1 text-left">
+                    </div>
+                    <div class="flex gap-2 flex-1 items-center">
+                        <span class="font-bold text-gray-700">I.E/RG:</span>
+                        <input type="text" class="input-inline flex-1 text-left">
+                    </div>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <span class="font-bold text-gray-700 w-24">Endereço:</span>
+                    <input type="text" class="input-inline flex-1 text-left uppercase" placeholder="RUA, Nº, BAIRRO">
+                </div>
+                <div class="flex gap-2 items-center">
+                    <span class="font-bold text-gray-700 w-24">Ramo Ativ.:</span>
+                    <input type="text" class="input-inline flex-1 text-left uppercase">
+                </div>
+                
+                <div class="mt-2 pt-2 border-t border-gray-200">
+                    <div class="flex gap-2 items-center">
+                        <span class="font-bold text-gray-700 w-24">Responsável:</span>
+                        <input type="text" class="input-inline flex-1 text-left uppercase">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-1">
+                        <div class="flex gap-2 items-center">
+                            <span class="font-bold text-gray-700">Nacionalidade:</span>
+                            <input type="text" class="input-inline flex-1" value="BRASILEIRO(A)">
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <span class="font-bold text-gray-700">Profissão:</span>
+                            <input type="text" class="input-inline flex-1 uppercase">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-1">
+                        <div class="flex gap-2 items-center">
+                            <span class="font-bold text-gray-700 text-xs">Possui Imóvel?</span>
+                            <input type="text" class="input-inline flex-1" placeholder="SIM/NÃO">
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <span class="font-bold text-gray-700 text-xs">Local Alugado?</span>
+                            <input type="text" class="input-inline flex-1" placeholder="SIM/NÃO">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">Garantia Locatícia</div>
+            <div class="grid grid-cols-3 gap-x-4 gap-y-2 p-2">
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Caução em Dinheiro</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Fiador</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Seguro Fiança</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Capitalização</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Caução Imobiliária</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 text-nj-blue rounded focus:ring-nj-blue">
+                    <span class="group-hover:text-nj-blue transition">Carta Fiança</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="text-[0.6rem] text-justify text-gray-500 mb-6 border-t border-gray-200 pt-2 leading-tight">
+            <p>
+                A aceitação desta Proposta fica condicionada à concordância do Proprietário do imóvel, bem como da aprovação do cadastro do Proponente e garantias locatícias. 
+                Em caso de desistência, após a aceitação da presente Proposta, a parte desistente concorda em arcar com o pagamento de honorários por serviços de aproximação e intermediação prestados pela 
+                <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong>, no valor equivalente a <strong>1 (um) aluguel nominal</strong>. 
+                Tais honorários serão igualmente devidos se as partes vierem a efetuar a transação diretamente, sendo ambas responsáveis solidárias pelo pagamento integral da remuneração.
+            </p>
+        </div>
+
+        <div class="mt-auto">
+            <div class="flex justify-center items-center gap-2 mb-6 text-sm">
+                <span>São Paulo,</span>
+                <input type="text" class="border-b border-black text-center w-8" placeholder="DD">
+                <span>de</span>
+                <input type="text" class="border-b border-black text-center w-24" placeholder="Mês">
+                <span>de</span>
+                <input type="text" class="border-b border-black text-center w-12" value="2026">
+            </div>
+
+            <div class="grid grid-cols-2 gap-16 text-center">
+                <div>
+                    <div class="h-12 border-b border-black mb-1 flex items-end justify-center"></div>
+                    <p class="font-bold text-sm text-nj-blue">PROPRIETÁRIO</p>
+                    <p class="text-[0.6rem] text-gray-400 uppercase">De Acordo</p>
+                </div>
+                <div>
+                    <div class="h-12 border-b border-black mb-1 flex items-end justify-center"></div>
+                    <p class="font-bold text-sm text-nj-blue">PROPONENTE</p>
+                    <p class="text-[0.6rem] text-gray-400 uppercase">De Acordo</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center border-t-2 border-nj-silver pt-3">
+            <div class="flex justify-center gap-6 text-xs font-bold text-nj-blue mb-1">
+                <span>📧 contato@netojunior.com.br</span>
+                <span>📞 (11) 2609-4093</span>
+                <span>📷 @netojunior.realestate</span>
+            </div>
+            <div class="text-[10px] text-gray-500 uppercase tracking-wide">
+                Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP • CEP: 04709-110
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Ajuste de datas para impressão
+        window.addEventListener('beforeprint', () => {
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => {
+                if(input.value) {
+                    const [y, m, d] = input.value.split('-');
+                    input.setAttribute('data-old-type', 'date');
+                    input.type = 'text';
+                    input.value = `${d}/${m}/${y}`;
+                }
+            });
+        });
+        
+        window.addEventListener('afterprint', () => {
+             const dateInputs = document.querySelectorAll('input[data-old-type="date"]');
+             dateInputs.forEach(input => {
+                 input.type = 'date';
+             });
+        });
+    </script>
+</body>
+</html>
