@@ -37,7 +37,7 @@
     </script>
 
     <style>
-        /* --- REGRAS DE IMPRESSÃO OTIMIZADAS PARA MOBILE --- */
+        /* --- REGRAS DE IMPRESSÃO ULTRA COMPACTAS --- */
         @media print {
             @page { margin: 0; size: A4; }
             .no-print { display: none !important; }
@@ -46,17 +46,17 @@
                 background: white; 
                 -webkit-print-color-adjust: exact; 
                 padding: 0 !important; 
-                /* O SEGREDO DO MOBILE: Zoom out para garantir 1 página */
-                zoom: 88%; 
+                /* O "PULO DO GATO" PARA IOS: Reduzir escala */
+                zoom: 82%; 
             }
             
             .page-container {
                 width: 210mm !important;
-                /* Altura livre para deixar o zoom agir */
-                min-height: 297mm !important; 
+                /* Força altura máxima */
+                max-height: 295mm !important; 
                 margin: 0 !important;
-                /* Margens laterais mais seguras para impresoras domésticas */
-                padding: 5mm 10mm !important; 
+                /* Padding mínimo */
+                padding: 4mm 10mm !important; 
                 box-shadow: none !important;
                 border: none !important;
                 display: flex;
@@ -75,12 +75,12 @@
             ::placeholder { color: transparent; }
             .hidden-print { display: none !important; }
 
-            /* Fontes e Espaçamentos Compactos */
-            .print-text-xs { font-size: 9px !important; line-height: 1.1 !important; }
-            .print-text-tiny { font-size: 8px !important; line-height: 1 !important; }
-            .print-text-lg { font-size: 13px !important; } /* Reduzido levemente */
+            /* Fontes Minúsculas na Impressão */
+            .print-text-xs { font-size: 9px !important; line-height: 1 !important; }
+            .print-text-tiny { font-size: 8px !important; line-height: 0.9 !important; }
+            .print-text-lg { font-size: 12px !important; } 
             
-            /* Grids */
+            /* Grids Compactos */
             .print-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
             .print-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
             .print-col-span-8 { grid-column: span 8 / span 8 !important; }
@@ -91,15 +91,18 @@
             .print-w-half { width: 50% !important; }
             .print-text-right { text-align: right !important; }
             
-            /* Margens Verticais Quase Zeradas */
+            /* Remoção de Espaços */
             .print-mb-0 { margin-bottom: 0 !important; }
             .print-mb-1 { margin-bottom: 2px !important; }
-            .print-gap-1 { gap: 2px !important; }
+            .print-mt-0 { margin-top: 0 !important; }
+            .print-gap-0 { gap: 0 !important; }
+            .print-gap-1 { gap: 4px !important; }
             .print-p-0 { padding: 0 !important; }
+            .print-h-auto { height: auto !important; }
             
-            input[type="checkbox"] { appearance: none; display: inline-block; }
-            input[type="checkbox"]:checked:after { content: '☒'; font-size: 11px; color: #0B2F5C; font-weight: bold; }
-            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 11px; color: #333; }
+            input[type="checkbox"] { appearance: none; display: inline-block; margin: 0; }
+            input[type="checkbox"]:checked:after { content: '☒'; font-size: 10px; color: #0B2F5C; font-weight: bold; }
+            input[type="checkbox"]:not(:checked):after { content: '☐'; font-size: 10px; color: #333; }
         }
 
         .input-inline {
@@ -115,13 +118,14 @@
         .section-title {
             background-color: #0B2F5C;
             color: white;
-            padding: 1px 6px;
+            padding: 0px 4px;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.7rem;
-            margin-bottom: 2px;
-            letter-spacing: 1px;
+            font-size: 0.65rem;
+            margin-bottom: 1px;
+            letter-spacing: 0.5px;
             border-radius: 2px;
+            display: inline-block;
         }
         
         .btn-mode.active { background-color: white; color: #0B2F5C; font-weight: bold; }
@@ -147,16 +151,16 @@
     <div class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-12 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
 
         <div>
-            <header class="flex flex-col md:flex-row print:flex-row justify-between items-center md:items-end border-b-2 border-nj-blue pb-2 mb-3 text-center md:text-left print:text-left print:pb-1 print:mb-1">
+            <header class="flex flex-col md:flex-row print:flex-row justify-between items-center md:items-end border-b-2 border-nj-blue pb-2 mb-3 text-center md:text-left print:text-left print:pb-0 print:mb-0 print:border-b">
                 <div class="w-full md:w-1/2 print:w-half mb-2 md:mb-0 print:mb-0">
-                    <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-16 md:h-16 print:h-10 object-contain mx-auto md:mx-0 print:mx-0">
+                    <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior Real Estate" class="h-16 md:h-16 print:h-8 object-contain mx-auto md:mx-0 print:mx-0">
                 </div>
                 <div class="w-full md:w-1/2 print:w-half md:text-right print:text-right">
                     <h1 id="doc-title" class="text-lg md:text-xl print:text-lg font-bold uppercase text-nj-blue tracking-wide">Proposta para Locação</h1>
                 </div>
             </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-1 mb-3 print:mb-1 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
+            <div class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-1 mb-3 print:mb-0 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
                 <div>
                     <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
                     <input type="text" class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs" placeholder="Nome">
@@ -175,7 +179,7 @@
                 </div>
             </div>
 
-            <div class="mb-3 print:mb-1 text-justify text-xs md:text-sm print:text-xs">
+            <div class="mb-3 print:mb-0 text-justify text-xs md:text-sm print:text-xs">
                 <p class="mb-1 print:mb-0">
                     Autorizo a <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a levar ao Proprietário do imóvel sito à:
                 </p>
@@ -192,7 +196,7 @@
                         <input type="text" class="input-inline w-full text-xs" placeholder="Conj/Apto">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-2 print:mb-1 items-end">
+                <div class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-2 print:mb-0 items-end">
                     <div class="md:col-span-3 print:col-span-3 flex gap-2 items-center md:block">
                         <span class="text-[10px] text-gray-500 md:block">CEP</span>
                         <input type="text" class="input-inline w-full text-xs" placeholder="00000-000">
@@ -211,7 +215,7 @@
                 </div>
 
                 <div id="box-locacao" class="mode-section border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-1">
-                    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8 print:gap-2">
                         <div>
                             <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Aluguel Mensal (R$)</span>
                             <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0.000,00">
@@ -228,7 +232,7 @@
                 </div>
 
                  <div id="box-venda" class="mode-section hidden border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-1">
-                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-2">
+                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-1">
                         <div class="md:col-span-1 print:col-span-1">
                             <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Valor Compra (R$)</span>
                             <input type="text" class="text-xl print:text-lg font-serif font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300" placeholder="0.000,00">
@@ -281,12 +285,12 @@
                         <span class="font-bold text-gray-700 md:w-20">Ramo Ativ.:</span>
                         <input type="text" class="input-inline flex-1 text-left uppercase">
                     </div>
-                    <div class="mt-1 pt-1 border-t border-gray-200">
+                    <div class="mt-1 pt-1 print:mt-0 print:pt-0 border-t border-gray-200">
                         <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center mb-1 md:mb-0">
                             <span class="font-bold text-gray-700 md:w-20">Responsável:</span>
                             <input type="text" class="input-inline flex-1 text-left uppercase">
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 md:gap-4 mt-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 md:gap-4 print:gap-1 mt-1 print:mt-0">
                             <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
                                 <span class="font-bold text-gray-700">Nacionalidade:</span>
                                 <input type="text" class="input-inline flex-1" value="BRASILEIRO(A)">
@@ -300,7 +304,7 @@
                 </div>
             </div>
 
-            <div id="details-locacao" class="mode-section mb-3 print:mb-1">
+            <div id="details-locacao" class="mode-section mb-3 print:mb-0">
                 <div class="section-title">Garantia Locatícia</div>
                 <div class="grid grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-x-4 gap-y-1 p-2 print:p-0">
                     <label class="flex items-center space-x-2 cursor-pointer group"><input type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span class="text-[10px] md:text-xs group-hover:text-nj-blue">Caução em Dinheiro</span></label>
@@ -312,32 +316,32 @@
                 </div>
             </div>
 
-             <div id="details-venda" class="mode-section hidden mb-3 print:mb-1">
+             <div id="details-venda" class="mode-section hidden mb-3 print:mb-0">
                 <div class="section-title">Condições de Pagamento</div>
-                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue" placeholder="Descreva aqui o fluxo de pagamento..."></textarea>
+                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 print:h-8 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue" placeholder="Descreva aqui o fluxo de pagamento..."></textarea>
             </div>
 
-            <div class="mb-3 print:mb-1">
+            <div class="mb-3 print:mb-0">
                 <h3 class="font-bold text-nj-blue mb-0 text-[10px] uppercase">Observações:</h3>
-                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue shadow-sm print:shadow-none" placeholder="Digite aqui..."></textarea>
+                <textarea class="w-full border border-gray-300 p-2 rounded text-xs h-12 print:h-8 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue shadow-sm print:shadow-none" placeholder="Digite aqui..."></textarea>
             </div>
         </div>
 
         <div>
-            <div id="terms-locacao" class="mode-section text-[0.55rem] print:text-tiny text-justify text-gray-500 mb-2 border-t border-gray-200 pt-1 leading-tight">
+            <div id="terms-locacao" class="mode-section text-[0.55rem] print:text-tiny text-justify text-gray-500 mb-2 print:mb-0 border-t border-gray-200 pt-1 leading-tight">
                 <p>
                     Pelos serviços de aproximação, negociação e intermediação imobiliária, as partes reconhecem ser devida à <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a remuneração equivalente a <strong>2 (dois) alugueres nominais</strong>. Os honorários serão exigíveis na celebração do contrato. Em qualquer hipótese, locador e locatário responderão solidariamente pelo pagamento integral da remuneração, conforme o artigo 725 do Código Civil.
                 </p>
             </div>
 
-             <div id="terms-venda" class="mode-section hidden text-[0.55rem] print:text-tiny text-justify text-gray-500 mb-2 border-t border-gray-200 pt-1 leading-tight">
+             <div id="terms-venda" class="mode-section hidden text-[0.55rem] print:text-tiny text-justify text-gray-500 mb-2 print:mb-0 border-t border-gray-200 pt-1 leading-tight">
                 <p>
                     Fica ajustado que, realizada a compra e venda do imóvel em decorrência dos serviços de aproximação, negociação e intermediação, será devida à <strong class="text-nj-blue">NETO JUNIOR CONSULTORIA IMOBILIÁRIA</strong> comissão de <strong>6% (seis por cento)</strong> sobre o valor total do negócio, acrescida dos impostos. A comissão será exigível com a concretização da transação, ainda que sem escritura definitiva. Comprador e vendedor respondem solidariamente, nos termos do art. 725 do Código Civil.
                 </p>
             </div>
 
-            <div class="mb-1">
-                <div class="flex justify-center items-center gap-2 mb-3 print:mb-2 text-xs print:text-[10px]">
+            <div class="mb-1 print:mt-1">
+                <div class="flex justify-center items-center gap-2 mb-3 print:mb-1 text-xs print:text-[10px]">
                     <span>São Paulo,</span>
                     <input type="text" class="border-b border-black text-center w-6" placeholder="DD">
                     <span>de</span>
@@ -395,45 +399,35 @@
             const propSignLabel = document.getElementById('prop-sign-label');
 
             if (mode === 'locacao') {
-                // Textos Locação
                 title.textContent = 'Proposta para Locação';
                 actionText.textContent = 'alugar';
                 propTitle.textContent = 'Informações do Proponente';
                 propLabel.textContent = 'Proponente:';
                 propSignInput.placeholder = 'PROPONENTE';
                 propSignLabel.textContent = 'PROPONENTE - DE ACORDO';
-
-                // Exibir/Ocultar
                 boxLocacao.classList.remove('hidden');
                 detailsLocacao.classList.remove('hidden');
                 termsLocacao.classList.remove('hidden');
                 boxVenda.classList.add('hidden');
                 detailsVenda.classList.add('hidden');
                 termsVenda.classList.add('hidden');
-                
-                // Botões
                 btnLocacao.classList.add('active', 'bg-white', 'text-nj-blue');
                 btnLocacao.classList.remove('text-white');
                 btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue');
                 btnVenda.classList.add('text-white');
             } else {
-                // Textos Venda
                 title.textContent = 'Proposta de Compra';
                 actionText.textContent = 'adquirir';
                 propTitle.textContent = 'Informações do Comprador';
                 propLabel.textContent = 'Comprador:';
                 propSignInput.placeholder = 'COMPRADOR';
                 propSignLabel.textContent = 'COMPRADOR - DE ACORDO';
-
-                // Exibir/Ocultar
                 boxVenda.classList.remove('hidden');
                 detailsVenda.classList.remove('hidden');
                 termsVenda.classList.remove('hidden');
                 boxLocacao.classList.add('hidden');
                 detailsLocacao.classList.add('hidden');
                 termsLocacao.classList.add('hidden');
-                
-                // Botões
                 btnVenda.classList.add('active', 'bg-white', 'text-nj-blue');
                 btnVenda.classList.remove('text-white');
                 btnLocacao.classList.remove('active', 'bg-white', 'text-nj-blue');
