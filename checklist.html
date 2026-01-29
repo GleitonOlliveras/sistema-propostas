@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist de Locação - Neto Junior</title>
+    <title>Checklist Locação | Neto Junior</title>
     
     <link rel="icon" href="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186773/1_knfthq.png" type="image/png">
 
@@ -212,11 +212,20 @@
 
             <div class="border border-gray-200 p-2 rounded bg-slate-50">
                 <div class="section-header print-section-header">Garantia Selecionada</div>
-                <div class="grid grid-cols-2 gap-1 mb-2 text-[8px]">
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Caução ($)</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Seg. Fiança</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Fiador</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Tít. Cap.</label>
+                
+                <div class="bg-white border border-gray-300 p-2 mb-2 rounded">
+                    <span class="text-[8px] font-bold text-gray-500 uppercase block mb-1">Modalidade Escolhida:</span>
+                    <div class="grid grid-cols-2 gap-1">
+                        <label class="flex items-center text-[9px]"><input type="checkbox" class="mr-1"> Caução</label>
+                        <label class="flex items-center text-[9px]"><input type="checkbox" class="mr-1"> Seguro</label>
+                        <label class="flex items-center text-[9px]"><input type="checkbox" class="mr-1"> Fiador</label>
+                        
+                        <div class="flex items-center text-[9px] col-span-1">
+                            <input type="checkbox" class="mr-1">
+                            <span class="mr-1">Tít. Cap.</span>
+                            <input type="text" class="border-b border-gray-400 w-12 text-center text-nj-blue font-bold bg-transparent outline-none h-3" placeholder="(Valor)">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="group-title">Documentos do Fiador</div>
@@ -226,66 +235,47 @@
                     <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Cert. Casamento</span></label>
                     <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Comprovante Residência</span></label>
                     <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Comprovante Renda (3x)</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">IR Completo + Recibo</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Ficha Cadastral Assinada</span></label>
+                </div>
+
+                <div class="group-title">Financeiro Inicial</div>
+                <label class="check-row"><input type="checkbox" class="check-input"><span class="check-label">1º Aluguel/Boleto Gerado</span></label>
+                <label class="check-row"><input type="checkbox" class="check-input"><span class="check-label">Comissão Recebida</span></label>
+                <label class="check-row"><input type="checkbox" class="check-input"><span class="check-label">Nota Fiscal Emitida</span></label>
+            </div>
+        </div>
+
+        <div class="border border-gray-200 p-2 rounded w-full">
+            <div class="grid grid-cols-4 gap-4 text-[9px] text-center uppercase font-bold text-gray-500">
+                <div class="border-r border-gray-200">
+                    <label class="block cursor-pointer hover:text-nj-blue"><input type="checkbox"> Análise Aprovada</label>
+                </div>
+                <div class="border-r border-gray-200">
+                    <label class="block cursor-pointer hover:text-nj-blue"><input type="checkbox"> Contrato Enviado</label>
+                </div>
+                <div class="border-r border-gray-200">
+                    <label class="block cursor-pointer hover:text-nj-blue"><input type="checkbox"> Chaves Entregues</label>
+                </div>
+                <div>
+                    <label class="block cursor-pointer hover:text-nj-blue"><input type="checkbox"> Processo Finalizado</label>
                 </div>
             </div>
         </div>
 
-        <div class="border border-gray-200 p-2 rounded">
-            <div class="section-header print-section-header bg-nj-silver text-white">Status do Processo</div>
-            <div class="grid grid-cols-4 gap-4 text-[9px]">
-                
-                <div class="flex flex-col gap-2">
-                    <div class="font-bold text-nj-blue border-b border-gray-200">1. ANÁLISE</div>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Proposta Aceita</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Docs Recebidos</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Ficha Aprovada</span></label>
-                    <input type="text" class="input-line mt-1" placeholder="Obs Análise:">
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <div class="font-bold text-nj-blue border-b border-gray-200">2. CONTRATO</div>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Minuta Enviada</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Aprovado Partes</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Assinado (DocuSign/Físico)</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Reconhecimento Firma</span></label>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <div class="font-bold text-nj-blue border-b border-gray-200">3. FINALIZAÇÃO</div>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Vistoria Agendada</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Laudo Assinado</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Seguro Incêndio Ativo</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Troca Titularidade (Luz/Gás)</span></label>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <div class="font-bold text-nj-blue border-b border-gray-200">4. FINANCEIRO</div>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">1º Aluguel/Boleto Gerado</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Comissão Recebida</span></label>
-                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">NF Emitida</span></label>
-                    <input type="text" class="input-line mt-1" placeholder="Data Entrega Chaves:">
-                </div>
-            </div>
-        </div>
-
-        <footer class="mt-auto pt-2 border-t border-gray-300 text-center text-[8px] text-gray-500">
-            <p class="font-bold text-nj-blue">NETO JUNIOR REAL ESTATE</p>
+        <footer class="mt-auto pt-4 text-center text-[9px] text-gray-400">
             <p>Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP</p>
         </footer>
 
     </div>
 
     <script>
-        function updateTitle() {
+        // Define o título da página com data para salvar PDF organizado
+        window.addEventListener('load', () => {
             const today = new Date();
             const dateStr = today.toLocaleDateString('pt-BR').replace(/\//g, '');
-            document.title = `Checklist Locacao NJ${dateStr}`;
-        }
-        
-        window.addEventListener('load', updateTitle);
-        // Garante que o input date mostre a data de hoje por padrão
-        window.addEventListener('load', () => {
+            document.title = `Checklist NJ${dateStr}`;
+            
+            // Seta data de hoje no input
             const dateInputs = document.querySelectorAll('input[type="date"]');
             dateInputs.forEach(input => {
                 input.valueAsDate = new Date();
