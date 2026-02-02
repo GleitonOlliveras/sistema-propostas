@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloco2 - Premium Pitch Deck</title>
+    <title>Bloco2 - Executive Business Deck</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
 
@@ -19,14 +19,14 @@
             /* 16:9 */
         }
 
-        /* MEDIA QUERY PARA MODO MOBILE (9:16) */
         @media (max-width: 1024px) or (orientation: portrait) {
             :root {
                 --slide-height: 177.77vw;
             }
 
+            /* 9:16 */
             .slide {
-                padding: 10% 8% !important;
+                padding: 8% 6% !important;
             }
 
             .grid-main {
@@ -35,12 +35,12 @@
             }
 
             .img-container {
-                height: 45% !important;
+                height: 35% !important;
                 order: -1;
             }
 
             h1 {
-                font-size: 3.5rem !important;
+                font-size: 3rem !important;
             }
 
             .hide-mobile {
@@ -56,24 +56,23 @@
         }
 
         body {
-            background: #222;
+            background: #111;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--primary);
         }
 
-        /* Slide Engine */
         .slide {
             width: var(--slide-width);
             height: var(--slide-height);
             background: var(--bg);
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             padding: 5% 7%;
             page-break-after: always;
-            margin-bottom: 20px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
         }
 
         .slide.dark {
@@ -81,25 +80,13 @@
             color: var(--white);
         }
 
-        /* Background Visual Decor */
-        .accent-circle {
-            position: absolute;
-            width: 40vw;
-            height: 40vw;
-            background: radial-gradient(circle, rgba(43, 254, 197, 0.1) 0%, transparent 70%);
-            top: -10%;
-            right: -5%;
-            z-index: 0;
-        }
-
-        /* Tipografia Premium */
+        /* Typography */
         h1 {
-            font-size: 4.8rem;
+            font-size: 4.2rem;
             font-weight: 800;
             line-height: 0.95;
             letter-spacing: -3px;
             margin-bottom: 1.5rem;
-            z-index: 1;
         }
 
         h1 span {
@@ -111,9 +98,9 @@
         }
 
         h2.tagline {
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 5px;
             color: var(--secondary);
             margin-bottom: 1rem;
             font-weight: 600;
@@ -124,31 +111,30 @@
         }
 
         p.lead {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 300;
             line-height: 1.4;
             opacity: 0.8;
-            max-width: 600px;
-            z-index: 1;
+            max-width: 750px;
         }
 
-        /* Grid Editorial */
+        /* Grid System */
         .grid-main {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 80px;
+            gap: 70px;
             height: 100%;
             align-items: center;
             z-index: 1;
         }
 
-        /* Molduras de Imagem */
+        /* Images */
         .img-container {
             width: 100%;
             height: 100%;
-            border-radius: 40px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -158,42 +144,29 @@
             object-fit: cover;
         }
 
-        /* Elementos de Interface */
-        .card-feature {
+        /* Content Blocks */
+        .info-card {
             background: var(--white);
-            padding: 35px;
-            border-radius: 30px;
+            padding: 40px;
+            border-radius: 25px;
             border-left: 10px solid var(--accent);
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            margin-bottom: 25px;
         }
 
-        .dark .card-feature {
+        .dark .info-card {
             background: rgba(255, 255, 255, 0.05);
             color: white;
-            border-left-color: var(--accent);
-        }
-
-        .step-pill {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 15px;
         }
 
         .logo-top {
-            height: 60px;
+            height: 50px;
             margin-bottom: 3rem;
             object-fit: contain;
             width: auto;
             z-index: 2;
         }
 
-        .footer-info {
+        .footer-deck {
             position: absolute;
             bottom: 5%;
             left: 7%;
@@ -204,26 +177,13 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            opacity: 0.4;
+            opacity: 0.5;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding-top: 15px;
         }
 
-        .dark .footer-info {
+        .dark .footer-deck {
             border-top-color: rgba(255, 255, 255, 0.1);
-        }
-
-        @media print {
-            body {
-                background: white;
-            }
-
-            .slide {
-                margin: 0;
-                box-shadow: none;
-                width: 100% !important;
-                height: 100% !important;
-            }
         }
     </style>
 </head>
@@ -231,186 +191,133 @@
 <body>
 
     <section class="slide">
-        <div class="accent-circle"></div>
         <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo Bloco2"
             class="logo-top">
         <div class="grid-main">
             <div>
-                <h2 class="tagline">O Próximo Passo do Imobiliário</h2>
-                <h1>Simples.<br>Humano.<br><span>Seu.</span></h1>
-                <p class="lead">O portal que conecta o Norte e Nordeste com tecnologia de ponta e alma brasileira.</p>
+                <h2 class="tagline">Ecossistema PropTech N/NE</h2>
+                <h1>Simplicidade que gera <span>Lucratividade.</span></h1>
+                <p class="lead">A solução definitiva para corretores e investidores que exigem uma vitrine imobiliária
+                    de alta performance.</p>
             </div>
             <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
-                    alt="Profissionalismo">
+                <img src="https://images.unsplash.com/photo-1556157382-97dee2dcb04e?q=80&w=800&auto=format&fit=crop"
+                    alt="Real Estate Investment">
             </div>
         </div>
-        <div class="footer-info"><span>Bloco2 Pitch 2026</span><span>01</span></div>
-    </section>
-
-    <section class="slide dark">
-        <div class="accent-circle" style="opacity: 0.3;"></div>
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png" alt="Símbolo"
-            class="logo-top" style="filter: brightness(0) invert(1);">
-        <div class="grid-main">
-            <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
-                    alt="Desafio do Mercado">
-            </div>
-            <div>
-                <h2 class="tagline">A Realidade Atual</h2>
-                <h1>Anunciar não deveria <span>ser um fardo.</span></h1>
-                <div class="card-feature">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Sistemas Poluídos</h3>
-                    <p style="opacity: 0.7;">Plataformas confusas que tomam o tempo precioso de quem deveria estar
-                        vendendo.</p>
-                </div>
-                <div class="card-feature">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Falta de Retorno</h3>
-                    <p style="opacity: 0.7;">Investimento alto em portais nacionais que não priorizam a dinâmica
-                        regional.</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-info"><span>Entendendo o Mercado</span><span>02</span></div>
+        <div class="footer-deck"><span>Desenvolvido por Suite Brasil</span><span>01</span></div>
     </section>
 
     <section class="slide">
-        <div class="accent-circle"></div>
+        <h2 class="tagline">O Portal</h2>
+        <h1>Sua autoridade <span>em destaque.</span></h1>
         <div class="grid-main">
             <div>
-                <h2 class="tagline">A Revolução Bloco2</h2>
-                <h1>Tecnologia para <span>quem decide.</span></h1>
-                <p class="lead">Nascemos para simplificar. Uma vitrine moderna, rápida e focada em converter leads
-                    qualificados no N/NE.</p>
-                <div style="margin-top: 40px; display: flex; gap: 20px;">
-                    <div style="background: var(--white); padding: 30px; border-radius: 20px; flex: 1;">
-                        <h4 style="color: var(--secondary);">Direto</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.7;">Menos cliques para o anúncio ir ao ar.</p>
-                    </div>
-                    <div style="background: var(--white); padding: 30px; border-radius: 20px; flex: 1;">
-                        <h4 style="color: var(--secondary);">Local</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.7;">Estrategicamente pensado para sua região.</p>
-                    </div>
+                <p class="lead" style="margin-bottom: 2.5rem;">O Bloco2 não é apenas um portal, é a sua página
+                    profissional de vendas. Menos distrações, mais fechamentos.</p>
+                <div class="info-card">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 5px;">Vitrine Exclusiva</h3>
+                    <p style="opacity: 0.7;">Página dedicada com sua marca, portfólio completo e avaliações reais de
+                        clientes.</p>
+                </div>
+                <div class="info-card">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 5px;">Link Direto</h3>
+                    <p style="opacity: 0.7;">URL profissional para compartilhar seu estoque diretamente com
+                        investidores.</p>
                 </div>
             </div>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
+                    alt="Dashboard Bloco2">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide dark">
+        <h2 class="tagline">Inteligência Aplicada</h2>
+        <h1>O motor de <span>vendas do amanhã.</span></h1>
+        <div class="grid-main">
             <div class="img-container">
                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
-                    alt="Solução Bloco2">
-            </div>
-        </div>
-        <div class="footer-info"><span>O Futuro do Real Estate</span><span>03</span></div>
-    </section>
-
-    <section class="slide dark" style="background: #1e0055;">
-        <h2 class="tagline">Exclusivo Bloco2</h2>
-        <h1>Sua Inteligência <span>Artificial.</span></h1>
-        <div class="grid-main">
-            <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
-                    alt="Inovação">
+                    alt="Tech Expertise">
             </div>
             <div>
-                <div class="card-feature">
-                    <h3 style="color: var(--accent);">Copywriter Integrado</h3>
-                    <p>A IA cria títulos e descrições magnéticas em segundos. Mais tempo para fechar negócios.</p>
+                <div class="info-card">
+                    <h3 style="color: var(--accent);">IA Generativa</h3>
+                    <p>Criação automatizada de títulos e descrições técnicas. Reduza o tempo de cadastro e maximize o
+                        alcance.</p>
                 </div>
-                <div class="card-feature">
-                    <h3 style="color: var(--accent);">Visual Ultra-Clean</h3>
-                    <p>Foco total no imóvel. O design que valoriza o produto e atrai o olhar do comprador.</p>
-                </div>
-                <div class="card-feature">
-                    <h3 style="color: var(--accent);">Performance N/NE</h3>
-                    <p>Indexação prioritária nas regiões Norte e Nordeste.</p>
+                <div class="info-card">
+                    <h3 style="color: var(--accent);">Bloco 2 Ads</h3>
+                    <p>Otimização de visibilidade no topo das buscas para acelerar a liquidez do seu patrimônio.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="slide">
-        <h2 class="tagline">Operação</h2>
-        <h1>O fluxo do <span>resultado.</span></h1>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; flex-grow: 1;">
-            <div
-                style="background: var(--white); border-radius: 40px; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; position: relative;">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
-                    style="width: 100%; height: 100%; object-fit: cover; opacity: 0.15;">
-                <div
-                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--secondary); font-weight: 800; font-size: 1.5rem; letter-spacing: 5px;">
-                    MOCKUP DASHBOARD</div>
+        <h2 class="tagline">Dominância Territorial</h2>
+        <h1>Estratégia focada no <span>Norte e Nordeste.</span></h1>
+        <div class="grid-main">
+            <div>
+                <p class="lead">Entendemos a dinâmica econômica regional. Indexação prioritária nas capitais que mais
+                    crescem no país.</p>
+                <div style="margin-top: 40px; border-top: 2px solid var(--accent); padding-top: 30px;">
+                    <h3 style="font-size: 2rem; color: var(--primary);">Curadoria Local</h3>
+                    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 10px;">Filtros inteligentes e curadoria de
+                        dados para encontrar imóveis autênticos nas regiões mais desejadas.</p>
+                </div>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px;">
-                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
-                    <span class="step-pill">Passo 01</span>
-                    <h3>Cadastre o Imóvel</h3>
-                    <p style="opacity: 0.7;">Interface amigável e campos otimizados.</p>
-                </div>
-                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
-                    <span class="step-pill">Passo 02</span>
-                    <h3>Ative a IA</h3>
-                    <p style="opacity: 0.7;">Deixe que a tecnologia crie o anúncio perfeito.</p>
-                </div>
-                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
-                    <span class="step-pill">Passo 03</span>
-                    <h3>Receba o Lead</h3>
-                    <p style="opacity: 0.7;">Conexão direta com quem quer comprar.</p>
-                </div>
+            <div class="img-container"
+                style="background: var(--primary); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 800; font-size: 2.5rem; text-align: center;">
+                Foco:<br>AM • PA • CE<br>RN • PE • AL
             </div>
         </div>
     </section>
 
-    <section class="slide dark">
-        <h2 class="tagline">Ecossistema</h2>
-        <h1>O portal para <span>quem vende.</span></h1>
+    <section class="slide dark" style="background: #111;">
+        <h2 class="tagline">Inteligência por trás do código</h2>
+        <h1>Suite <span>Brasil.</span></h1>
         <div class="grid-main">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
-                    <h3 style="color: var(--accent);">Imobiliárias</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.6;">Escala e visibilidade.</p>
-                </div>
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
-                    <h3 style="color: var(--accent);">Corretores</h3>
-                    <h3 style="color: var(--accent);">Corretores</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.6;">Agilidade e autonomia.</p>
-                </div>
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
-                    <h3 style="color: var(--accent);">Investidores</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.6;">Oportunidades reais.</p>
-                </div>
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
-                    <h3 style="color: var(--accent);">Proprietários</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.6;">Anúncio direto.</p>
-                </div>
-            </div>
             <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
-                    alt="Público Alvo">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop"
+                    alt="Suite Brasil Office">
+            </div>
+            <div>
+                <p class="lead" style="margin-bottom: 2.5rem;">A Suite Brasil é a engenharia que sustenta o ecossistema
+                    Bloco2, focada em entregar ferramentas de gestão robustas para o setor imobiliário.</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px;">
+                    <p style="font-size: 1.1rem; color: var(--accent); font-weight: 600;">Site: suitebrasil.com.br</p>
+                    <p style="font-size: 1.1rem; color: var(--white); opacity: 0.7; margin-top: 5px;">Contato:
+                        contato@suitebrasil.com.br</p>
+                </div>
             </div>
         </div>
+        <div class="footer-deck"><span>Tecnologia & Gestão Imobiliária</span><span>05</span></div>
     </section>
 
     <section class="slide" style="text-align: center; justify-content: center; align-items: center;">
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(115, 110, 211, 0.08) 0%, transparent 70%); z-index: 0;">
+        </div>
         <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo Final"
-            style="height: 100px; margin-bottom: 3rem;">
-        <h1>A revolução começa <span>hoje.</span></h1>
-        <p class="lead" style="margin: 0 auto 3rem;">Junte-se ao portal imobiliário que mais cresce no Norte e Nordeste.
-        </p>
+            style="height: 110px; margin-bottom: 3.5rem; z-index: 1;">
+        <h1 style="z-index: 1;">O mercado mudou. <span>Sua vitrine também.</span></h1>
+        <p class="lead" style="margin: 0 auto 3.5rem; z-index: 1;">O maior portal imobiliário do Norte e Nordeste
+            aguarda seus anúncios.</p>
 
         <div
-            style="background: var(--primary); color: var(--accent); padding: 25px 60px; border-radius: 100px; display: inline-block; font-weight: 800; font-size: 1.5rem; cursor: pointer;">
+            style="background: var(--primary); color: var(--accent); padding: 25px 70px; border-radius: 100px; display: inline-block; font-weight: 800; font-size: 1.5rem; cursor: pointer; z-index: 1;">
             ANUNCIAR AGORA
         </div>
 
-        <p style="margin-top: 4rem; font-weight: 600; font-size: 1.2rem; opacity: 0.5;">www.bloco2.com.br</p>
+        <div style="margin-top: 4rem; z-index: 1;">
+            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary);">www.bloco2.com.br</p>
+            <p style="font-size: 0.9rem; opacity: 0.5; margin-top: 10px;">Uma plataforma Suite Brasil</p>
+        </div>
     </section>
 
     <script>
-        // Navegação simples por setas para testar no browser
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') window.scrollBy(0, window.innerHeight);
             if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
