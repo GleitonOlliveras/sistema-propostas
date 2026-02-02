@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloco2 - Commercial Pitch Deck</title>
+    <title>Bloco2 - Premium Pitch Deck</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
 
@@ -12,37 +12,39 @@
             --primary: #160040;
             --accent: #2BFEC5;
             --secondary: #736ED3;
-            --bg-light: #EAE8EF;
+            --bg: #EAE8EF;
             --white: #FFFFFF;
             --slide-width: 100vw;
             --slide-height: 56.25vw;
+            /* 16:9 */
         }
 
+        /* MEDIA QUERY PARA MODO MOBILE (9:16) */
         @media (max-width: 1024px) or (orientation: portrait) {
             :root {
                 --slide-height: 177.77vw;
             }
 
             .slide {
-                padding: 8% 6% !important;
+                padding: 10% 8% !important;
             }
 
-            .grid-2 {
+            .grid-main {
                 grid-template-columns: 1fr !important;
-                gap: 20px !important;
+                gap: 40px !important;
+            }
+
+            .img-container {
+                height: 45% !important;
+                order: -1;
+            }
+
+            h1 {
+                font-size: 3.5rem !important;
             }
 
             .hide-mobile {
                 display: none;
-            }
-
-            h1 {
-                font-size: 3.2rem !important;
-                margin-bottom: 1rem !important;
-            }
-
-            .feature-item h3 {
-                font-size: 1.5rem !important;
             }
         }
 
@@ -54,23 +56,24 @@
         }
 
         body {
-            background: #111;
+            background: #222;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--primary);
         }
 
+        /* Slide Engine */
         .slide {
             width: var(--slide-width);
             height: var(--slide-height);
-            background: var(--bg-light);
+            background: var(--bg);
             position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             padding: 5% 7%;
             page-break-after: always;
-            margin-bottom: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
         .slide.dark {
@@ -78,28 +81,24 @@
             color: var(--white);
         }
 
-        .slide.accent {
-            background: var(--secondary);
-            color: var(--white);
-        }
-
-        .blur-blob {
+        /* Background Visual Decor */
+        .accent-circle {
             position: absolute;
-            width: 60%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(115, 110, 211, 0.12) 0%, transparent 70%);
-            top: -20%;
-            right: -10%;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(43, 254, 197, 0.1) 0%, transparent 70%);
+            top: -10%;
+            right: -5%;
             z-index: 0;
-            pointer-events: none;
         }
 
+        /* Tipografia Premium */
         h1 {
             font-size: 4.8rem;
             font-weight: 800;
-            line-height: 1;
+            line-height: 0.95;
             letter-spacing: -3px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             z-index: 1;
         }
 
@@ -125,55 +124,65 @@
         }
 
         p.lead {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 300;
             line-height: 1.4;
             opacity: 0.8;
-            max-width: 700px;
+            max-width: 600px;
             z-index: 1;
-            margin-bottom: 2rem;
         }
 
-        .grid-2 {
+        /* Grid Editorial */
+        .grid-main {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
+            gap: 80px;
             height: 100%;
             align-items: center;
             z-index: 1;
         }
 
-        .feature-item {
-            border-left: 5px solid var(--accent);
-            padding-left: 25px;
-            margin-bottom: 35px;
-        }
-
-        .feature-item h3 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .feature-item p {
-            font-size: 1.1rem;
-            opacity: 0.7;
-            line-height: 1.5;
-        }
-
-        .img-frame {
+        /* Molduras de Imagem */
+        .img-container {
             width: 100%;
             height: 100%;
             border-radius: 40px;
             overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .img-frame img {
+        .img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* Elementos de Interface */
+        .card-feature {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 30px;
+            border-left: 10px solid var(--accent);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .dark .card-feature {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-left-color: var(--accent);
+        }
+
+        .step-pill {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         .logo-top {
@@ -184,7 +193,7 @@
             z-index: 2;
         }
 
-        .deck-footer {
+        .footer-info {
             position: absolute;
             bottom: 5%;
             left: 7%;
@@ -200,20 +209,8 @@
             padding-top: 15px;
         }
 
-        .dark .deck-footer {
+        .dark .footer-info {
             border-top-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .highlight-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .accent .highlight-box {
-            background: rgba(22, 0, 64, 0.1);
-            border-color: rgba(22, 0, 64, 0.1);
         }
 
         @media print {
@@ -234,151 +231,186 @@
 <body>
 
     <section class="slide">
-        <div class="blur-blob"></div>
+        <div class="accent-circle"></div>
         <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo Bloco2"
             class="logo-top">
-        <div class="grid-2">
+        <div class="grid-main">
             <div>
-                <h2 class="tagline">Seu próximo endereço</h2>
-                <h1>Com alma<span> brasileira.</span></h1>
-                <p class="lead">Combinamos inteligência de dados com curadoria local para encontrar os imóveis mais
-                    autênticos do país.</p>
+                <h2 class="tagline">O Próximo Passo do Imobiliário</h2>
+                <h1>Simples.<br>Humano.<br><span>Seu.</span></h1>
+                <p class="lead">O portal que conecta o Norte e Nordeste com tecnologia de ponta e alma brasileira.</p>
             </div>
-            <div class="img-frame hide-mobile">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
-                    alt="Imóvel Autêntico">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+                    alt="Profissionalismo">
             </div>
         </div>
-        <div class="deck-footer"><span>Bloco2 Comercial 2026</span><span>01</span></div>
-    </section>
-
-    <section class="slide">
-        <h2 class="tagline">Autoridade do Anunciante</h2>
-        <h1>Sua <span>vitrine</span> exclusiva.</h1>
-        <div class="grid-2">
-            <div>
-                <p class="lead">Mais que um anúncio, uma página dedicada para construir sua credibilidade.</p>
-                <div class="feature-item">
-                    <h3>Perfil Dedicado</h3>
-                    <p>Sua marca em destaque com histórico e avaliações reais dos clientes.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Portfolio Direto</h3>
-                    <p>Link exclusivo para compartilhar todo seu estoque de forma profissional e limpa.</p>
-                </div>
-            </div>
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80"
-                    alt="Trabalho Profissional">
-            </div>
-        </div>
-        <div class="deck-footer"><span>Branding para Anunciantes</span><span>02</span></div>
+        <div class="footer-info"><span>Bloco2 Pitch 2026</span><span>01</span></div>
     </section>
 
     <section class="slide dark">
-        <div class="blur-blob" style="opacity: 0.5;"></div>
-        <h2 class="tagline">Aceleração de Vendas</h2>
-        <h1>O boost do <span>Bloco 2 Ads.</span></h1>
-        <div class="grid-2">
-            <div class="highlight-box">
-                <h3 style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;">Destaque Máximo</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 30px;">Apareça no topo das buscas por 48h seguidas e gere
-                    leads qualificados instantaneamente.</p>
-                <div style="display: flex; gap: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                    <div style="flex: 1;"><strong>Topo</strong><br><small>Prioridade na lista</small></div>
-                    <div style="flex: 1;"><strong>Cliques</strong><br><small>Destaque visual</small></div>
-                </div>
+        <div class="accent-circle" style="opacity: 0.3;"></div>
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png" alt="Símbolo"
+            class="logo-top" style="filter: brightness(0) invert(1);">
+        <div class="grid-main">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
+                    alt="Desafio do Mercado">
             </div>
             <div>
-                <h3 style="font-size: 2.2rem; margin-bottom: 20px;">Venda <span>mais rápido.</span></h3>
-                <p style="opacity: 0.7; font-size: 1.1rem;">Ferramenta exclusiva para anunciantes que buscam performance
-                    e não querem esperar o mercado.</p>
+                <h2 class="tagline">A Realidade Atual</h2>
+                <h1>Anunciar não deveria <span>ser um fardo.</span></h1>
+                <div class="card-feature">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Sistemas Poluídos</h3>
+                    <p style="opacity: 0.7;">Plataformas confusas que tomam o tempo precioso de quem deveria estar
+                        vendendo.</p>
+                </div>
+                <div class="card-feature">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Falta de Retorno</h3>
+                    <p style="opacity: 0.7;">Investimento alto em portais nacionais que não priorizam a dinâmica
+                        regional.</p>
+                </div>
             </div>
         </div>
-        <div class="deck-footer"><span>Performance Ads</span><span>03</span></div>
+        <div class="footer-info"><span>Entendendo o Mercado</span><span>02</span></div>
     </section>
 
-    <section class="slide dark" style="background: var(--secondary);">
-        <h2 class="tagline" style="color: var(--primary);">Inteligência Artificial</h2>
-        <h1>Anúncios que <span>se vendem.</span></h1>
-        <div class="grid-2">
+    <section class="slide">
+        <div class="accent-circle"></div>
+        <div class="grid-main">
             <div>
-                <p class="lead">Nossa IA cria títulos e descrições impactantes para você economizar tempo e ganhar
-                    cliques.</p>
-                <div class="feature-item" style="border-color: var(--primary);">
-                    <h3>Copywriting Assistido</h3>
-                    <p>Textos autênticos baseados nas melhores práticas de conversão.</p>
-                </div>
-                <div class="feature-item" style="border-color: var(--primary);">
-                    <h3>Análise em Real Time</h3>
-                    <p>Dashboard completo para acompanhar o desempenho de cada imóvel.</p>
+                <h2 class="tagline">A Revolução Bloco2</h2>
+                <h1>Tecnologia para <span>quem decide.</span></h1>
+                <p class="lead">Nascemos para simplificar. Uma vitrine moderna, rápida e focada em converter leads
+                    qualificados no N/NE.</p>
+                <div style="margin-top: 40px; display: flex; gap: 20px;">
+                    <div style="background: var(--white); padding: 30px; border-radius: 20px; flex: 1;">
+                        <h4 style="color: var(--secondary);">Direto</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Menos cliques para o anúncio ir ao ar.</p>
+                    </div>
+                    <div style="background: var(--white); padding: 30px; border-radius: 20px; flex: 1;">
+                        <h4 style="color: var(--secondary);">Local</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Estrategicamente pensado para sua região.</p>
+                    </div>
                 </div>
             </div>
-            <div class="img-frame hide-mobile">
-                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
-                    alt="AI Interface">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+                    alt="Solução Bloco2">
+            </div>
+        </div>
+        <div class="footer-info"><span>O Futuro do Real Estate</span><span>03</span></div>
+    </section>
+
+    <section class="slide dark" style="background: #1e0055;">
+        <h2 class="tagline">Exclusivo Bloco2</h2>
+        <h1>Sua Inteligência <span>Artificial.</span></h1>
+        <div class="grid-main">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=800&auto=format&fit=crop"
+                    alt="Inovação">
+            </div>
+            <div>
+                <div class="card-feature">
+                    <h3 style="color: var(--accent);">Copywriter Integrado</h3>
+                    <p>A IA cria títulos e descrições magnéticas em segundos. Mais tempo para fechar negócios.</p>
+                </div>
+                <div class="card-feature">
+                    <h3 style="color: var(--accent);">Visual Ultra-Clean</h3>
+                    <p>Foco total no imóvel. O design que valoriza o produto e atrai o olhar do comprador.</p>
+                </div>
+                <div class="card-feature">
+                    <h3 style="color: var(--accent);">Performance N/NE</h3>
+                    <p>Indexação prioritária nas regiões Norte e Nordeste.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="slide">
-        <h2 class="tagline">Parceria Real</h2>
-        <h1>Suporte <span>dedicado.</span></h1>
-        <div class="grid-2">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1521791136366-398517526ed8?auto=format&fit=crop&w=800&q=80"
-                    alt="Atendimento Especializado">
+        <h2 class="tagline">Operação</h2>
+        <h1>O fluxo do <span>resultado.</span></h1>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; flex-grow: 1;">
+            <div
+                style="background: var(--white); border-radius: 40px; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; position: relative;">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
+                    style="width: 100%; height: 100%; object-fit: cover; opacity: 0.15;">
+                <div
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--secondary); font-weight: 800; font-size: 1.5rem; letter-spacing: 5px;">
+                    MOCKUP DASHBOARD</div>
             </div>
-            <div>
-                <div class="feature-item">
-                    <h3>Gestão Completa</h3>
-                    <p>Ferramentas de análise para otimizar seus anúncios e aumentar o ROI.</p>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
+                    <span class="step-pill">Passo 01</span>
+                    <h3>Cadastre o Imóvel</h3>
+                    <p style="opacity: 0.7;">Interface amigável e campos otimizados.</p>
                 </div>
-                <div class="feature-item">
-                    <h3>Atendimento Humano</h3>
-                    <p>Suporte especializado para ajudar você a configurar e vender melhor.</p>
+                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
+                    <span class="step-pill">Passo 02</span>
+                    <h3>Ative a IA</h3>
+                    <p style="opacity: 0.7;">Deixe que a tecnologia crie o anúncio perfeito.</p>
+                </div>
+                <div style="padding: 25px; background: rgba(115, 110, 211, 0.05); border-radius: 20px;">
+                    <span class="step-pill">Passo 03</span>
+                    <h3>Receba o Lead</h3>
+                    <p style="opacity: 0.7;">Conexão direta com quem quer comprar.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="slide dark">
-        <h2 class="tagline">Para quem é o Bloco 2?</h2>
-        <h1>Ecossistema <span>Completo.</span></h1>
-        <div class="grid-2" style="grid-template-columns: repeat(2, 1fr); gap: 30px;">
-            <div class="highlight-box">
-                <h3 style="color: var(--accent);">Imobiliárias</h3>
-                <p>Escala e visibilidade para grandes carteiras.</p>
+        <h2 class="tagline">Ecossistema</h2>
+        <h1>O portal para <span>quem vende.</span></h1>
+        <div class="grid-main">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div
+                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
+                    <h3 style="color: var(--accent);">Imobiliárias</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.6;">Escala e visibilidade.</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
+                    <h3 style="color: var(--accent);">Corretores</h3>
+                    <h3 style="color: var(--accent);">Corretores</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.6;">Agilidade e autonomia.</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
+                    <h3 style="color: var(--accent);">Investidores</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.6;">Oportunidades reais.</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; text-align: center;">
+                    <h3 style="color: var(--accent);">Proprietários</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.6;">Anúncio direto.</p>
+                </div>
             </div>
-            <div class="highlight-box">
-                <h3 style="color: var(--accent);">Corretores</h3>
-                <p>Branding pessoal e agilidade no fechamento.</p>
-            </div>
-            <div class="highlight-box">
-                <h3 style="color: var(--accent);">Investidores</h3>
-                <p>Dados reais para as melhores oportunidades.</p>
-            </div>
-            <div class="highlight-box">
-                <h3 style="color: var(--accent);">Proprietários</h3>
-                <p>Anuncie direto com ferramentas de profissional.</p>
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop"
+                    alt="Público Alvo">
             </div>
         </div>
     </section>
 
-    <section class="slide accent" style="text-align: center; justify-content: center; align-items: center;">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo"
-            style="height: 100px; margin-bottom: 3rem; filter: brightness(0) invert(1);">
-        <h1 style="color: white;">O maior portal do <span>Norte e Nordeste.</span></h1>
-        <p class="lead" style="margin: 0 auto 3rem; color: white; opacity: 1;">Comece agora e alcance milhares de
-            interessados qualificados.</p>
+    <section class="slide" style="text-align: center; justify-content: center; align-items: center;">
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo Final"
+            style="height: 100px; margin-bottom: 3rem;">
+        <h1>A revolução começa <span>hoje.</span></h1>
+        <p class="lead" style="margin: 0 auto 3rem;">Junte-se ao portal imobiliário que mais cresce no Norte e Nordeste.
+        </p>
+
         <div
-            style="background: var(--accent); color: var(--primary); padding: 25px 60px; border-radius: 100px; font-weight: 800; font-size: 1.5rem; display: inline-block; cursor: pointer;">
-            COMEÇAR A ANUNCIAR
+            style="background: var(--primary); color: var(--accent); padding: 25px 60px; border-radius: 100px; display: inline-block; font-weight: 800; font-size: 1.5rem; cursor: pointer;">
+            ANUNCIAR AGORA
         </div>
-        <p style="margin-top: 40px; font-weight: 600; font-size: 1.2rem;">www.bloco2.com.br</p>
+
+        <p style="margin-top: 4rem; font-weight: 600; font-size: 1.2rem; opacity: 0.5;">www.bloco2.com.br</p>
     </section>
 
     <script>
+        // Navegação simples por setas para testar no browser
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') window.scrollBy(0, window.innerHeight);
             if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
