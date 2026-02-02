@@ -1,70 +1,285 @@
-<section class="slide">
-    <div class="ambient-light"></div>
-    <h2>Tração</h2>
-    <h1>Ocupando o <span>espaço.</span></h1>
-    <p class="lead">Nossa presença no Norte e Nordeste cresce em ritmo acelerado, validando a demanda regional.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <div class="feature-stack" style="margin-top: 60px;">
-        <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h3 style="font-size: 70px; color: var(--secondary);">+28k</h3>
-                <p>Imóveis Ativos</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco 2 - Investor Deck</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #160040;
+            --accent: #2bfec5;
+            --secondary: #736ED3;
+            --bg: #f8f9fc;
+            --white: #ffffff;
+        }
+
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container do Slide (9:16) */
+        .slide {
+            width: 1080px;
+            height: 1920px;
+            background: var(--bg);
+            color: var(--primary);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 100px 80px;
+            overflow: hidden;
+            flex-shrink: 0;
+            /* Impede que o slide "encolha" */
+            margin-bottom: 20px;
+            /* Separação visual no navegador */
+        }
+
+        .slide.dark {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Elemento de Luz Ambiental */
+        .light-effect {
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(circle, rgba(115, 110, 211, 0.08) 0%, transparent 70%);
+            top: -300px;
+            right: -300px;
+            pointer-events: none;
+        }
+
+        /* Tipografia */
+        h2 {
+            font-size: 34px;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .dark h2 {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 110px;
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -5px;
+            margin-bottom: 45px;
+        }
+
+        h1 span {
+            color: var(--secondary);
+        }
+
+        .dark h1 span {
+            color: var(--accent);
+        }
+
+        .lead {
+            font-size: 44px;
+            line-height: 1.4;
+            color: #4b4b4b;
+            font-weight: 300;
+        }
+
+        .dark .lead {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Cards e Grids */
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-top: auto;
+            margin-bottom: 100px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 60px;
+            border-radius: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .card h3 {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .dark .card h3 {
+            color: var(--accent);
+        }
+
+        .card p {
+            font-size: 32px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .dark .card p {
+            color: #ccc;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-small {
+            height: 50px;
+        }
+
+        .dark .logo-small {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Forçar quebra de página no PDF */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .slide {
+                margin: 0;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="slide">
+        <div class="light-effect"></div>
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
+            style="width: 450px; margin-bottom: 150px;">
+        <h2>Estratégia 2026</h2>
+        <h1>O seu novo <span>endereço</span> no N/NE.</h1>
+        <p class="lead">O portal que une inteligência regional e performance tecnológica para revolucionar o Real
+            Estate.</p>
+
+        <div
+            style="margin-top: auto; width: 100%; height: 800px; background: #eee; border-radius: 50px 50px 0 0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 30px; border: 1px solid #ddd;">
+            [Screenshot da Home]
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Diferenciais</h2>
+        <h1>Por que somos <span>interessantes?</span></h1>
+        <div class="stack">
+            <div class="card" style="border-left: 15px solid var(--accent);">
+                <h3>Bloco 2 Ads</h3>
+                <p>Monetização via visibilidade prioritária com foco em ROI para o anunciante.</p>
             </div>
-            <div style="text-align: right;">
-                <h3 style="font-size: 70px; color: var(--accent);">N/NE</h3>
-                <p>Foco Geográfico</p>
+            <div class="card" style="border-left: 15px solid var(--secondary);">
+                <h3>Leads Diretos</h3>
+                <p>Conexão instantânea via WhatsApp, eliminando fricção comercial.</p>
             </div>
         </div>
-
-        <div class="card" style="background: var(--primary); border: none; color: white;">
-            <h3 style="color: var(--accent); font-size: 45px;">Crescimento Orgânico</h3>
-            <p style="color: rgba(255,255,255,0.7);">Interface otimizada para SEO local, garantindo baixo custo de
-                aquisição de leads (CAC).</p>
+        <div class="footer">
+            <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png"
+                class="logo-small">
+            <span style="font-weight: bold; color: var(--secondary);">02</span>
         </div>
-    </div>
+    </section>
 
-    <div class="footer">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png"
-            style="height: 60px;">
-        <span style="font-weight: 800; color: var(--secondary); font-size: 30px;">05</span>
-    </div>
-</section>
+    <section class="slide dark">
+        <div class="light-effect" style="opacity: 0.5;"></div>
+        <h2>Autoridade</h2>
+        <h1>Time de <span>Especialistas.</span></h1>
+        <p class="lead">Combinamos gestão imobiliária com engenharia de software de alta escala.</p>
 
-<section class="slide dark">
-    <div class="ambient-light"
-        style="background: radial-gradient(circle, rgba(115, 110, 211, 0.1) 0%, transparent 70%);"></div>
-    <h2>Business Model</h2>
-    <h1>Escala & <span>Monetização.</span></h1>
+        <div class="stack">
+            <div class="card">
+                <h3>Infraestrutura</h3>
+                <p>Construído para suportar milhões de acessos com tempo de resposta recorde.</p>
+            </div>
+            <div class="card">
+                <h3>Marketing</h3>
+                <p>UX desenhada para reduzir o estresse de busca e acelerar a conversão.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
+                class="logo-small">
+            <span style="font-weight: bold; color: var(--accent);">03</span>
+        </div>
+    </section>
 
-    <div style="margin-top: 80px; display: flex; flex-direction: column; gap: 40px;">
+    <section class="slide">
+        <h2>Resultados</h2>
+        <h1>Domínio de <span>Mercado.</span></h1>
+        <div class="stack">
+            <div class="card" style="text-align: center;">
+                <h3 style="font-size: 100px; color: var(--secondary);">+28k</h3>
+                <p>Imóveis Ativos na base</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="font-size: 100px; color: var(--accent);">N/NE</h3>
+                <p>Foco Geográfico Exclusivo</p>
+            </div>
+        </div>
+        <div class="footer">
+            <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png"
+                class="logo-small">
+            <span style="font-weight: bold; color: var(--secondary);">04</span>
+        </div>
+    </section>
+
+    <section class="slide dark">
+        <h2>Business</h2>
+        <h1>Como <span>escalamos?</span></h1>
+        <div class="stack">
+            <div class="card">
+                <h3>SaaS & Ads</h3>
+                <p>Planos de assinatura para imobiliárias e destaques avulsos.</p>
+            </div>
+            <div class="card">
+                <h3>Big Data</h3>
+                <p>Inteligência de mercado regional para grandes incorporadoras.</p>
+            </div>
+        </div>
         <div
-            style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px; border: 1px solid rgba(43, 254, 197, 0.2);">
-            <h3 style="color: var(--accent); font-size: 42px;">Bloco 2 Ads</h3>
-            <p style="font-size: 28px; opacity: 0.8;">Modelo Freemium com upgrade para destaque de imóveis (SaaS de
-                visibilidade).</p>
+            style="margin-top: auto; text-align: center; background: var(--accent); padding: 40px; border-radius: 30px; color: var(--primary); font-weight: 800; font-size: 36px;">
+            www.bloco2.com.br
         </div>
+    </section>
 
-        <div
-            style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px; border: 1px solid rgba(115, 110, 211, 0.3);">
-            <h3 style="color: var(--secondary); font-size: 42px;">Planos Profissionais</h3>
-            <p style="font-size: 28px; opacity: 0.8;">Assinaturas mensais para imobiliárias com ferramentas exclusivas
-                de gestão e CRM.</p>
-        </div>
+</body>
 
-        <div
-            style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="color: white; font-size: 42px;">Data Intelligence</h3>
-            <p style="font-size: 28px; opacity: 0.8;">Venda de relatórios de tendências de mercado regional para grandes
-                incorporadoras.</p>
-        </div>
-    </div>
-
-    <div style="margin-top: auto; text-align: center;">
-        <p style="font-size: 24px; letter-spacing: 4px; opacity: 0.5;">CAPITAL MÍNIMO • ESCALA MÁXIMA</p>
-    </div>
-
-    <div class="footer">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" class="logo-small">
-        <span style="font-weight: 800; color: var(--accent); font-size: 30px;">06</span>
-    </div>
-</section>
+</html>
