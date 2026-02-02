@@ -14,12 +14,10 @@
             --secondary: #736ED3;
             --bg: #EAE8EF;
             --white: #FFFFFF;
-            /* Dimensões base para 16:9 */
             --slide-width: 1280px;
             --slide-height: 720px;
         }
 
-        /* RESET PARA IMPRESSÃO LIMPA */
         * {
             margin: 0;
             padding: 0;
@@ -38,19 +36,17 @@
             padding: 40px 0;
         }
 
-        /* FORMATO 9:16 (MOBILE) - Ajustes de Variáveis */
         body.format-9-16 {
             --slide-width: 540px;
             --slide-height: 960px;
         }
 
-        /* CONTAINER DO SLIDE */
         .slide {
             width: var(--slide-width);
             height: var(--slide-height);
             background: var(--bg);
             position: relative;
-            padding: 60px 80px;
+            padding: 50px 70px;
             margin-bottom: 30px;
             overflow: hidden;
             display: flex;
@@ -64,43 +60,34 @@
             color: var(--white);
         }
 
-        /* AJUSTES ESTRUTURAIS PARA 9:16 */
+        /* Ajustes Mobile 9:16 */
         body.format-9-16 .slide {
-            padding: 40px 30px;
+            padding: 40px 25px;
         }
 
         body.format-9-16 .grid-main {
             grid-template-columns: 1fr !important;
-            gap: 30px !important;
+            gap: 20px !important;
         }
 
-        body.format-9-16 .img-container {
-            height: 35% !important;
-            order: -1;
+        body.format-9-16 .hide-mobile {
+            display: none;
         }
 
         body.format-9-16 h1 {
-            font-size: 2.8rem !important;
-            letter-spacing: -1px;
+            font-size: 2.5rem !important;
         }
 
-        body.format-9-16 .logo-top {
-            height: 35px;
-            margin-bottom: 20px;
+        body.format-9-16 .organograma {
+            flex-direction: column !important;
         }
 
-        body.format-9-16 .footer-deck {
-            font-size: 0.6rem;
-            bottom: 2%;
-        }
-
-        /* ELEMENTOS INTERNOS */
         h1 {
-            font-size: 4.2rem;
+            font-size: 3.8rem;
             font-weight: 800;
             line-height: 0.95;
-            letter-spacing: -3px;
-            margin-bottom: 20px;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
         }
 
         h1 span {
@@ -112,7 +99,7 @@
         }
 
         h2.tagline {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 4px;
             color: var(--secondary);
@@ -125,26 +112,26 @@
         }
 
         p.lead {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            line-height: 1.4;
+            line-height: 1.5;
             opacity: 0.8;
         }
 
         .grid-main {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             flex-grow: 1;
             align-items: center;
         }
 
         .img-container {
             width: 100%;
-            height: 90%;
-            border-radius: 30px;
+            height: 85%;
+            border-radius: 25px;
             overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .img-container img {
@@ -153,50 +140,54 @@
             object-fit: cover;
         }
 
-        .info-card {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 20px;
-            border-left: 8px solid var(--accent);
-            margin-bottom: 15px;
+        /* Organograma Estilizado */
+        .organograma {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
         }
 
-        .dark .info-card {
+        .step {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            border-bottom: 4px solid var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .dark .step {
             background: rgba(255, 255, 255, 0.05);
             color: white;
         }
 
-        .logo-top {
-            height: 45px;
-            margin-bottom: 30px;
-            align-self: flex-start;
-            object-fit: contain;
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--accent);
         }
 
         .footer-deck {
             position: absolute;
-            bottom: 40px;
-            left: 80px;
-            right: 80px;
+            bottom: 30px;
+            left: 70px;
+            right: 70px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             opacity: 0.4;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding-top: 10px;
         }
 
-        body.format-9-16 .footer-deck {
-            left: 30px;
-            right: 30px;
-        }
-
         .dark .footer-deck {
             border-top-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* PAINEL DE CONTROLE (FLUTUANTE) */
         #ui-controls {
             position: fixed;
             top: 20px;
@@ -209,19 +200,17 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .ui-btn {
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid var(--accent);
             background: transparent;
             color: white;
             cursor: pointer;
             font-weight: 800;
-            font-size: 12px;
-            transition: 0.3s;
+            font-size: 11px;
         }
 
         .ui-btn.active {
@@ -229,34 +218,19 @@
             color: var(--primary);
         }
 
-        .ui-btn-save {
-            background: white;
-            color: black;
-            border: none;
-            margin-top: 10px;
-        }
-
-        /* REGRAS DE IMPRESSÃO - O SEGREDO */
         @media print {
             #ui-controls {
                 display: none !important;
             }
 
             body {
-                background: white !important;
                 padding: 0 !important;
-                display: block !important;
             }
 
             .slide {
                 margin: 0 !important;
-                box-shadow: none !important;
                 page-break-after: always !important;
-                break-after: page !important;
-                -webkit-print-color-adjust: exact;
             }
-
-            /* O JS injetará o @page dinâmico aqui */
         }
     </style>
 </head>
@@ -264,73 +238,77 @@
 <body class="format-16-9">
 
     <div id="ui-controls">
-        <label style="color:white; font-size: 10px; font-weight: 800; margin-bottom: 5px; display: block;">1. ESCOLHA O
-            FORMATO</label>
         <button class="ui-btn active" onclick="setFormat('16-9', this)">DESKTOP (16:9)</button>
         <button class="ui-btn" onclick="setFormat('9-16', this)">MOBILE (9:16)</button>
-
-        <label style="color:white; font-size: 10px; font-weight: 800; margin-top: 10px; display: block;">2. GERAR
-            ARQUIVO</label>
-        <button class="ui-btn ui-btn-save" onclick="window.print()">SALVAR PDF</button>
+        <button class="ui-btn" style="background:white; color:black;" onclick="window.print()">SALVAR PDF</button>
     </div>
 
     <section class="slide">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" class="logo-top">
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" class="logo-top"
+            style="height: 60px;">
         <div class="grid-main">
             <div>
-                <h2 class="tagline">Alta Performance Imobiliária</h2>
-                <h1>Seu imóvel <span>vende e aluga</span> de verdade.</h1>
-                <p class="lead">Maximizamos o ROI do seu anúncio com o portal líder em conversão no Norte e Nordeste.
-                </p>
+                <h2 class="tagline">Oceano Azul Imobiliário</h2>
+                <h1>Líder em conversão no <span>Norte e Nordeste.</span></h1>
+                <p class="lead">Não somos apenas um portal de anúncios. Somos o motor de vendas focado na região que
+                    mais cresce no Brasil.</p>
+                <div class="organograma">
+                    <div class="step">Anúncio Inteligente</div>
+                    <div class="arrow">→</div>
+                    <div class="step">Qualificação por I.A.</div>
+                    <div class="arrow">→</div>
+                    <div class="step">Lead no WhatsApp</div>
+                </div>
             </div>
             <div class="img-container">
                 <img
                     src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop">
             </div>
         </div>
-        <div class="footer-deck"><span>Bloco2 Pitch 2026</span><span>01</span></div>
+        <div class="footer-deck"><span>Bloco2 | Proposta de Valor 2026</span><span>01</span></div>
     </section>
 
     <section class="slide dark">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png"
-            class="logo-top" style="filter: brightness(0) invert(1);">
+        <h2 class="tagline">Análise Competitiva</h2>
+        <h1>Por que <span>escolher o Bloco2?</span></h1>
         <div class="grid-main">
-            <div class="img-container">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/1_ykosv1.png">
+            <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px;">
+                <h3 style="color: var(--accent); margin-bottom: 20px;">Portais Tradicionais</h3>
+                <ul style="list-style: none; opacity: 0.7; line-height: 2;">
+                    <li>❌ Interface saturada e confusa [cite: 41]</li>
+                    <li>❌ Algoritmos que favorecem quem paga mais</li>
+                    <li>❌ Leads frios e desqualificados</li>
+                    <li>❌ Foco genérico nacional</li>
+                </ul>
             </div>
-            <div>
-                <h2 class="tagline">O Gap de Mercado</h2>
-                <h1>Cansado de portais <span>ineficientes?</span></h1>
-                <div class="info-card">
-                    <h3 style="font-size: 1.3rem;">Abandono de Lead Zero</h3>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">Interface desenhada para converter visualizações em
-                        visitas reais.</p>
-                </div>
-                <div class="info-card">
-                    <h3 style="font-size: 1.3rem;">Domínio Regional</h3>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">Entendemos o comportamento de busca e a valorização
-                        local no N/NE.</p>
-                </div>
+            <div
+                style="background: rgba(43, 254, 197, 0.1); padding: 30px; border-radius: 20px; border: 1px solid var(--accent);">
+                <h3 style="color: var(--accent); margin-bottom: 20px;">Diferencial Bloco2</h3>
+                <ul style="list-style: none; line-height: 2;">
+                    <li>✅ UX Minimalista: Foco total no imóvel [cite: 42]</li>
+                    <li>✅ I.A. que escreve seu anúncio [cite: 46, 49]</li>
+                    <li>✅ Leads direto para o seu WhatsApp [cite: 56]</li>
+                    <li>✅ Domínio absoluto do Norte e Nordeste [cite: 5]</li>
+                </ul>
             </div>
         </div>
-        <div class="footer-deck"><span>Análise de Mercado</span><span>02</span></div>
+        <div class="footer-deck"><span>Eficiência e Conversão</span><span>02</span></div>
     </section>
 
-    <section class="slide" style="background: #ffffff;">
-        <h2 class="tagline">Ecossistema Inteligente</h2>
-        <h1>I.A. que <span>acelera o fechamento.</span></h1>
+    <section class="slide">
+        <h2 class="tagline">Tecnologia Proprietária</h2>
+        <h1>I.A. que <span>trabalha por você.</span></h1>
         <div class="grid-main">
             <div>
-                <p class="lead" style="margin-bottom: 1.5rem;">Reduzimos o tempo de criação de anúncios em 90%.</p>
-                <div class="info-card" style="border-left-color: var(--secondary);">
-                    <h3 style="font-size: 1.3rem;">Copywriting de Alta Conversão</h3>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">Títulos otimizados por I.A. para gatilhos mentais de
-                        venda.</p>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: var(--secondary); margin-bottom: 10px;">Copywriter Automático</h3>
+                    <p style="opacity: 0.8;">Nossa I.A. analisa as fotos e gera títulos magnéticos e descrições
+                        otimizadas para o Google automaticamente[cite: 49].</p>
                 </div>
-                <div class="info-card" style="border-left-color: var(--secondary);">
-                    <h3 style="font-size: 1.3rem;">Anúncio em Segundos</h3>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">Tecnologia humanizada para proprietários focarem na
-                        negociação.</p>
+                <div>
+                    <h3 style="color: var(--secondary); margin-bottom: 10px;">Curadoria de Atributos</h3>
+                    <p style="opacity: 0.8;">O sistema identifica automaticamente as comodidades (piscina, varanda, etc)
+                        e as coloca em destaque para investidores[cite: 109, 110].</p>
                 </div>
             </div>
             <div class="img-container">
@@ -338,64 +316,65 @@
                     src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop">
             </div>
         </div>
-        <div class="footer-deck"><span>Inovação I.A.</span><span>03</span></div>
-    </section>
-
-    <section class="slide">
-        <h2 class="tagline">Experiência do Usuário</h2>
-        <h1>Fluidez que gera <span>negócios.</span></h1>
-        <div class="grid-main">
-            <div>
-                <div class="info-card">
-                    <h3 style="font-size: 1.3rem;">Jornada de Compra Intuitiva</h3>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">O Bloco2 guia o interessado direto ao seu WhatsApp ou
-                        central de vendas.</p>
-                </div>
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074119/2_t5u3pz.png"
-                    style="width: 100%; border-radius: 20px;">
-            </div>
-            <div class="img-container" style="height: 100%;">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074121/3_bukacz.png">
-            </div>
-        </div>
+        <div class="footer-deck"><span>Feature Showcase: Inteligência Artificial</span><span>03</span></div>
     </section>
 
     <section class="slide dark">
-        <h2 class="tagline">Visibilidade Premium</h2>
-        <h1>Valorize <span>cada m².</span></h1>
-        <div class="grid-main">
-            <div class="img-container">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/4_ibkpmd.png">
+        <h2 class="tagline">User Experience</h2>
+        <h1>A jornada da <span>conversão perfeita.</span></h1>
+        <div class="organograma"
+            style="margin-bottom: 40px; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px;">
+            <div style="text-align: center;">
+                <div
+                    style="background: var(--accent); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--primary); font-weight: 800;">
+                    01</div>
+                <p style="font-size: 0.8rem;">Anúncio Simples [cite: 58]</p>
             </div>
-            <div>
-                <h3 style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;">Curadoria de Atributos</h3>
-                <p class="lead" style="font-size: 1.2rem;">Exibimos comodidades que os grandes investidores realmente
-                    valorizam.</p>
-                <p style="margin-top: 20px; opacity: 0.7; font-size: 1rem;">O algoritmo Bloco2 Ads entrega seu anúncio
-                    para quem tem real poder de compra.</p>
+            <div class="arrow">→</div>
+            <div style="text-align: center;">
+                <div
+                    style="background: var(--accent); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--primary); font-weight: 800;">
+                    02</div>
+                <p style="font-size: 0.8rem;">Otimização I.A. [cite: 46]</p>
             </div>
+            <div class="arrow">→</div>
+            <div style="text-align: center;">
+                <div
+                    style="background: var(--accent); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--primary); font-weight: 800;">
+                    03</div>
+                <p style="font-size: 0.8rem;">Match Regional [cite: 5, 111]</p>
+            </div>
+            <div class="arrow">→</div>
+            <div style="text-align: center;">
+                <div
+                    style="background: var(--accent); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--primary); font-weight: 800;">
+                    04</div>
+                <p style="font-size: 0.8rem;">Fechamento WhatsApp [cite: 56]</p>
+            </div>
+        </div>
+        <p class="lead" style="text-align: center; margin: 0 auto; max-width: 800px;">Eliminamos porteiros digitais. No
+            Bloco2, o interessado fala direto com você, sem intermediários[cite: 56].</p>
+    </section>
+
+    <section class="slide" style="text-align: center; justify-content: center; align-items: center; background: #fff;">
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
+            style="height: 100px; margin-bottom: 2rem;">
+        <h1 style="font-size: 4rem;">O futuro imobiliário do N/NE <span>começa aqui.</span></h1>
+        <p class="lead" style="margin-bottom: 40px;">Junte-se à plataforma que entende a alma do Norte e Nordeste
+            brasileiro[cite: 114].</p>
+        <div
+            style="background: var(--primary); color: var(--accent); padding: 25px 80px; border-radius: 100px; font-weight: 800; font-size: 1.5rem; letter-spacing: 1px;">
+            ANUNCIE AGORA</div>
+        <div style="margin-top: 50px; opacity: 0.5; font-size: 0.9rem;">
+            Uma solução <strong>Suite Brasil</strong> [cite: 116]<br>
+            www.bloco2.com.br
         </div>
     </section>
 
-    <section class="slide"
-        style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
-            style="height: 80px; margin-bottom: 2rem;">
-        <h1 style="font-size: 3.5rem;">O mercado mudou. <span>E você?</span></h1>
-        <p class="lead" style="max-width: 600px; margin-bottom: 3rem;">O Bloco2 é o parceiro estratégico para acelerar
-            seu portfólio no Norte e Nordeste.</p>
-        <div
-            style="background: var(--primary); color: var(--accent); padding: 20px 50px; border-radius: 100px; font-weight: 800; font-size: 1.2rem;">
-            COMEÇAR AGORA</div>
-        <div style="margin-top: 3rem; opacity: 0.6; font-size: 0.8rem;">www.bloco2.com.br | Suite Brasil</div>
-    </section>
-
     <script>
-        // Configura o formato e injeta o CSS de impressão específico
         function setFormat(format, btn) {
             document.querySelectorAll('.ui-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             const body = document.body;
             let printStyle = document.getElementById('dynamic-print-style');
             if (!printStyle) {
@@ -403,19 +382,14 @@
                 printStyle.id = 'dynamic-print-style';
                 document.head.appendChild(printStyle);
             }
-
             if (format === '9-16') {
                 body.className = 'format-9-16';
-                // Trava o tamanho do papel no PDF para 540x960px (9:16)
                 printStyle.innerHTML = "@media print { @page { size: 540px 960px; margin: 0; } }";
             } else {
                 body.className = 'format-16-9';
-                // Trava o tamanho do papel no PDF para 1280x720px (16:9)
                 printStyle.innerHTML = "@media print { @page { size: 1280px 720px; margin: 0; } }";
             }
         }
-
-        // Inicializa com 16:9
         setFormat('16-9', document.querySelector('.ui-btn'));
     </script>
 </body>
