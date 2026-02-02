@@ -323,6 +323,93 @@
             if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
         });
     </script>
+
+    <div id="export-panel"
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: var(--primary); padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--accent);">
+        <span style="color: white; font-size: 0.7rem; font-weight: 800; text-align: center; margin-bottom: 5px;">FORMATO
+            DO PDF</span>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="setFormat('16/9')"
+                style="cursor: pointer; padding: 8px 15px; border-radius: 10px; border: 1px solid var(--accent); background: transparent; color: white; font-weight: 600;">16:9
+                (Desktop)</button>
+            <button onclick="setFormat('9/16')"
+                style="cursor: pointer; padding: 8px 15px; border-radius: 10px; border: 1px solid var(--accent); background: transparent; color: white; font-weight: 600;">9:16
+                (Mobile)</button>
+        </div>
+        <button onclick="window.print()"
+            style="cursor: pointer; padding: 12px; border-radius: 10px; border: none; background: var(--accent); color: var(--primary); font-weight: 800; margin-top: 5px;">GERAR
+            PDF AGORA</button>
+    </div>
+
+    <style>
+        /* Estilos para troca de formato via JS */
+        body.format-9-16 .slide {
+            width: 56.25vh !important;
+            /* Proporção 9:16 baseada na altura */
+            height: 100vh !important;
+            margin: 0 auto 20px auto;
+            padding: 10% 8% !important;
+        }
+
+        body.format-9-16 .grid-main {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+
+        body.format-9-16 .img-container {
+            height: 35% !important;
+            order: -1;
+        }
+
+        body.format-9-16 h1 {
+            font-size: 2.8rem !important;
+        }
+
+        /* Regras de Impressão */
+        @media print {
+            #export-panel {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .slide {
+                margin-bottom: 0 !important;
+                page-break-after: always !important;
+            }
+
+            /* O formato da página é definido pelo JS antes de imprimir */
+        }
+    </style>
+
+    <script>
+        function setFormat(ratio) {
+            const body = document.body;
+            const style = document.createElement('style');
+            style.id = "print-setting";
+
+            // Remove configuração anterior de impressão se existir
+            const oldStyle = document.getElementById("print-setting");
+            if (oldStyle) oldStyle.remove();
+
+            if (ratio === '9/16') {
+                body.classList.add('format-9-16');
+                style.innerHTML = "@media print { @page { size: 1080px 1920px; margin: 0; } }";
+            } else {
+                body.classList.remove('format-9-16');
+                style.innerHTML = "@media print { @page { size: 1920px 1080px; margin: 0; } }";
+            }
+            document.head.appendChild(style);
+        }
+
+        // Atalho de teclado para as setas (mantido do seu código original)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') window.scrollBy(0, window.innerHeight);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
+        });
+    </script>
 </body>
 
 </html>
