@@ -14,42 +14,55 @@
             --secondary: #736ED3;
             --bg: #EAE8EF;
             --white: #FFFFFF;
+            --slide-w: 100vw;
+            --slide-h: 56.25vw;
+            /* 16:9 Default */
         }
 
-        @media (max-width: 1024px) or (orientation: portrait) {
-            :root {
-                --slide-height: 177.77vw;
-            }
-
-            .slide {
-                padding: 8% 6% !important;
-            }
-
-            .grid-main {
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
-            }
-
-            .img-container {
-                height: 40% !important;
-                order: -1;
-            }
-
-            h1 {
-                font-size: 3.2rem !important;
-            }
-
-            .hide-mobile {
-                display: none;
-            }
+        /* FORMATO VERTICAL 9:16 (Ativado via Classe) */
+        body.format-9-16 {
+            --slide-w: 56.25vh;
+            --slide-h: 100vh;
         }
 
-        @media (min-width: 1025px) {
-            :root {
-                --slide-height: 56.25vw;
-            }
+        body.format-9-16 .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 0 auto 40px auto;
+            padding: 10% 8% !important;
+            display: flex;
+            flex-direction: column;
         }
 
+        body.format-9-16 .grid-main {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 20px !important;
+            justify-content: center;
+        }
+
+        body.format-9-16 .img-container {
+            height: 30% !important;
+            width: 100% !important;
+            order: -1;
+        }
+
+        body.format-9-16 h1 {
+            font-size: 2.8rem !important;
+            line-height: 1;
+        }
+
+        body.format-9-16 .info-card {
+            padding: 20px !important;
+            margin-bottom: 10px !important;
+        }
+
+        body.format-9-16 .logo-top {
+            height: 40px;
+            margin-bottom: 2rem;
+        }
+
+        /* ESTILOS GERAIS */
         * {
             margin: 0;
             padding: 0;
@@ -61,19 +74,21 @@
             background: #111;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .slide {
-            width: 100vw;
-            height: var(--slide-height);
+            width: var(--slide-w);
+            height: var(--slide-h);
             background: var(--bg);
             position: relative;
-            display: flex;
-            flex-direction: column;
             padding: 5% 7%;
             page-break-after: always;
             margin-bottom: 20px;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .slide.dark {
@@ -98,9 +113,9 @@
         }
 
         h2.tagline {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             color: var(--secondary);
             margin-bottom: 1rem;
             font-weight: 600;
@@ -111,11 +126,10 @@
         }
 
         p.lead {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 300;
             line-height: 1.4;
             opacity: 0.8;
-            max-width: 750px;
         }
 
         .grid-main {
@@ -124,12 +138,11 @@
             gap: 60px;
             height: 100%;
             align-items: center;
-            z-index: 1;
         }
 
         .img-container {
             width: 100%;
-            height: 100%;
+            height: 80%;
             border-radius: 35px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
@@ -144,10 +157,10 @@
 
         .info-card {
             background: var(--white);
-            padding: 35px;
+            padding: 30px;
             border-radius: 25px;
             border-left: 10px solid var(--accent);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .dark .info-card {
@@ -156,24 +169,20 @@
         }
 
         .logo-top {
-            height: 55px;
-            margin-bottom: 3rem;
+            height: 50px;
+            margin-bottom: 2rem;
             object-fit: contain;
-            width: auto;
-            z-index: 2;
         }
 
         .footer-deck {
             position: absolute;
-            bottom: 4%;
+            bottom: 3%;
             left: 7%;
             right: 7%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
             opacity: 0.5;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding-top: 10px;
@@ -182,53 +191,112 @@
         .dark .footer-deck {
             border-top-color: rgba(255, 255, 255, 0.1);
         }
+
+        /* CONTROLES */
+        #controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(22, 0, 64, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-ui {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .btn-ui.active {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-print {
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 800;
+            margin-top: 5px;
+        }
+
+        @media print {
+            #controls {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .slide {
+                margin: 0;
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="format-16-9">
+
+    <div id="controls">
+        <span style="color:white; font-size: 10px; font-weight: 800; text-align: center;">MODO DE VISUALIZAÇÃO</span>
+        <button class="btn-ui active" onclick="changeFormat('16-9', this)">16:9 DESKTOP</button>
+        <button class="btn-ui" onclick="changeFormat('9-16', this)">9:16 MOBILE</button>
+        <button class="btn-ui btn-print" onclick="window.print()">SALVAR PDF</button>
+    </div>
 
     <section class="slide">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo"
-            class="logo-top">
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" class="logo-top">
         <div class="grid-main">
             <div>
                 <h2 class="tagline">Alta Performance Imobiliária</h2>
                 <h1>Seu imóvel <span>vende e aluga</span> de verdade.</h1>
                 <p class="lead">Maximizamos o ROI do seu anúncio com o portal líder em conversão no Norte e Nordeste.
-                    Onde investidores qualificados encontram oportunidades reais.</p>
+                </p>
             </div>
             <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop"
-                    alt="Imóvel com placa de Vende-se">
+                <img
+                    src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop">
             </div>
         </div>
-        <div class="footer-deck"><span>Bloco2 Pitch 2026 | Eficiência em Real Estate</span><span>01</span></div>
+        <div class="footer-deck"><span>Bloco2 Pitch 2026</span><span>01</span></div>
     </section>
 
     <section class="slide dark">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png" alt="Sinal"
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046783/bloco2_signal_xyyiwh.png"
             class="logo-top" style="filter: brightness(0) invert(1);">
         <div class="grid-main">
             <div class="img-container">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/1_ykosv1.png"
-                    alt="Portal Bloco2 Interface">
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/1_ykosv1.png">
             </div>
             <div>
                 <h2 class="tagline">O Gap de Mercado</h2>
                 <h1>Cansado de portais <span>ineficientes?</span></h1>
                 <div class="info-card">
-                    <h3 style="font-size: 1.6rem;">Abandono de Lead Zero</h3>
-                    <p style="opacity: 0.7;">Acabamos com a poluição visual que dispersa o comprador. Nossa interface é
-                        desenhada para converter visualizações em visitas reais.</p>
+                    <h3 style="font-size: 1.3rem;">Abandono de Lead Zero</h3>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Interface desenhada para converter visualizações em
+                        visitas reais.</p>
                 </div>
                 <div class="info-card">
-                    <h3 style="font-size: 1.6rem;">Domínio Regional Estratégico</h3>
-                    <p style="opacity: 0.7;">Enquanto outros generalizam, nós dominamos o N/NE. Entendemos o
-                        comportamento de busca e a valorização local como ninguém.</p>
+                    <h3 style="font-size: 1.3rem;">Domínio Regional</h3>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Entendemos o comportamento de busca e a valorização
+                        local no N/NE.</p>
                 </div>
             </div>
         </div>
-        <div class="footer-deck"><span>Análise de Mercado e Posicionamento</span><span>02</span></div>
+        <div class="footer-deck"><span>Análise de Mercado</span><span>02</span></div>
     </section>
 
     <section class="slide" style="background: #ffffff;">
@@ -236,43 +304,41 @@
         <h1>I.A. que <span>acelera o fechamento.</span></h1>
         <div class="grid-main">
             <div>
-                <p class="lead" style="margin-bottom: 2rem;">Reduzimos o tempo de criação de anúncios em 90%. Nossa
-                    Inteligência Artificial trabalha para destacar o seu imóvel no topo.</p>
+                <p class="lead" style="margin-bottom: 1.5rem;">Reduzimos o tempo de criação de anúncios em 90%.</p>
                 <div class="info-card" style="border-left-color: var(--secondary);">
-                    <h3 style="font-size: 1.6rem;">Copywriting de Alta Conversão</h3>
-                    <p style="opacity: 0.7;">Títulos e descrições otimizados por I.A. para gatilhos mentais de venda,
-                        garantindo que o seu imóvel se destaque na multidão.</p>
+                    <h3 style="font-size: 1.3rem;">Copywriting de Alta Conversão</h3>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Títulos otimizados por I.A. para gatilhos mentais de
+                        venda.</p>
                 </div>
                 <div class="info-card" style="border-left-color: var(--secondary);">
-                    <h3 style="font-size: 1.6rem;">Anúncio em Segundos</h3>
-                    <p style="opacity: 0.7;">Tecnologia humanizada: facilitamos o processo para que proprietários foquem
-                        na negociação, não na burocracia digital.</p>
+                    <h3 style="font-size: 1.3rem;">Anúncio em Segundos</h3>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Tecnologia humanizada para proprietários focarem na
+                        negociação.</p>
                 </div>
             </div>
             <div class="img-container">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop"
-                    alt="Casal utilizando notebook juntos no sofá">
+                <img
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop">
             </div>
         </div>
-        <div class="footer-deck"><span>Inovação: Inteligência Artificial Humanizada</span><span>03</span></div>
+        <div class="footer-deck"><span>Inovação I.A.</span><span>03</span></div>
     </section>
 
     <section class="slide">
         <h2 class="tagline">Experiência do Usuário</h2>
         <h1>Fluidez que gera <span>negócios.</span></h1>
-        <div class="grid-main" style="grid-template-columns: 1fr 1.2fr;">
+        <div class="grid-main">
             <div>
                 <div class="info-card">
-                    <h3 style="font-size: 1.5rem;">Jornada de Compra Intuitiva</h3>
-                    <p style="opacity: 0.7;">Do cadastro ao clique final, removemos todas as fricções. O Bloco2 guia o
-                        interessado direto ao seu WhatsApp ou central de vendas.</p>
+                    <h3 style="font-size: 1.3rem;">Jornada de Compra Intuitiva</h3>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">O Bloco2 guia o interessado direto ao seu WhatsApp ou
+                        central de vendas.</p>
                 </div>
                 <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074119/2_t5u3pz.png"
-                    style="width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    style="width: 100%; border-radius: 20px;">
             </div>
             <div class="img-container">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074121/3_bukacz.png"
-                    alt="Cadastro de Endereço Otimizado">
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074121/3_bukacz.png">
             </div>
         </div>
     </section>
@@ -282,133 +348,55 @@
         <h1>Valorize <span>cada m².</span></h1>
         <div class="grid-main">
             <div class="img-container">
-                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/4_ibkpmd.png"
-                    alt="Comodidades e Detalhes">
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770074120/4_ibkpmd.png">
             </div>
             <div>
-                <h3 style="font-size: 2.5rem; color: var(--accent); margin-bottom: 20px;">Curadoria de Atributos</h3>
-                <p class="lead">Não é apenas um anúncio, é uma vitrine técnica. Exibimos comodidades que os grandes
-                    investidores realmente valorizam.</p>
-                <p style="margin-top: 30px; opacity: 0.7; font-size: 1.2rem;">O algoritmo <strong>Bloco2 Ads</strong>
-                    prioriza imóveis completos, entregando seu anúncio para quem tem real poder de compra.</p>
+                <h3 style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;">Curadoria de Atributos</h3>
+                <p class="lead" style="font-size: 1.2rem;">Exibimos comodidades que os grandes investidores realmente
+                    valorizam.</p>
+                <p style="margin-top: 20px; opacity: 0.7; font-size: 1rem;">O algoritmo Bloco2 Ads entrega seu anúncio
+                    para quem tem real poder de compra.</p>
             </div>
         </div>
     </section>
 
-    <section class="slide" style="text-align: center; justify-content: center; align-items: center;">
-        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png" alt="Logo Final"
-            style="height: 100px; margin-bottom: 3rem;">
-        <h1>O mercado mudou. <span>E você?</span></h1>
-        <p class="lead" style="margin: 0 auto 3rem;">Escalabilidade, tecnologia e foco regional. O Bloco2 é o parceiro
-            estratégico para acelerar seu portfólio no Norte e Nordeste.</p>
-
+    <section class="slide"
+        style="text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
+            style="height: 80px; margin-bottom: 2rem;">
+        <h1 style="font-size: 3.5rem;">O mercado mudou. <span>E você?</span></h1>
+        <p class="lead" style="max-width: 600px; margin-bottom: 3rem;">O Bloco2 é o parceiro estratégico para acelerar
+            seu portfólio no Norte e Nordeste.</p>
         <div
-            style="background: var(--primary); color: var(--accent); padding: 25px 70px; border-radius: 100px; display: inline-block; font-weight: 800; font-size: 1.5rem; cursor: pointer; box-shadow: 0 20px 40px rgba(22,0,64,0.2);">
-            QUERO ACELERAR MEUS RESULTADOS
-        </div>
-
-        <div
-            style="margin-top: 4rem; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; max-width: 600px;">
-            <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary);">www.bloco2.com.br</p>
-            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 10px;">
-                Uma solução <strong>Suite Brasil</strong><br>
-                A autoridade em tecnologia para o mercado imobiliário regional.
-            </p>
-        </div>
+            style="background: var(--primary); color: var(--accent); padding: 20px 50px; border-radius: 100px; font-weight: 800; font-size: 1.2rem;">
+            COMEÇAR AGORA</div>
+        <div style="margin-top: 3rem; opacity: 0.6; font-size: 0.8rem;">www.bloco2.com.br | Suite Brasil</div>
     </section>
 
     <script>
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') window.scrollBy(0, window.innerHeight);
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
-        });
-    </script>
+        function changeFormat(format, btn) {
+            // Remove classes ativas
+            document.querySelectorAll('.btn-ui').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-    <div id="export-panel"
-        style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: var(--primary); padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--accent);">
-        <span style="color: white; font-size: 0.7rem; font-weight: 800; text-align: center; margin-bottom: 5px;">FORMATO
-            DO PDF</span>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="setFormat('16/9')"
-                style="cursor: pointer; padding: 8px 15px; border-radius: 10px; border: 1px solid var(--accent); background: transparent; color: white; font-weight: 600;">16:9
-                (Desktop)</button>
-            <button onclick="setFormat('9/16')"
-                style="cursor: pointer; padding: 8px 15px; border-radius: 10px; border: 1px solid var(--accent); background: transparent; color: white; font-weight: 600;">9:16
-                (Mobile)</button>
-        </div>
-        <button onclick="window.print()"
-            style="cursor: pointer; padding: 12px; border-radius: 10px; border: none; background: var(--accent); color: var(--primary); font-weight: 800; margin-top: 5px;">GERAR
-            PDF AGORA</button>
-    </div>
-
-    <style>
-        /* Estilos para troca de formato via JS */
-        body.format-9-16 .slide {
-            width: 56.25vh !important;
-            /* Proporção 9:16 baseada na altura */
-            height: 100vh !important;
-            margin: 0 auto 20px auto;
-            padding: 10% 8% !important;
-        }
-
-        body.format-9-16 .grid-main {
-            grid-template-columns: 1fr !important;
-            gap: 20px !important;
-        }
-
-        body.format-9-16 .img-container {
-            height: 35% !important;
-            order: -1;
-        }
-
-        body.format-9-16 h1 {
-            font-size: 2.8rem !important;
-        }
-
-        /* Regras de Impressão */
-        @media print {
-            #export-panel {
-                display: none !important;
-            }
-
-            body {
-                background: white !important;
-            }
-
-            .slide {
-                margin-bottom: 0 !important;
-                page-break-after: always !important;
-            }
-
-            /* O formato da página é definido pelo JS antes de imprimir */
-        }
-    </style>
-
-    <script>
-        function setFormat(ratio) {
             const body = document.body;
-            const style = document.createElement('style');
-            style.id = "print-setting";
+            const styleId = "print-format-style";
+            let printStyle = document.getElementById(styleId);
 
-            // Remove configuração anterior de impressão se existir
-            const oldStyle = document.getElementById("print-setting");
-            if (oldStyle) oldStyle.remove();
-
-            if (ratio === '9/16') {
-                body.classList.add('format-9-16');
-                style.innerHTML = "@media print { @page { size: 1080px 1920px; margin: 0; } }";
-            } else {
-                body.classList.remove('format-9-16');
-                style.innerHTML = "@media print { @page { size: 1920px 1080px; margin: 0; } }";
+            if (!printStyle) {
+                printStyle = document.createElement('style');
+                printStyle.id = styleId;
+                document.head.appendChild(printStyle);
             }
-            document.head.appendChild(style);
-        }
 
-        // Atalho de teclado para as setas (mantido do seu código original)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') window.scrollBy(0, window.innerHeight);
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') window.scrollBy(0, -window.innerHeight);
-        });
+            if (format === '9-16') {
+                body.className = 'format-9-16';
+                printStyle.innerHTML = "@media print { @page { size: 1080px 1920px; margin: 0; } }";
+            } else {
+                body.className = 'format-16-9';
+                printStyle.innerHTML = "@media print { @page { size: 1920px 1080px; margin: 0; } }";
+            }
+        }
     </script>
 </body>
 
