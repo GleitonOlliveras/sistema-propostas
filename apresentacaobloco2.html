@@ -14,11 +14,9 @@
             --secondary: #736ED3;
             --bg: #EAE8EF;
             --white: #FFFFFF;
-            --slide-w: 1280px;
-            --slide-h: 720px;
         }
 
-        /* RESET PROFISSIONAL */
+        /* CONFIGURAÇÃO PARA IMPRESSÃO SEM ERROS */
         * {
             margin: 0;
             padding: 0;
@@ -31,31 +29,20 @@
             background: #111;
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 0;
-        }
-
-        /* ALTERNÂNCIA DE FORMATO */
-        body.format-9-16 {
-            --slide-w: 540px;
-            --slide-h: 960px;
         }
 
         .slide {
-            width: var(--slide-w);
-            height: var(--slide-h);
+            width: 297mm;
+            /* Tamanho A4 Paisagem fixo para PDF */
+            height: 210mm;
             background: var(--bg);
             position: relative;
-            padding: 60px 80px;
-            margin-bottom: 30px;
+            padding: 40px 60px;
+            margin: 20px auto;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             page-break-after: always;
-            break-after: page;
         }
 
         .slide.dark {
@@ -63,39 +50,11 @@
             color: var(--white);
         }
 
-        /* AJUSTES PARA VERSÃO MOBILE 9:16 */
-        body.format-9-16 .slide {
-            padding: 50px 35px;
-        }
-
-        body.format-9-16 .grid-main {
-            grid-template-columns: 1fr !important;
-            gap: 25px !important;
-        }
-
-        body.format-9-16 .img-container {
-            height: 30% !important;
-            order: -1;
-        }
-
-        body.format-9-16 h1 {
-            font-size: 2.6rem !important;
-        }
-
-        body.format-9-16 .organograma {
-            flex-direction: column !important;
-            gap: 10px;
-        }
-
-        body.format-9-16 .step-box {
-            width: 100%;
-        }
-
         /* TIPOGRAFIA EXECUTIVA */
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            line-height: 0.95;
+            line-height: 1;
             letter-spacing: -2px;
             margin-bottom: 20px;
         }
@@ -113,7 +72,7 @@
             text-transform: uppercase;
             letter-spacing: 5px;
             color: var(--secondary);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
@@ -122,25 +81,25 @@
         }
 
         p.lead {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 300;
             line-height: 1.5;
             opacity: 0.8;
-            max-width: 700px;
+            max-width: 800px;
         }
 
         .grid-main {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
             flex-grow: 1;
         }
 
         .img-container {
             width: 100%;
-            height: 85%;
-            border-radius: 30px;
+            height: 350px;
+            border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
@@ -156,166 +115,111 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 30px;
-            gap: 10px;
+            margin-top: 40px;
+            gap: 20px;
         }
 
-        .step-box {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 20px;
+        .step {
+            background: var(--white);
+            padding: 25px;
             border-radius: 20px;
             text-align: center;
+            flex: 1;
             border-bottom: 5px solid var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .dark .step-box {
+        .dark .step {
             background: rgba(255, 255, 255, 0.05);
+            color: white;
         }
 
-        .step-num {
-            background: var(--accent);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            color: var(--primary);
-            font-weight: 800;
+        .step h4 {
             font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .dark .step h4 {
+            color: var(--accent);
         }
 
         /* TABELA COMPARATIVA */
-        .comp-table {
+        .comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        .comp-item {
-            padding: 25px;
-            border-radius: 20px;
+        .comp-card {
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .comp-bad {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .comp-good {
-            background: rgba(43, 254, 197, 0.08);
-            border: 1px solid var(--accent);
+        .comp-card.premium {
+            border-color: var(--accent);
+            background: rgba(43, 254, 197, 0.05);
         }
 
         .footer-deck {
             position: absolute;
-            bottom: 40px;
-            left: 80px;
-            right: 80px;
+            bottom: 30px;
+            left: 60px;
+            right: 60px;
             display: flex;
             justify-content: space-between;
             font-size: 0.7rem;
-            text-transform: uppercase;
             opacity: 0.4;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding-top: 10px;
         }
 
-        .dark .footer-deck {
-            border-top-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* INTERFACE DE CONTROLE */
-        #ui-layer {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            background: var(--primary);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid var(--accent);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .btn-mode {
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--accent);
-            background: transparent;
-            color: white;
-            cursor: pointer;
-            font-weight: 800;
-            font-size: 11px;
-            transition: 0.2s;
-        }
-
-        .btn-mode.active {
-            background: var(--accent);
-            color: var(--primary);
-        }
-
-        .btn-save {
-            background: white;
-            color: black;
-            border: none;
-            margin-top: 5px;
-            font-size: 13px;
-        }
-
         @media print {
-            #ui-layer {
-                display: none !important;
-            }
-
             body {
-                padding: 0 !important;
-                background: white !important;
+                background: white;
             }
 
             .slide {
-                margin: 0 !important;
-                box-shadow: none !important;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+            }
+
+            @page {
+                size: landscape;
+                margin: 0;
             }
         }
     </style>
 </head>
 
-<body class="format-16-9">
-
-    <div id="ui-layer">
-        <button class="btn-mode active" onclick="updateView('16-9', this)">DESKTOP (16:9)</button>
-        <button class="btn-mode" onclick="updateView('9-16', this)">MOBILE (9:16)</button>
-        <button class="btn-mode btn-save" onclick="window.print()">SALVAR PDF PROFISSIONAL</button>
-    </div>
+<body>
 
     <section class="slide">
         <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
-            style="height: 55px; margin-bottom: 30px;">
+            style="height: 50px; margin-bottom: 30px;">
         <div class="grid-main">
             <div>
-                <h2 class="tagline">Alta Performance Regional</h2>
-                <h1>Líder absoluto no <span>Norte e Nordeste.</span></h1>
-                <p class="lead">O Bloco2 não é apenas um portal, é um motor de conversão focado no mercado que mais
-                    cresce no Brasil[cite: 168].</p>
+                <h2 class="tagline">Oceano Azul Imobiliário</h2>
+                <h1>A plataforma nº 1 em conversão no <span>Norte e Nordeste.</span></h1>
+                <p class="lead">O Bloco2 não é apenas um portal; é o motor de vendas estratégico para a região que mais
+                    cresce e se valoriza no Brasil. [cite: 219, 264]</p>
                 <div class="organograma">
-                    <div class="step-box">
-                        <div class="step-num">1</div>
-                        <p style="font-size:0.8rem; font-weight:800;">Anúncio I.A.</p>
+                    <div class="step">
+                        <h4>1. Atração</h4>
+                        <p style="font-size:0.8rem;">Anúncio otimizado por I.A.</p>
                     </div>
-                    <div class="step-box">
-                        <div class="step-num">2</div>
-                        <p style="font-size:0.8rem; font-weight:800;">Match Local</p>
+                    <div style="font-size: 1.5rem; color: var(--accent);">→</div>
+                    <div class="step">
+                        <h4>2. Retenção</h4>
+                        <p style="font-size:0.8rem;">Interface focada no imóvel.</p>
                     </div>
-                    <div class="step-box">
-                        <div class="step-num">3</div>
-                        <p style="font-size:0.8rem; font-weight:800;">WhatsApp</p>
+                    <div style="font-size: 1.5rem; color: var(--accent);">→</div>
+                    <div class="step">
+                        <h4>3. Conversão</h4>
+                        <p style="font-size:0.8rem;">Lead direto no WhatsApp.</p>
                     </div>
                 </div>
             </div>
@@ -324,120 +228,77 @@
                     src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1000&auto=format&fit=crop">
             </div>
         </div>
-        <div class="footer-deck"><span>Bloco2 Pitch 2026</span><span>01</span></div>
+        <div class="footer-deck"><span>Proposta de Valor Bloco2 2026</span><span>01</span></div>
     </section>
 
     <section class="slide dark">
-        <h2 class="tagline">Por que o Bloco2?</h2>
-        <h1>O fim dos <span>leads frios.</span></h1>
-        <div class="comp-table">
-            <div class="comp-item comp-bad">
-                <h3 style="color:var(--accent); margin-bottom:15px;">Portais Genéricos</h3>
-                <p style="font-size:0.9rem; margin-bottom:10px; opacity:0.7;">❌ Interface saturada e confusa [cite: 177]
-                </p>
-                <p style="font-size:0.9rem; margin-bottom:10px; opacity:0.7;">❌ Algoritmos baseados em leilão [cite:
-                    179]</p>
-                <p style="font-size:0.9rem; opacity:0.7;">❌ Leads desqualificados [cite: 181]</p>
+        <h2 class="tagline">Análise Competitiva</h2>
+        <h1>Por que anunciar com o <span>Bloco2?</span></h1>
+        <div class="comparison">
+            <div class="comp-card">
+                <h3 style="color:var(--accent); margin-bottom:20px;">Portais Tradicionais</h3>
+                <ul style="list-style: none; line-height: 2.2; opacity: 0.8;">
+                    <li>❌ Interface saturada e confusa [cite: 260]</li>
+                    <li>❌ Leads frios e desqualificados</li>
+                    <li>❌ Algoritmos que priorizam apenas grandes grupos</li>
+                    <li>❌ Abandono de usuários pela poluição visual [cite: 261]</li>
+                </ul>
             </div>
-            <div class="comp-item comp-good">
-                <h3 style="color:var(--accent); margin-bottom:15px;">Experiência Bloco2</h3>
-                <p style="font-size:0.9rem; margin-bottom:10px;">✅ UX Minimalista e Direto [cite: 178]</p>
-                <p style="font-size:0.9rem; margin-bottom:10px;">✅ Inteligência Artificial Ativa [cite: 180]</p>
-                <p style="font-size:0.9rem;">✅ Conexão Direta via WhatsApp [cite: 182]</p>
+            <div class="comp-card premium">
+                <h3 style="color:var(--accent); margin-bottom:20px;">Ecossistema Bloco2</h3>
+                <ul style="list-style: none; line-height: 2.2;">
+                    <li>✅ UX Minimalista: Foco total no seu imóvel [cite: 261]</li>
+                    <li>✅ I.A. que escreve e otimiza seus anúncios [cite: 269]</li>
+                    <li>✅ Conexão direta com o WhatsApp do vendedor </li>
+                    <li>✅ Domínio absoluto do mercado N/NE [cite: 262, 264]</li>
+                </ul>
             </div>
         </div>
-        <div class="footer-deck"><span>Vantagem Competitiva</span><span>02</span></div>
+        <div class="footer-deck"><span>Diferenciais Estratégicos</span><span>02</span></div>
     </section>
 
     <section class="slide">
-        <h2 class="tagline">Ecossistema de Tecnologia</h2>
+        <h2 class="tagline">Inteligência de Vendas</h2>
         <h1>I.A. que <span>vende por você.</span></h1>
         <div class="grid-main">
-            <div>
-                <div style="margin-bottom:30px;">
-                    <h3 style="color:var(--secondary); margin-bottom:10px;">Copywriter Automático</h3>
-                    <p style="font-size:1rem; opacity:0.8;">Nossa I.A. gera descrições magnéticas e títulos otimizados
-                        para SEO em segundos[cite: 190].</p>
-                </div>
-                <div>
-                    <h3 style="color:var(--secondary); margin-bottom:10px;">Deep Learning Regional</h3>
-                    <p style="font-size:1rem; opacity:0.8;">O sistema identifica automaticamente os atributos que
-                        investidores do N/NE mais valorizam[cite: 192].</p>
-                </div>
-            </div>
-            <div class="img-container">
+            <div class="img-container" style="height: 400px;">
                 <img
                     src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop">
+            </div>
+            <div>
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color:var(--secondary); margin-bottom:10px;">Copywriting de Alta Performance</h3>
+                    <p style="opacity:0.8;">Nossa I.A. cria títulos e descrições magnéticas em segundos, reduzindo o
+                        tempo de criação em 90%. [cite: 268, 270]</p>
+                </div>
+                <div>
+                    <h3 style="color:var(--secondary); margin-bottom:10px;">SEO Regional Automatizado</h3>
+                    <p style="opacity:0.8;">O sistema identifica automaticamente os atributos que investidores do N/NE
+                        mais valorizam e os coloca no topo. [cite: 263, 353]</p>
+                </div>
             </div>
         </div>
         <div class="footer-deck"><span>Inovação Proprietária</span><span>03</span></div>
     </section>
 
-    <section class="slide dark" style="text-align:center; justify-content:center;">
-        <h2 class="tagline">User Journey</h2>
-        <h1 style="margin-bottom:50px;">A jornada da <span>conversão real.</span></h1>
-        <div class="organograma"
-            style="max-width:1000px; margin:0 auto; background:rgba(255,255,255,0.05); padding:40px; border-radius:30px;">
-            <div class="step-box" style="border:none;">
-                <div class="step-num">01</div>
-                <p style="font-size:0.8rem;">Anúncio Simples [cite: 201]</p>
-            </div>
-            <div style="color:var(--accent); font-weight:800;">→</div>
-            <div class="step-box" style="border:none;">
-                <div class="step-num">02</div>
-                <p style="font-size:0.8rem;">Otimização I.A. [cite: 202]</p>
-            </div>
-            <div style="color:var(--accent); font-weight:800;">→</div>
-            <div class="step-box" style="border:none;">
-                <div class="step-num">03</div>
-                <p style="font-size:0.8rem;">Match Regional [cite: 203]</p>
-            </div>
-            <div style="color:var(--accent); font-weight:800;">→</div>
-            <div class="step-box" style="border:none;">
-                <div class="step-num">04</div>
-                <p style="font-size:0.8rem;">WhatsApp Direto [cite: 204]</p>
-            </div>
-        </div>
-        <p style="margin-top:40px; opacity:0.7; font-size:1.1rem;">Eliminamos intermediários. No Bloco2, o negócio
-            acontece sem fricção[cite: 205].</p>
-    </section>
-
-    <section class="slide" style="text-align:center; align-items:center; justify-content:center;">
+    <section class="slide dark" style="text-align: center; justify-content: center; align-items: center;">
         <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1770046736/bloco_2_ogj9jw.png"
-            style="height: 100px; margin-bottom: 30px;">
-        <h1 style="font-size: 3.5rem;">O mercado mudou. <span>E você?</span></h1>
-        <p class="lead" style="margin-bottom:40px;">Seja parte do portal que entende a alma do Norte e Nordeste
-            brasileiro[cite: 211].</p>
+            style="height: 100px; margin-bottom: 40px;">
+        <h1 style="font-size: 4rem;">O futuro imobiliário <span>é regional.</span></h1>
+        <p class="lead" style="margin: 0 auto 50px;">Junte-se ao portal que entende a alma do Norte e Nordeste. Comece a
+            converter leads reais hoje mesmo. [cite: 358]</p>
+
         <div
-            style="background:var(--primary); color:var(--accent); padding:25px 60px; border-radius:100px; font-weight:800; font-size:1.4rem; cursor:pointer;">
-            COMEÇAR AGORA</div>
-        <p style="margin-top:50px; font-size:0.9rem; opacity:0.6;">Uma solução Suite Brasil [cite: 213] |
-            www.bloco2.com.br</p>
+            style="background: var(--accent); color: var(--primary); padding: 25px 80px; border-radius: 100px; font-weight: 800; font-size: 1.5rem; cursor: pointer;">
+            COMEÇAR AGORA
+        </div>
+
+        <div style="margin-top: 60px; opacity: 0.6;">
+            <p style="font-weight: 800;">www.bloco2.com.br</p>
+            <p style="font-size: 0.8rem;">Uma solução Suite Brasil [cite: 360]</p>
+        </div>
     </section>
 
-    <script>
-        function updateView(mode, btn) {
-            document.querySelectorAll('.btn-mode').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const body = document.body;
-            let styleTag = document.getElementById('print-logic');
-            if (!styleTag) {
-                styleTag = document.createElement('style');
-                styleTag.id = 'print-logic';
-                document.head.appendChild(styleTag);
-            }
-
-            if (mode === '9-16') {
-                body.className = 'format-9-16';
-                styleTag.innerHTML = "@media print { @page { size: 540px 960px; margin: 0; } }";
-            } else {
-                body.className = 'format-16-9';
-                styleTag.innerHTML = "@media print { @page { size: 1280px 720px; margin: 0; } }";
-            }
-        }
-        updateView('16-9', document.querySelector('.btn-mode'));
-    </script>
 </body>
 
 </html>
