@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GERAR PROPOSTAS</title>
+    <title>Checklist Locação | Neto Junior</title>
 
     <link rel="icon" href="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186773/1_knfthq.png" type="image/png">
-
-    <meta property="og:title" content="Gerador de Propostas | Neto Junior">
-    <meta property="og:description" content="Sistema exclusivo. Gere propostas de Locação e Venda em PDF.">
-    <meta property="og:image" content="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -38,45 +34,33 @@
 
     <style>
         :root {
-            --print-zoom: 82%;
+            --print-zoom: 85%;
         }
 
         @media print {
             @page {
-                margin: 0mm;
+                margin: 0;
                 size: A4;
-            }
-
-            .no-print {
-                display: none !important;
             }
 
             body {
                 background: white;
                 -webkit-print-color-adjust: exact;
                 padding: 0 !important;
-                margin: 0 !important;
                 zoom: var(--print-zoom);
+            }
+
+            .no-print {
+                display: none !important;
             }
 
             .page-container {
                 width: 210mm !important;
                 min-height: 296mm !important;
                 margin: 0 auto !important;
-                padding: 5mm 10mm !important;
+                padding: 8mm !important;
                 box-shadow: none !important;
                 border: none !important;
-                overflow: visible !important;
-            }
-
-            .legal-text-print {
-                color: #000000 !important;
-                font-weight: 600 !important;
-            }
-
-            .hide-if-empty:placeholder-shown,
-            .obs-container.empty-obs {
-                display: none !important;
             }
 
             input,
@@ -85,74 +69,26 @@
                 border: none !important;
                 background: transparent !important;
                 resize: none;
-                margin: 0;
                 padding: 0;
+                margin: 0;
             }
 
-            .box-indent-print {
-                padding-left: 10px !important;
+            /* Correção Texto Apagado */
+            .text-gray-500,
+            .text-gray-400 {
+                color: #000 !important;
             }
 
-            ::placeholder {
-                color: transparent;
-            }
-
-            .hidden-print {
-                display: none !important;
-            }
-
-            .print-text-xs {
-                font-size: 10px !important;
-                line-height: 1.2 !important;
-            }
-
-            .print-text-lg {
-                font-size: 14px !important;
-            }
-
-            .print-grid-cols-4 {
-                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-            }
-
-            .print-grid-cols-12 {
-                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-            }
-
-            .print-col-span-8 {
-                grid-column: span 8 / span 8 !important;
-            }
-
-            .print-col-span-4 {
-                grid-column: span 4 / span 4 !important;
-            }
-
-            .print-col-span-3 {
-                grid-column: span 3 / span 3 !important;
-            }
-
-            .print-col-span-2 {
-                grid-column: span 2 / span 2 !important;
-            }
-
-            .print-checkbox-container {
-                display: flex !important;
-                flex-direction: row !important;
-                align-items: center !important;
-                white-space: nowrap !important;
-                margin-bottom: 4px !important;
-                width: 100% !important;
-            }
-
+            /* Checkbox Customizado */
             input[type="checkbox"] {
                 appearance: none !important;
                 display: inline-flex !important;
-                width: 12px !important;
-                height: 12px !important;
+                width: 11px !important;
+                height: 11px !important;
                 border: 1px solid #000 !important;
-                border-radius: 2px !important;
-                margin-right: 6px !important;
+                border-radius: 1px !important;
+                margin-right: 4px !important;
                 flex-shrink: 0 !important;
-                background-color: transparent !important;
             }
 
             input[type="checkbox"]:checked {
@@ -164,57 +100,82 @@
                 content: '✔';
                 font-size: 8px !important;
                 color: white !important;
+                line-height: 10px;
                 display: block;
-                line-height: 1;
+                text-align: center;
+            }
+
+            .print-section-header {
+                background-color: #0B2F5C !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            /* Auto-hide Obs */
+            .obs-container.empty-obs {
+                display: none !important;
             }
         }
 
-        .input-inline {
-            border-bottom: 1px dashed #ccc;
-            color: #000;
-            font-weight: 600;
-            text-align: center;
+        .input-line {
+            border-bottom: 1px solid #ddd;
             outline: none;
-            transition: all 0.3s;
-            padding-left: 4px;
+            width: 100%;
+            font-size: 0.75rem;
+            color: #333;
+            padding-left: 2px;
         }
 
-        .input-inline:focus {
-            border-bottom: 2px solid #0B2F5C;
-            background-color: #eef2ff;
+        .input-line:focus {
+            border-bottom: 1px solid #0B2F5C;
+            background-color: #f0f4ff;
         }
 
-        .section-title {
+        .section-header {
             background-color: #0B2F5C;
             color: white;
-            padding: 2px 6px;
+            font-size: 0.7rem;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            margin-bottom: 3px;
-            letter-spacing: 1px;
+            padding: 2px 6px;
+            margin-bottom: 4px;
             border-radius: 2px;
-            display: block;
+            letter-spacing: 0.5px;
         }
 
-        .btn-mode.active {
-            background-color: white;
-            color: #0B2F5C;
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .check-label {
+            font-size: 0.65rem;
+            line-height: 1.1;
+            color: #444;
+            cursor: pointer;
+        }
+
+        .check-input {
+            margin-right: 4px;
+            margin-top: 1px;
+            cursor: pointer;
+        }
+
+        .group-title {
+            font-size: 0.65rem;
             font-weight: bold;
-        }
-
-        .btn-mode {
-            opacity: 0.8;
-        }
-
-        .btn-mode:hover {
-            opacity: 1;
+            color: #0B2F5C;
+            margin-top: 4px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #eee;
         }
 
         .auto-textarea {
             overflow: hidden;
-            min-height: 40px;
             resize: none;
+            min-height: 20px;
         }
 
         /* Botões de Ação no Menu */
@@ -253,32 +214,21 @@
     </style>
 </head>
 
-<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white">
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-6 print:py-0">
 
     <input type="file" id="file-input" accept=".nj,.json" style="display: none;" onchange="loadFromFile(this)">
 
     <div
-        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
-        <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-            <div class="font-bold tracking-widest pl-2 text-xs md:text-sm">SISTEMA NJ</div>
-
-            <div class="bg-blue-900/50 p-1 rounded flex gap-1">
-                <button onclick="setMode('locacao')" id="btn-locacao"
-                    class="btn-mode active px-3 py-1 rounded text-xs uppercase tracking-wide border border-transparent transition">🏠
-                    Locação</button>
-                <button onclick="setMode('venda')" id="btn-venda"
-                    class="btn-mode px-3 py-1 rounded text-xs uppercase tracking-wide border border-transparent text-white transition hover:bg-white/10">💰
-                    Venda</button>
-            </div>
-        </div>
+        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
+        <div class="font-bold tracking-widest pl-4 w-full md:w-auto text-center md:text-left">CHECKLIST NJ</div>
 
         <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto justify-center">
 
-            <button onclick="saveData()" class="btn-action btn-save" title="Salvar dados para editar depois">
-                💾 <span class="hidden md:inline">Salvar Dados</span>
+            <button onclick="saveData()" class="btn-action btn-save" title="Salvar checklist preenchido">
+                💾 <span class="hidden md:inline">Salvar</span>
             </button>
             <button onclick="document.getElementById('file-input').click()" class="btn-action btn-load"
-                title="Carregar dados de um arquivo">
+                title="Carregar checklist anterior">
                 📂 <span class="hidden md:inline">Carregar</span>
             </button>
 
@@ -287,345 +237,231 @@
             <div class="flex items-center bg-blue-900/50 rounded px-2 py-1 gap-2">
                 <button onclick="adjustZoom(-5)"
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A-</button>
-                <span id="zoom-display" class="text-xs font-mono w-8 text-center">82%</span>
+                <span id="zoom-display" class="text-xs font-mono w-8 text-center">85%</span>
                 <button onclick="adjustZoom(5)"
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A+</button>
             </div>
 
             <button onclick="window.print()"
-                class="bg-white text-nj-blue px-3 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition shadow text-xs flex items-center gap-2">
-                🖨️ <span class="hidden md:inline">PDF</span>
+                class="bg-white text-nj-blue px-4 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition shadow text-xs flex items-center gap-2">
+                🖨️ <span class="hidden md:inline">Imprimir</span>
             </button>
         </div>
     </div>
 
     <div
-        class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-16 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
+        class="page-container bg-white w-full max-w-[210mm] min-h-[297mm] shadow-xl print:shadow-none p-8 mt-16 md:mt-8 print:mt-0 relative text-gray-800 flex flex-col gap-3">
 
-        <div>
-            <header
-                class="flex flex-col md:flex-row print:flex-row justify-between items-center md:items-end border-b-2 border-nj-blue pb-2 mb-3 text-center md:text-left print:text-left print:pb-1 print:mb-2 print:border-b-2">
-                <div class="w-full md:w-1/2 print:w-half mb-2 md:mb-0 print:mb-0">
-                    <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png"
-                        alt="Neto Junior Real Estate"
-                        class="h-16 md:h-16 print:h-10 object-contain mx-auto md:mx-0 print:mx-0">
-                </div>
-                <div class="w-full md:w-1/2 print:w-half md:text-right print:text-right">
-                    <h1 id="doc-title"
-                        class="text-lg md:text-xl print:text-lg font-bold uppercase text-nj-blue tracking-wide">Proposta
-                        para Locação</h1>
-                </div>
-            </header>
-
-            <div
-                class="grid grid-cols-1 md:grid-cols-4 print:grid-cols-4 gap-4 print:gap-2 mb-3 print:mb-2 bg-slate-50 p-2 rounded border border-gray-100 print:border-none print:bg-transparent print:p-0">
-                <div>
-                    <label class="block text-[10px] text-nj-blue font-bold uppercase">Consultor</label>
-                    <input type="text"
-                        class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1"
-                        placeholder="Nome">
-                </div>
-                <div>
-                    <label class="block text-[10px] text-nj-blue font-bold uppercase">Edifício</label>
-                    <input type="text"
-                        class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1"
-                        placeholder="Nome">
-                </div>
-                <div>
-                    <label class="block text-[10px] text-nj-blue font-bold uppercase">Local</label>
-                    <input type="text" value="São Paulo"
-                        class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1">
-                </div>
-                <div>
-                    <label class="block text-[10px] text-nj-blue font-bold uppercase">Data</label>
-                    <input type="date"
-                        class="w-full bg-transparent font-bold border-b border-gray-300 focus:border-nj-blue outline-none text-gray-700 text-xs print:text-xs pl-1">
-                </div>
+        <header class="flex justify-between items-end border-b-2 border-nj-blue pb-2">
+            <div>
+                <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior"
+                    class="h-10 object-contain mb-1">
+                <h1 class="text-lg font-bold text-nj-blue uppercase leading-none">Checklist - Processo de Locação</h1>
             </div>
+            <div class="text-right flex flex-col gap-1 w-1/3">
+                <div class="flex gap-2"><span class="text-[10px] font-bold">DATA:</span> <input type="date"
+                        class="input-line text-right"></div>
+                <div class="flex gap-2"><span class="text-[10px] font-bold">CORRETOR:</span> <input type="text"
+                        class="input-line text-right"></div>
+                <div class="flex gap-2"><span class="text-[10px] font-bold">REF. IMÓVEL:</span> <input type="text"
+                        class="input-line text-right"></div>
+            </div>
+        </header>
 
-            <div class="mb-3 print:mb-2 text-justify text-xs md:text-sm print:text-xs">
-                <p class="mb-1 print:mb-1">
-                    Autorizo a <strong class="text-nj-blue">NETO JUNIOR REAL ESTATE</strong> a levar ao Proprietário do
-                    imóvel sito à:
-                </p>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-1 print:mb-1 items-end">
-                    <div class="md:col-span-8 print:col-span-8">
-                        <input type="text" class="input-inline w-full text-left uppercase text-xs print:text-xs pl-1"
-                            placeholder="ENDEREÇO COMPLETO">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="border border-gray-200 p-2 rounded">
+                <div class="section-header print-section-header">Dados do Imóvel</div>
+                <div class="grid grid-cols-1 gap-1">
+                    <input type="text" class="input-line" placeholder="Edifício / Condomínio">
+                    <div class="flex gap-2">
+                        <input type="text" class="input-line w-3/4" placeholder="Endereço">
+                        <input type="text" class="input-line w-1/4" placeholder="Nº">
                     </div>
-                    <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
-                        <span class="text-[10px] text-gray-500 md:block">Nº</span>
-                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1" placeholder="000">
+                    <div class="flex gap-2">
+                        <input type="text" class="input-line w-1/3" placeholder="Compl/Conj">
+                        <input type="text" class="input-line w-1/3" placeholder="Bairro">
+                        <input type="text" class="input-line w-1/3" placeholder="CEP">
                     </div>
-                    <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
-                        <span class="text-[10px] text-gray-500 md:block">Compl.</span>
-                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1"
-                            placeholder="Conj/Apto">
-                    </div>
-                </div>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-12 print:grid-cols-12 gap-2 print:gap-1 mb-2 print:mb-2 items-end">
-                    <div class="md:col-span-3 print:col-span-3 flex gap-2 items-center md:block">
-                        <span class="text-[10px] text-gray-500 md:block">CEP</span>
-                        <input type="text" class="input-inline w-full text-xs print:text-xs pl-1"
-                            placeholder="00000-000">
-                    </div>
-                    <div class="md:col-span-4 print:col-span-4 flex gap-2 items-center md:block">
-                        <span class="text-[10px] text-gray-500 md:block">Cidade</span>
-                        <input type="text" value="SÃO PAULO"
-                            class="input-inline w-full uppercase text-xs print:text-xs pl-1">
-                    </div>
-                    <div class="md:col-span-2 print:col-span-2 flex gap-2 items-center md:block">
-                        <span class="text-[10px] text-gray-500 md:block">UF</span>
-                        <input type="text" value="SP" class="input-inline w-full uppercase text-xs print:text-xs pl-1">
-                    </div>
-                    <div
-                        class="md:col-span-3 print:col-span-3 md:text-right print:text-right text-[10px] italic text-gray-400 self-center hidden md:block print:block">
-                        esta Proposta para <span id="doc-action-text">alugar</span> o imóvel.
-                    </div>
-                </div>
-
-                <div id="box-locacao"
-                    class="mode-section border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
-                    <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 md:gap-8 print:gap-4">
-                        <div class="box-indent-print">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Aluguel Mensal
-                                (R$)</span>
-                            <input type="text"
-                                class="text-xl print:text-lg font-sans font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1"
-                                placeholder="0.000,00">
-                        </div>
-                        <div class="box-indent-print">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Prazo do
-                                Contrato</span>
-                            <input type="text"
-                                class="text-xl print:text-lg font-sans font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1"
-                                placeholder="36 meses">
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row print:flex-row md:items-center gap-2 mt-1 box-indent-print">
-                        <span class="text-[10px] text-gray-600 font-bold uppercase">Proposta Válida até:</span>
-                        <input type="date"
-                            class="bg-transparent border-b border-gray-300 text-xs print:text-xs w-full md:w-32 text-gray-700 pl-1">
-                    </div>
-                </div>
-
-                <div id="box-venda"
-                    class="mode-section hidden border-l-4 border-nj-blue pl-4 py-2 bg-slate-50 print:bg-transparent print:p-0 my-2 print:my-2">
-                    <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-2">
-                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Valor Compra
-                                (R$)</span>
-                            <input type="text"
-                                class="text-xl print:text-lg font-sans font-bold text-gray-900 bg-transparent w-full outline-none placeholder-gray-300 pl-1"
-                                placeholder="0.000,00">
-                        </div>
-                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Entrada (R$)</span>
-                            <input type="text"
-                                class="text-lg print:text-base font-sans font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1"
-                                placeholder="0,00">
-                        </div>
-                        <div class="md:col-span-1 print:col-span-1 box-indent-print">
-                            <span class="text-nj-blue font-bold block text-[10px] uppercase mb-1">Financiamento
-                                (R$)</span>
-                            <input type="text"
-                                class="text-lg print:text-base font-sans font-bold text-gray-700 bg-transparent w-full outline-none placeholder-gray-300 pl-1"
-                                placeholder="0,00">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 print:gap-2 mt-1 box-indent-print">
-                        <div>
-                            <span class="text-[10px] text-nj-blue font-bold uppercase block">FGTS</span>
-                            <input type="text" class="input-inline w-full text-xs print:text-xs text-left pl-1"
-                                placeholder="Valor ou Não">
-                        </div>
-                        <div>
-                            <span class="text-[10px] text-nj-blue font-bold uppercase block">Permuta</span>
-                            <input type="text" class="input-inline w-full text-xs print:text-xs text-left pl-1"
-                                placeholder="Descreva ou Não">
-                        </div>
+                    <div class="flex gap-2">
+                        <input type="text" class="input-line" placeholder="Cidade/UF" value="São Paulo - SP">
+                        <input type="text" class="input-line" placeholder="Vagas de Garagem">
                     </div>
                 </div>
             </div>
 
-            <div class="mb-3 print:mb-1">
-                <div id="prop-title" class="section-title">Informações do Proponente</div>
-
-                <div
-                    class="grid grid-cols-1 gap-y-1 text-xs print:text-xs p-2 border border-gray-100 rounded print:border-none print:p-0">
-                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                        <span id="prop-label"
-                            class="font-bold text-gray-700 md:w-20 whitespace-nowrap">Proponente:</span>
-                        <input type="text" class="input-inline flex-1 text-left uppercase pl-1"
-                            placeholder="NOME COMPLETO">
+            <div class="border border-gray-200 p-2 rounded">
+                <div class="section-header print-section-header">Negociação</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-[9px] font-bold text-nj-blue">ALUGUEL (R$)</label>
+                        <input type="text" class="input-line font-bold">
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row gap-2 print:gap-1 md:gap-4">
-                        <div class="flex flex-col md:flex-row print:flex-row md:gap-2 flex-1 md:items-center">
-                            <span class="font-bold text-gray-700">CNPJ/CPF:</span>
-                            <input type="text" class="input-inline flex-1 text-left pl-1">
-                        </div>
-                        <div class="flex flex-col md:flex-row print:flex-row md:gap-2 flex-1 md:items-center">
-                            <span class="font-bold text-gray-700">I.E/RG:</span>
-                            <input type="text" class="input-inline flex-1 text-left pl-1">
-                        </div>
+                    <div>
+                        <label class="text-[9px] font-bold text-nj-blue">CONDOMÍNIO (R$)</label>
+                        <input type="text" class="input-line">
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                        <span class="font-bold text-gray-700 md:w-20">Endereço:</span>
-                        <input type="text" class="input-inline flex-1 text-left uppercase pl-1"
-                            placeholder="RUA, Nº, BAIRRO">
+                    <div>
+                        <label class="text-[9px] font-bold text-nj-blue">IPTU (R$)</label>
+                        <input type="text" class="input-line">
                     </div>
-                    <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                        <span class="font-bold text-gray-700 md:w-20">Ramo Ativ.:</span>
-                        <input type="text" class="input-inline flex-1 text-left uppercase pl-1">
-                    </div>
-                    <div class="mt-1 pt-1 print:mt-1 print:pt-1 border-t border-gray-200">
-                        <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center mb-1 md:mb-0">
-                            <span class="font-bold text-gray-700 md:w-20">Responsável:</span>
-                            <input type="text" class="input-inline flex-1 text-left uppercase pl-1">
-                        </div>
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-2 md:gap-4 print:gap-2 mt-1 print:mt-0">
-                            <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                                <span class="font-bold text-gray-700">Nacionalidade:</span>
-                                <input type="text" class="input-inline flex-1 pl-1" value="BRASILEIRO(A)">
-                            </div>
-                            <div class="flex flex-col md:flex-row print:flex-row md:gap-2 md:items-center">
-                                <span class="font-bold text-gray-700">Profissão:</span>
-                                <input type="text" class="input-inline flex-1 uppercase pl-1">
-                            </div>
-                        </div>
+                    <div>
+                        <label class="text-[9px] font-bold text-nj-blue">COMISSÃO (%)</label>
+                        <input type="text" class="input-line">
                     </div>
                 </div>
-            </div>
-
-            <div id="details-locacao" class="mode-section mb-3 print:mb-2">
-                <div class="section-title">Garantia Locatícia</div>
-                <div class="grid grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-x-4 gap-y-1 p-2 print:p-0">
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Caução em
-                            Dinheiro</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Fiador</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Seguro
-                            Fiança</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Capitalização</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Caução
-                            Imobiliária</span></label>
-                    <label class="flex items-center space-x-2 cursor-pointer group print-checkbox-container"><input
-                            type="checkbox" class="w-3 h-3 text-nj-blue rounded"><span
-                            class="text-[10px] md:text-xs print:text-xs group-hover:text-nj-blue">Carta
-                            Fiança</span></label>
+                <div class="mt-2 flex gap-4 text-[9px]">
+                    <span class="font-bold text-nj-blue">NOTA FISCAL?</span>
+                    <label class="flex items-center"><input type="checkbox" class="mr-1"> SIM</label>
+                    <label class="flex items-center"><input type="checkbox" class="mr-1"> NÃO</label>
                 </div>
-            </div>
-
-            <div id="details-venda" class="mode-section hidden mb-3 print:mb-2">
-                <div class="section-title">Condições de Pagamento</div>
-                <textarea
-                    class="w-full border border-gray-300 p-2 rounded text-xs print:text-xs h-12 print:h-10 bg-white print:border-none print:p-0 print:resize-none outline-none focus:border-nj-blue"
-                    placeholder="Descreva aqui o fluxo de pagamento..."></textarea>
-            </div>
-
-            <div id="obs-container" class="obs-container mb-3 print:mb-2">
-                <h3 class="font-bold text-nj-blue mb-0 text-[10px] uppercase">Observações:</h3>
-                <textarea id="obs-field"
-                    class="auto-textarea w-full border border-gray-300 p-2 rounded text-xs print:text-xs bg-white print:border-none print:p-0 outline-none focus:border-nj-blue shadow-sm print:shadow-none"
-                    placeholder="Digite aqui..." rows="1"></textarea>
+                <input type="text" class="input-line mt-1" placeholder="Obs / Carência">
             </div>
         </div>
 
-        <div>
-            <div id="terms-locacao"
-                class="mode-section text-[0.55rem] print:text-tiny text-justify text-gray-500 legal-text-print mb-2 print:mb-1 border-t border-gray-200 pt-1 leading-tight">
-                <p>
-                    Pelos serviços de aproximação, negociação e intermediação imobiliária, as partes reconhecem ser
-                    devida à <strong class="text-nj-blue legal-text-print">NETO JUNIOR REAL ESTATE</strong> a
-                    remuneração equivalente a <strong>2 (dois) alugueres nominais</strong>. Os honorários serão
-                    exigíveis na celebração do contrato. Em qualquer hipótese, locador e locatário responderão
-                    solidariamente pelo pagamento integral da remuneração, conforme o artigo 725 do Código Civil.
-                </p>
-            </div>
-
-            <div id="terms-venda"
-                class="mode-section hidden text-[0.55rem] print:text-tiny text-justify text-gray-500 legal-text-print mb-2 print:mb-1 border-t border-gray-200 pt-1 leading-tight">
-                <p>
-                    Fica ajustado que, realizada a compra e venda do imóvel em decorrência dos serviços de aproximação,
-                    negociação e intermediação, será devida à <strong class="text-nj-blue legal-text-print">NETO JUNIOR
-                        CONSULTORIA IMOBILIÁRIA</strong> comissão de <strong>6% (seis por cento)</strong> sobre o valor
-                    total do negócio, acrescida dos impostos. A comissão será exigível com a concretização da transação,
-                    ainda que sem escritura definitiva. Comprador e vendedor respondem solidariamente, nos termos do
-                    art. 725 do Código Civil.
-                </p>
-            </div>
-
-            <div class="mb-1 print:mt-2">
-                <div class="flex justify-center items-center gap-2 mb-3 print:mb-2 text-xs print:text-xs">
-                    <span>São Paulo,</span>
-                    <input type="text" class="border-b border-black text-center w-6" placeholder="DD">
-                    <span>de</span>
-                    <input type="text" class="border-b border-black text-center w-16" placeholder="Mês">
-                    <span>de</span>
-                    <input type="text" class="border-b border-black text-center w-10" value="2026">
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 md:gap-16 text-center">
-                    <div class="flex flex-col items-center">
-                        <div class="h-6 border-b border-black mb-1 w-full"></div>
-                        <input type="text"
-                            class="w-full text-center font-bold text-[9px] uppercase bg-transparent outline-none placeholder-gray-300 text-nj-blue"
-                            placeholder="PROPRIETÁRIO">
-                        <input type="text"
-                            class="w-full text-center text-[8px] bg-transparent outline-none placeholder-gray-300 text-gray-600"
-                            placeholder="CPF/CNPJ">
-                        <p class="text-[0.5rem] text-gray-400 uppercase mt-0">PROPRIETÁRIO - DE ACORDO</p>
+        <div class="border border-gray-200 p-2 rounded">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <div class="section-header print-section-header bg-gray-500">Locatário (Inquilino)</div>
+                    <input type="text" class="input-line mb-1" placeholder="Nome Completo">
+                    <div class="flex gap-2">
+                        <input type="text" class="input-line" placeholder="Telefone">
+                        <input type="text" class="input-line" placeholder="E-mail">
                     </div>
-                    <div class="flex flex-col items-center">
-                        <div class="h-6 border-b border-black mb-1 w-full"></div>
-                        <input id="prop-sign-input" type="text"
-                            class="w-full text-center font-bold text-[9px] uppercase bg-transparent outline-none placeholder-gray-300 text-nj-blue"
-                            placeholder="PROPONENTE">
-                        <input type="text"
-                            class="w-full text-center text-[8px] bg-transparent outline-none placeholder-gray-300 text-gray-600"
-                            placeholder="CPF/CNPJ">
-                        <p id="prop-sign-label" class="text-[0.5rem] text-gray-400 uppercase mt-0">PROPONENTE - DE
-                            ACORDO</p>
+                </div>
+                <div>
+                    <div class="section-header print-section-header bg-gray-500">Proprietário</div>
+                    <input type="text" class="input-line mb-1" placeholder="Nome Completo">
+                    <div class="flex gap-2">
+                        <input type="text" class="input-line" placeholder="Telefone">
+                        <input type="text" class="input-line" placeholder="E-mail">
                     </div>
                 </div>
             </div>
-
-            <footer class="mt-2 text-center border-t border-nj-silver pt-1">
-                <div
-                    class="flex flex-col md:flex-row print:flex-row justify-center gap-2 md:gap-6 text-[9px] font-bold text-nj-blue mb-0">
-                    <span>📧 contato@netojunior.com.br</span>
-                    <span>📞 (11) 2609-4093</span>
-                    <span>📷 @netojunior.realestate</span>
-                </div>
-                <div class="text-[8px] text-gray-500 uppercase tracking-wide px-4 md:px-0">
-                    Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP • CEP:
-                    04709-110
-                </div>
-            </footer>
         </div>
+
+        <div class="grid grid-cols-3 gap-3">
+            <div class="border border-gray-200 p-2 rounded bg-slate-50">
+                <div class="section-header print-section-header">Locatário P. Física</div>
+                <div class="flex flex-col gap-1">
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">RG e
+                            CPF (Casal se houver)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Certidão Casamento/Nasc.</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Comprovante Residência</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">IR
+                            Completo + Recibo</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Ficha
+                            Cadastral Assinada</span></label>
+                </div>
+                <div class="group-title">Comprovantes de Renda</div>
+                <div class="flex flex-col gap-1">
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Holerites (3 últimos)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Carteira Trabalho (Digital)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Extrato Bancário (3 meses)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">DECORE (Autônomo)</span></label>
+                </div>
+            </div>
+
+            <div class="border border-gray-200 p-2 rounded bg-slate-50">
+                <div class="section-header print-section-header">Locatário P. Jurídica</div>
+                <div class="flex flex-col gap-1">
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Contrato Social + Alterações</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Cartão CNPJ</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">RG/CPF dos Sócios</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">IRPJ
+                            ou Balancete</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Faturamento (últimos 12m)</span></label>
+                </div>
+                <div class="section-header print-section-header mt-3 bg-gray-600">Imóvel / Proprietário</div>
+                <div class="flex flex-col gap-1">
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Matrícula Atualizada</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Capa
+                            IPTU</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Boleto Condomínio</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Conta
+                            de Consumo (Luz/Gás)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Docs
+                            Pessoais Proprietário</span></label>
+                </div>
+            </div>
+
+            <div class="border border-gray-200 p-2 rounded bg-slate-50">
+                <div class="section-header print-section-header">Garantia Selecionada</div>
+                <div class="grid grid-cols-2 gap-1 mb-2 text-[8px]">
+                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Caução ($)</label>
+                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Seg. Fiança</label>
+                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Fiador</label>
+                    <div class="flex items-center text-[9px] col-span-1">
+                        <input type="checkbox" class="mr-1"> <span class="mr-1">Tít. Cap.</span>
+                        <input type="text"
+                            class="border-b border-gray-400 w-12 text-center font-bold bg-transparent outline-none h-3"
+                            placeholder="(Valor)">
+                    </div>
+                </div>
+
+                <div class="group-title">Documentos do Fiador</div>
+                <div class="flex flex-col gap-1">
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Matrícula Imóvel (Ônus)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">RG/CPF (Casal)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Cert.
+                            Casamento</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Comprovante Residência</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span
+                            class="check-label">Comprovante Renda (3x)</span></label>
+                    <label class="check-item"><input type="checkbox" class="check-input"><span class="check-label">Ficha
+                            Cadastral Assinada</span></label>
+                </div>
+            </div>
+        </div>
+
+        <div id="obs-container" class="obs-container border border-gray-200 p-2 rounded w-full mb-2">
+            <div class="section-header print-section-header bg-nj-silver text-white">Status do Processo & Observações
+            </div>
+            <div class="grid grid-cols-4 gap-4 text-[9px] text-center uppercase font-bold text-gray-500 mb-2">
+                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Análise
+                        Aprovada</label></div>
+                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Contrato
+                        Enviado</label></div>
+                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Chaves
+                        Entregues</label></div>
+                <div><label class="cursor-pointer"><input type="checkbox"> Finalizado</label></div>
+            </div>
+            <textarea id="obs-field"
+                class="auto-textarea w-full border-t border-gray-200 pt-2 text-xs bg-transparent outline-none"
+                placeholder="Digite observações importantes aqui..." rows="1"></textarea>
+        </div>
+
+        <footer class="mt-auto pt-2 border-t border-gray-300 text-center text-[8px] text-gray-500">
+            <p class="font-bold text-nj-blue">NETO JUNIOR REAL ESTATE</p>
+            <p>Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP</p>
+        </footer>
+
     </div>
 
     <script>
-        /* --- SISTEMA DE ARQUIVOS (SALVAR/CARREGAR) --- */
+        /* --- SISTEMA DE ARQUIVOS (Checklist) --- */
         function saveData() {
             const inputs = document.querySelectorAll('input, textarea, select');
             const data = {
-                mode: document.getElementById('box-locacao').classList.contains('hidden') ? 'venda' : 'locacao',
+                type: 'checklist',
                 values: []
             };
 
+            // Salva o estado de todos os inputs (texto e checkboxes)
             inputs.forEach(input => {
                 if (input.type === 'checkbox') {
                     data.values.push(input.checked);
@@ -639,9 +475,8 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
 
-            // Nome do arquivo inteligente
             const now = new Date();
-            const filename = `Proposta_NJ_${now.getHours()}h${now.getMinutes()}.nj`;
+            const filename = `Checklist_NJ_${now.getDate()}-${now.getMonth() + 1}_${now.getHours()}h.nj`;
 
             a.href = url;
             a.download = filename;
@@ -659,10 +494,6 @@
                 try {
                     const data = JSON.parse(e.target.result);
 
-                    // 1. Restaurar Modo (Locação/Venda)
-                    if (data.mode) setMode(data.mode);
-
-                    // 2. Restaurar Valores
                     const inputs = document.querySelectorAll('input, textarea, select');
                     inputs.forEach((input, index) => {
                         if (index < data.values.length) {
@@ -674,19 +505,18 @@
                         }
                     });
 
-                    // 3. Reajustar textarea se tiver texto
                     autoResize.call(document.getElementById('obs-field'));
-                    alert('Dados carregados com sucesso!');
+                    alert('Checklist carregado com sucesso!');
                 } catch (err) {
-                    alert('Erro ao ler arquivo. Verifique se é um arquivo .nj válido.');
+                    alert('Erro ao carregar. Verifique se o arquivo é válido.');
                 }
             };
             reader.readAsText(file);
-            input.value = ''; // Limpa input para permitir carregar o mesmo arquivo 2x
+            input.value = '';
         }
 
-        /* --- ZOOM (Aumentar/Diminuir Fonte) --- */
-        let currentZoom = 82;
+        /* --- ZOOM --- */
+        let currentZoom = 85;
         const zoomDisplay = document.getElementById('zoom-display');
         const root = document.documentElement;
 
@@ -698,7 +528,7 @@
             zoomDisplay.textContent = currentZoom + '%';
         }
 
-        /* --- AUTO-RESIZE OBS --- */
+        /* --- AUTO-RESIZE --- */
         const obsField = document.getElementById('obs-field');
         const obsContainer = document.getElementById('obs-container');
 
@@ -714,81 +544,19 @@
         }
         obsField.addEventListener('input', autoResize);
 
-        /* --- LÓGICA GERAL --- */
-        function updateDocTitle(type) {
-            const today = new Date();
-            const day = String(today.getDate()).padStart(2, '0');
-            const month = String(today.getMonth() + 1).padStart(2, '0');
-            const year = String(today.getFullYear()).slice(-2);
-            document.title = `Proposta ${type} NJRE${day}${month}${year}`;
-        }
-
-        function setMode(mode) {
-            const title = document.getElementById('doc-title');
-            const boxLocacao = document.getElementById('box-locacao');
-            const boxVenda = document.getElementById('box-venda');
-            const detailsLocacao = document.getElementById('details-locacao');
-            const detailsVenda = document.getElementById('details-venda');
-            const termsLocacao = document.getElementById('terms-locacao');
-            const termsVenda = document.getElementById('terms-venda');
-            const btnLocacao = document.getElementById('btn-locacao');
-            const btnVenda = document.getElementById('btn-venda');
-            const propTitle = document.getElementById('prop-title');
-            const propLabel = document.getElementById('prop-label');
-            const propSignInput = document.getElementById('prop-sign-input');
-            const propSignLabel = document.getElementById('prop-sign-label');
-
-            if (mode === 'locacao') {
-                title.textContent = 'Proposta para Locação';
-                propTitle.textContent = 'Informações do Proponente';
-                propLabel.textContent = 'Proponente:';
-                propSignInput.placeholder = 'PROPONENTE';
-                propSignLabel.textContent = 'PROPONENTE - DE ACORDO';
-
-                boxLocacao.classList.remove('hidden'); detailsLocacao.classList.remove('hidden'); termsLocacao.classList.remove('hidden');
-                boxVenda.classList.add('hidden'); detailsVenda.classList.add('hidden'); termsVenda.classList.add('hidden');
-
-                btnLocacao.classList.add('active', 'bg-white', 'text-nj-blue'); btnLocacao.classList.remove('text-white');
-                btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue'); btnVenda.classList.add('text-white');
-                updateDocTitle('Locacao');
-            } else {
-                title.textContent = 'Proposta de Compra';
-                propTitle.textContent = 'Informações do Comprador';
-                propLabel.textContent = 'Comprador:';
-                propSignInput.placeholder = 'COMPRADOR';
-                propSignLabel.textContent = 'COMPRADOR - DE ACORDO';
-
-                boxVenda.classList.remove('hidden'); detailsVenda.classList.remove('hidden'); termsVenda.classList.remove('hidden');
-                boxLocacao.classList.add('hidden'); detailsLocacao.classList.add('hidden'); termsLocacao.classList.add('hidden');
-
-                btnVenda.classList.add('active', 'bg-white', 'text-nj-blue'); btnVenda.classList.remove('text-white');
-                btnLocacao.classList.remove('active', 'bg-white', 'text-nj-blue'); btnLocacao.classList.add('text-white');
-                updateDocTitle('Venda');
-            }
-        }
-
+        /* --- INICIALIZAÇÃO --- */
         window.addEventListener('load', () => {
-            updateDocTitle('Locacao');
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('pt-BR').replace(/\//g, '');
+            document.title = `Checklist NJ${dateStr}`;
+
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => { input.valueAsDate = new Date(); });
+
             autoResize.call(obsField);
         });
-
-        window.addEventListener('beforeprint', () => {
-            const dateInputs = document.querySelectorAll('input[type="date"]');
-            dateInputs.forEach(input => {
-                if (input.value) {
-                    const [y, m, d] = input.value.split('-');
-                    input.setAttribute('data-old-type', 'date');
-                    input.type = 'text';
-                    input.value = `${d}/${m}/${y}`;
-                }
-            });
-        });
-
-        window.addEventListener('afterprint', () => {
-            const dateInputs = document.querySelectorAll('input[data-old-type="date"]');
-            dateInputs.forEach(input => { input.type = 'date'; });
-        });
     </script>
+
 </body>
 
 </html>
