@@ -178,26 +178,27 @@
             min-height: 20px;
         }
 
-        /* Botões de Ação no Menu */
+        /* Botões de Ação Unificados */
         .btn-action {
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 12px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
             transition: all 0.2s;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .btn-save {
             background-color: #10B981;
             color: white;
+            border: 1px solid #059669;
         }
 
-        /* Verde */
         .btn-save:hover {
             background-color: #059669;
         }
@@ -205,31 +206,72 @@
         .btn-load {
             background-color: #F59E0B;
             color: white;
+            border: 1px solid #D97706;
         }
 
-        /* Laranja */
         .btn-load:hover {
             background-color: #D97706;
+        }
+
+        .btn-pdf {
+            background-color: white;
+            color: #0B2F5C;
+        }
+
+        .btn-pdf:hover {
+            background-color: #e5e7eb;
         }
     </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-6 print:py-0">
+<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white relative">
+
+    <div id="info-box"
+        class="no-print fixed z-40 bg-yellow-50 border-l-4 border-yellow-500 shadow-xl rounded transition-all p-5 hidden xl:block top-[60px] left-2 right-2 md:top-24 md:right-4 md:left-auto md:w-80">
+        <div class="flex justify-between items-start mb-4 border-b border-yellow-200 pb-3">
+            <h3 class="font-bold text-nj-blue text-base uppercase flex items-center gap-2">
+                ⚠️ Instruções Checklist
+            </h3>
+            <button onclick="toggleInfoBox()"
+                class="text-gray-400 hover:text-red-500 font-bold text-xl p-1 leading-none"
+                title="Fechar aviso">✕</button>
+        </div>
+        <ul class="text-sm space-y-4 text-gray-800 font-sans">
+            <li class="leading-snug">
+                <strong class="block text-green-600 mb-1 text-sm flex items-center gap-1">💾 BOTÃO SALVAR</strong>
+                Use para salvar o checklist em andamento no seu computador e continuar preenchendo depois.
+            </li>
+            <li class="leading-snug">
+                <strong class="block text-orange-500 mb-1 text-sm flex items-center gap-1">📂 BOTÃO CARREGAR</strong>
+                Recupera um checklist salvo anteriormente para terminar de preencher ou conferir.
+            </li>
+            <li class="leading-snug bg-blue-100 p-3 rounded border border-blue-200">
+                <strong class="block text-nj-blue mb-1 text-sm flex items-center gap-1">🖨️ SALVAR PDF</strong>
+                Gera o documento final para impressão ou para salvar como PDF na pasta do cliente.
+            </li>
+        </ul>
+    </div>
 
     <input type="file" id="file-input" accept=".nj,.json" style="display: none;" onchange="loadFromFile(this)">
 
     <div
-        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
-        <div class="font-bold tracking-widest pl-4 w-full md:w-auto text-center md:text-left">CHECKLIST NJ</div>
+        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
+        <div class="flex items-center gap-2 w-full md:w-auto justify-center md:justify-start">
+            <div class="font-bold tracking-widest pl-2 md:pl-4">CHECKLIST NJ</div>
+            <button onclick="toggleInfoBox()" class="ml-2 text-blue-200 hover:text-white text-lg leading-none"
+                title="Ver Instruções">
+                ℹ️
+            </button>
+        </div>
 
-        <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto justify-center">
+        <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto justify-center pb-1 md:pb-0">
 
-            <button onclick="saveData()" class="btn-action btn-save" title="Salvar checklist preenchido">
-                💾 <span class="hidden md:inline">Salvar</span>
+            <button onclick="saveData()" class="btn-action btn-save" title="Salvar checklist">
+                💾 Salvar
             </button>
             <button onclick="document.getElementById('file-input').click()" class="btn-action btn-load"
-                title="Carregar checklist anterior">
-                📂 <span class="hidden md:inline">Carregar</span>
+                title="Carregar checklist">
+                📂 Carregar
             </button>
 
             <div class="h-6 w-px bg-blue-800 mx-1"></div>
@@ -242,15 +284,14 @@
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A+</button>
             </div>
 
-            <button onclick="window.print()"
-                class="bg-white text-nj-blue px-4 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition shadow text-xs flex items-center gap-2">
-                🖨️ <span class="hidden md:inline">Imprimir</span>
+            <button onclick="window.print()" class="btn-action btn-pdf px-4 py-1.5 shadow text-xs">
+                🖨️ SALVAR PDF
             </button>
         </div>
     </div>
 
     <div
-        class="page-container bg-white w-full max-w-[210mm] min-h-[297mm] shadow-xl print:shadow-none p-8 mt-16 md:mt-8 print:mt-0 relative text-gray-800 flex flex-col gap-3">
+        class="page-container bg-white w-full max-w-[210mm] min-h-[297mm] shadow-xl print:shadow-none p-8 mt-24 md:mt-16 print:mt-0 relative text-gray-800 flex flex-col gap-3">
 
         <header class="flex justify-between items-end border-b-2 border-nj-blue pb-2">
             <div>
@@ -470,7 +511,6 @@
                 }
             });
 
-            // Criar e baixar arquivo
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -543,6 +583,19 @@
             }
         }
         obsField.addEventListener('input', autoResize);
+
+        /* --- TOGGLE INFO BOX (NOVO) --- */
+        function toggleInfoBox() {
+            const box = document.getElementById('info-box');
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                box.classList.add('block');
+            } else {
+                box.classList.add('hidden');
+                box.classList.remove('block');
+            }
+            box.classList.toggle('xl:block');
+        }
 
         /* --- INICIALIZAÇÃO --- */
         window.addEventListener('load', () => {
