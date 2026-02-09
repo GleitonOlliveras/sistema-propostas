@@ -139,18 +139,6 @@
                 grid-column: span 2 / span 2 !important;
             }
 
-            .print-flex-row {
-                flex-direction: row !important;
-            }
-
-            .print-w-half {
-                width: 50% !important;
-            }
-
-            .print-text-right {
-                text-align: right !important;
-            }
-
             .print-checkbox-container {
                 display: flex !important;
                 flex-direction: row !important;
@@ -234,26 +222,27 @@
             resize: none;
         }
 
-        /* Botões de Ação no Menu */
+        /* Estilo dos Novos Botões */
         .btn-action {
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 12px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
             transition: all 0.2s;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .btn-save {
             background-color: #10B981;
             color: white;
+            border: 1px solid #059669;
         }
 
-        /* Verde */
         .btn-save:hover {
             background-color: #059669;
         }
@@ -261,11 +250,20 @@
         .btn-load {
             background-color: #F59E0B;
             color: white;
+            border: 1px solid #D97706;
         }
 
-        /* Laranja */
         .btn-load:hover {
             background-color: #D97706;
+        }
+
+        .btn-pdf {
+            background-color: white;
+            color: #0B2F5C;
+        }
+
+        .btn-pdf:hover {
+            background-color: #e5e7eb;
         }
     </style>
 </head>
@@ -276,9 +274,9 @@
 
     <div
         class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
+
         <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
             <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm">SISTEMA NJ</div>
-
             <div class="bg-blue-900/50 p-1 rounded flex gap-1">
                 <button onclick="setMode('locacao')" id="btn-locacao"
                     class="btn-mode active px-3 py-1 rounded text-xs uppercase tracking-wide border border-transparent transition">🏠
@@ -289,14 +287,14 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto justify-center">
+        <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto justify-center pb-1 md:pb-0">
 
-            <button onclick="saveData()" class="btn-action btn-save" title="Salvar dados para editar depois">
-                💾 <span class="hidden md:inline">Salvar</span>
+            <button onclick="saveData()" class="btn-action btn-save" title="Baixar arquivo para editar depois">
+                💾 Salvar
             </button>
             <button onclick="document.getElementById('file-input').click()" class="btn-action btn-load"
-                title="Carregar dados de um arquivo">
-                📂 <span class="hidden md:inline">Carregar</span>
+                title="Abrir arquivo salvo">
+                📂 Carregar
             </button>
 
             <div class="h-6 w-px bg-blue-800 mx-1"></div>
@@ -309,15 +307,14 @@
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A+</button>
             </div>
 
-            <button onclick="window.print()"
-                class="bg-white text-nj-blue px-3 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition shadow text-xs flex items-center gap-2">
-                🖨️ <span class="hidden md:inline">PDF</span>
+            <button onclick="window.print()" class="btn-action btn-pdf px-4 py-1.5 shadow text-xs">
+                🖨️ SALVAR PDF
             </button>
         </div>
     </div>
 
     <div
-        class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-16 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
+        class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-24 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
 
         <div>
             <header
@@ -635,7 +632,7 @@
     </div>
 
     <script>
-        /* --- SISTEMA DE ARQUIVOS (SALVAR/CARREGAR) --- */
+        /* --- LÓGICA DE DADOS (Salvar/Carregar) --- */
         function saveData() {
             const inputs = document.querySelectorAll('input, textarea, select');
             const data = {
@@ -651,12 +648,10 @@
                 }
             });
 
-            // Criar e baixar arquivo
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
 
-            // Nome do arquivo inteligente
             const now = new Date();
             const filename = `Proposta_NJ_${now.getHours()}h${now.getMinutes()}.nj`;
 
@@ -675,11 +670,8 @@
             reader.onload = function (e) {
                 try {
                     const data = JSON.parse(e.target.result);
-
-                    // 1. Restaurar Modo (Locação/Venda)
                     if (data.mode) setMode(data.mode);
 
-                    // 2. Restaurar Valores
                     const inputs = document.querySelectorAll('input, textarea, select');
                     inputs.forEach((input, index) => {
                         if (index < data.values.length) {
@@ -691,18 +683,17 @@
                         }
                     });
 
-                    // 3. Reajustar textarea se tiver texto
                     autoResize.call(document.getElementById('obs-field'));
                     alert('Dados carregados com sucesso!');
                 } catch (err) {
-                    alert('Erro ao ler arquivo. Verifique se é um arquivo .nj válido.');
+                    alert('Erro ao ler arquivo.');
                 }
             };
             reader.readAsText(file);
-            input.value = ''; // Limpa input para permitir carregar o mesmo arquivo 2x
+            input.value = '';
         }
 
-        /* --- ZOOM (Aumentar/Diminuir Fonte) --- */
+        /* --- ZOOM E AJUSTES --- */
         let currentZoom = 82;
         const zoomDisplay = document.getElementById('zoom-display');
         const root = document.documentElement;
@@ -715,14 +706,12 @@
             zoomDisplay.textContent = currentZoom + '%';
         }
 
-        /* --- AUTO-RESIZE OBS --- */
         const obsField = document.getElementById('obs-field');
         const obsContainer = document.getElementById('obs-container');
 
         function autoResize() {
             this.style.height = 'auto';
             this.style.height = this.scrollHeight + 'px';
-
             if (this.value.trim() === '') {
                 obsContainer.classList.add('empty-obs');
             } else {
@@ -731,7 +720,6 @@
         }
         obsField.addEventListener('input', autoResize);
 
-        /* --- LÓGICA GERAL --- */
         function updateDocTitle(type) {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
