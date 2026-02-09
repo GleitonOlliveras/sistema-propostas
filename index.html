@@ -270,26 +270,29 @@
 <body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white relative">
 
     <div id="info-box"
-        class="no-print fixed top-24 right-4 w-60 bg-yellow-50 border-l-4 border-yellow-500 shadow-xl p-4 rounded z-40 hidden xl:block transition-all opacity-90 hover:opacity-100">
-        <div class="flex justify-between items-start mb-3 border-b border-yellow-200 pb-2">
-            <h3 class="font-bold text-nj-blue text-xs uppercase flex items-center gap-2">
+        class="no-print fixed z-40 bg-yellow-50 border-l-4 border-yellow-500 shadow-xl rounded transition-all p-5 hidden xl:block top-[60px] left-2 right-2 md:top-24 md:right-4 md:left-auto md:w-80">
+        <div class="flex justify-between items-start mb-4 border-b border-yellow-200 pb-3">
+            <h3 class="font-bold text-nj-blue text-base uppercase flex items-center gap-2">
                 ⚠️ Instruções de Uso
             </h3>
-            <button onclick="document.getElementById('info-box').style.display='none'"
-                class="text-gray-400 hover:text-red-500 font-bold text-sm" title="Fechar aviso">✕</button>
+            <button onclick="toggleInfoBox()"
+                class="text-gray-400 hover:text-red-500 font-bold text-xl p-1 leading-none"
+                title="Fechar aviso">✕</button>
         </div>
-        <ul class="text-[11px] space-y-3 text-gray-700 font-sans">
-            <li class="leading-tight">
-                <strong class="block text-green-600 mb-1 text-xs">💾 BOTÃO SALVAR</strong>
-                Use se <u>não tiver certeza</u>. Baixa um arquivo no seu PC para você enviar ao Gerente revisar.
+        <ul class="text-sm space-y-4 text-gray-800 font-sans">
+            <li class="leading-snug">
+                <strong class="block text-green-600 mb-1 text-sm flex items-center gap-1">💾 BOTÃO SALVAR
+                    (Corretor)</strong>
+                Use se <u>não tiver certeza</u>. Baixa um arquivo no seu computador para você enviar ao Gerente revisar.
             </li>
-            <li class="leading-tight">
-                <strong class="block text-orange-500 mb-1 text-xs">📂 BOTÃO CARREGAR</strong>
-                O Gerente usa este botão para abrir o arquivo enviado pelo corretor e fazer correções.
+            <li class="leading-snug">
+                <strong class="block text-orange-500 mb-1 text-sm flex items-center gap-1">📂 BOTÃO CARREGAR
+                    (Gerente)</strong>
+                O Gerente usa este botão para abrir o arquivo enviado pelo corretor e fazer as correções necessárias.
             </li>
-            <li class="leading-tight bg-blue-100 p-2 rounded border border-blue-200">
-                <strong class="block text-nj-blue mb-1 text-xs">🖨️ SALVAR PDF</strong>
-                Clique aqui <u>apenas</u> se a proposta estiver 100% correta e finalizada para enviar ao cliente.
+            <li class="leading-snug bg-blue-100 p-3 rounded border border-blue-200">
+                <strong class="block text-nj-blue mb-1 text-sm flex items-center gap-1">🖨️ SALVAR PDF (Final)</strong>
+                Clique aqui <u>apenas</u> quando a proposta estiver 100% correta e pronta para enviar ao cliente.
             </li>
         </ul>
     </div>
@@ -300,7 +303,14 @@
         class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
 
         <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-            <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm">SISTEMA NJ</div>
+            <div class="flex items-center gap-2">
+                <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm">SISTEMA NJ</div>
+                <button onclick="toggleInfoBox()" class="ml-2 text-blue-200 hover:text-white text-lg leading-none"
+                    title="Ver Instruções">
+                    ℹ️
+                </button>
+            </div>
+
             <div class="bg-blue-900/50 p-1 rounded flex gap-1">
                 <button onclick="setMode('locacao')" id="btn-locacao"
                     class="btn-mode active px-3 py-1 rounded text-xs uppercase tracking-wide border border-transparent transition">🏠
@@ -743,6 +753,21 @@
             }
         }
         obsField.addEventListener('input', autoResize);
+
+        /* --- LÓGICA DO QUADRO DE AVISOS (NOVO) --- */
+        function toggleInfoBox() {
+            const box = document.getElementById('info-box');
+            // Alterna entre mostrar e esconder, independente da tela
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                box.classList.add('block');
+            } else {
+                box.classList.add('hidden');
+                box.classList.remove('block');
+            }
+            // Garante que no desktop ele obedeça a mesma lógica
+            box.classList.toggle('xl:block');
+        }
 
         function updateDocTitle(type) {
             const today = new Date();
