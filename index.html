@@ -11,9 +11,6 @@
     <meta property="og:title" content="Gerador de Propostas | Neto Junior">
     <meta property="og:description" content="Sistema exclusivo. Gere propostas de Locação e Venda em PDF.">
     <meta property="og:image" content="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -40,12 +37,10 @@
     </script>
 
     <style>
-        /* Variável CSS para controlar o Zoom dinamicamente via JS */
         :root {
             --print-zoom: 82%;
         }
 
-        /* --- REGRAS DE IMPRESSÃO --- */
         @media print {
             @page {
                 margin: 0mm;
@@ -61,38 +56,25 @@
                 -webkit-print-color-adjust: exact;
                 padding: 0 !important;
                 margin: 0 !important;
-                /* Aqui usamos a variável que o JS vai controlar */
                 zoom: var(--print-zoom);
             }
 
             .page-container {
                 width: 210mm !important;
-                /* Removemos altura fixa para permitir que cresça se o usuário aumentar muito a fonte */
                 min-height: 296mm !important;
                 margin: 0 auto !important;
                 padding: 5mm 10mm !important;
                 box-shadow: none !important;
                 border: none !important;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
                 overflow: visible !important;
             }
 
-            /* Correção do Texto Jurídico Apagado */
             .legal-text-print {
                 color: #000000 !important;
-                /* Preto absoluto */
                 font-weight: 600 !important;
-                /* Mais negrito */
             }
 
-            /* Ocultar Observações se estiver vazio */
-            .hide-if-empty:placeholder-shown {
-                display: none !important;
-            }
-
-            /* Se o container pai tiver a classe 'empty-obs', esconde ele todo */
+            .hide-if-empty:placeholder-shown,
             .obs-container.empty-obs {
                 display: none !important;
             }
@@ -119,7 +101,6 @@
                 display: none !important;
             }
 
-            /* Fontes */
             .print-text-xs {
                 font-size: 10px !important;
                 line-height: 1.2 !important;
@@ -134,7 +115,6 @@
                 font-size: 14px !important;
             }
 
-            /* Grids */
             .print-grid-cols-4 {
                 grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }
@@ -171,7 +151,6 @@
                 text-align: right !important;
             }
 
-            /* Checkboxes */
             .print-checkbox-container {
                 display: flex !important;
                 flex-direction: row !important;
@@ -183,10 +162,7 @@
 
             input[type="checkbox"] {
                 appearance: none !important;
-                -webkit-appearance: none !important;
                 display: inline-flex !important;
-                align-items: center;
-                justify-content: center;
                 width: 12px !important;
                 height: 12px !important;
                 border: 1px solid #000 !important;
@@ -210,7 +186,6 @@
             }
         }
 
-        /* Estilos de Tela */
         .input-inline {
             border-bottom: 1px dashed #ccc;
             color: #000;
@@ -253,21 +228,56 @@
             opacity: 1;
         }
 
-        /* Estilo da Textarea Auto-Resize */
         .auto-textarea {
             overflow: hidden;
             min-height: 40px;
             resize: none;
+        }
+
+        /* Botões de Ação no Menu */
+        .btn-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background-color: #10B981;
+            color: white;
+        }
+
+        /* Verde */
+        .btn-save:hover {
+            background-color: #059669;
+        }
+
+        .btn-load {
+            background-color: #F59E0B;
+            color: white;
+        }
+
+        /* Laranja */
+        .btn-load:hover {
+            background-color: #D97706;
         }
     </style>
 </head>
 
 <body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white">
 
+    <input type="file" id="file-input" accept=".nj,.json" style="display: none;" onchange="loadFromFile(this)">
+
     <div
-        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex justify-between items-center text-sm">
-        <div class="flex items-center gap-4">
-            <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm hidden md:block">SISTEMA NJ</div>
+        class="no-print fixed top-0 left-0 w-full bg-nj-blue text-white p-2 md:p-3 shadow-lg z-50 flex flex-col md:flex-row justify-between items-center text-sm gap-2">
+        <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+            <div class="font-bold tracking-widest pl-2 md:pl-4 text-xs md:text-sm">SISTEMA NJ</div>
 
             <div class="bg-blue-900/50 p-1 rounded flex gap-1">
                 <button onclick="setMode('locacao')" id="btn-locacao"
@@ -279,25 +289,35 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto justify-center">
+
+            <button onclick="saveData()" class="btn-action btn-save" title="Salvar dados para editar depois">
+                💾 <span class="hidden md:inline">Salvar</span>
+            </button>
+            <button onclick="document.getElementById('file-input').click()" class="btn-action btn-load"
+                title="Carregar dados de um arquivo">
+                📂 <span class="hidden md:inline">Carregar</span>
+            </button>
+
+            <div class="h-6 w-px bg-blue-800 mx-1"></div>
+
             <div class="flex items-center bg-blue-900/50 rounded px-2 py-1 gap-2">
-                <span class="text-[10px] uppercase font-bold text-gray-300">Tamanho:</span>
-                <button onclick="adjustZoom(-5)" class="text-white hover:text-yellow-400 font-bold text-lg leading-none"
-                    title="Diminuir Fonte">A-</button>
+                <button onclick="adjustZoom(-5)"
+                    class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A-</button>
                 <span id="zoom-display" class="text-xs font-mono w-8 text-center">82%</span>
-                <button onclick="adjustZoom(5)" class="text-white hover:text-yellow-400 font-bold text-lg leading-none"
-                    title="Aumentar Fonte">A+</button>
+                <button onclick="adjustZoom(5)"
+                    class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A+</button>
             </div>
 
             <button onclick="window.print()"
-                class="bg-white text-nj-blue px-3 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition mr-2 md:mr-4 shadow text-xs flex items-center gap-2">
-                <span>🖨️</span> <span class="hidden md:inline">Imprimir / PDF</span>
+                class="bg-white text-nj-blue px-3 py-1 rounded font-bold hover:bg-nj-silver hover:text-white transition shadow text-xs flex items-center gap-2">
+                🖨️ <span class="hidden md:inline">PDF</span>
             </button>
         </div>
     </div>
 
     <div
-        class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-12 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
+        class="page-container bg-white w-full md:w-[210mm] min-h-[297mm] shadow-none md:shadow-2xl print:shadow-none p-4 md:p-[15mm] mt-16 md:mt-8 print:mt-0 box-border relative text-sm leading-relaxed text-gray-800 flex flex-col">
 
         <div>
             <header
@@ -615,53 +635,109 @@
     </div>
 
     <script>
-        // --- 1. LÓGICA DE ZOOM (TAMANHO DA FONTE) ---
-        let currentZoom = 82; // Valor inicial igual ao padrão do CSS
+        /* --- SISTEMA DE ARQUIVOS (SALVAR/CARREGAR) --- */
+        function saveData() {
+            const inputs = document.querySelectorAll('input, textarea, select');
+            const data = {
+                mode: document.getElementById('box-locacao').classList.contains('hidden') ? 'venda' : 'locacao',
+                values: []
+            };
+
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    data.values.push(input.checked);
+                } else {
+                    data.values.push(input.value);
+                }
+            });
+
+            // Criar e baixar arquivo
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+
+            // Nome do arquivo inteligente
+            const now = new Date();
+            const filename = `Proposta_NJ_${now.getHours()}h${now.getMinutes()}.nj`;
+
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function loadFromFile(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+
+                    // 1. Restaurar Modo (Locação/Venda)
+                    if (data.mode) setMode(data.mode);
+
+                    // 2. Restaurar Valores
+                    const inputs = document.querySelectorAll('input, textarea, select');
+                    inputs.forEach((input, index) => {
+                        if (index < data.values.length) {
+                            if (input.type === 'checkbox') {
+                                input.checked = data.values[index];
+                            } else {
+                                input.value = data.values[index];
+                            }
+                        }
+                    });
+
+                    // 3. Reajustar textarea se tiver texto
+                    autoResize.call(document.getElementById('obs-field'));
+                    alert('Dados carregados com sucesso!');
+                } catch (err) {
+                    alert('Erro ao ler arquivo. Verifique se é um arquivo .nj válido.');
+                }
+            };
+            reader.readAsText(file);
+            input.value = ''; // Limpa input para permitir carregar o mesmo arquivo 2x
+        }
+
+        /* --- ZOOM (Aumentar/Diminuir Fonte) --- */
+        let currentZoom = 82;
         const zoomDisplay = document.getElementById('zoom-display');
         const root = document.documentElement;
 
         function adjustZoom(amount) {
             currentZoom += amount;
-            // Limites de segurança para não quebrar tudo
             if (currentZoom < 60) currentZoom = 60;
             if (currentZoom > 120) currentZoom = 120;
-
-            // Atualiza a variável CSS e o display
             root.style.setProperty('--print-zoom', currentZoom + '%');
             zoomDisplay.textContent = currentZoom + '%';
         }
 
-        // --- 2. LÓGICA DE OBSERVAÇÕES (Auto-Size e Hide) ---
+        /* --- AUTO-RESIZE OBS --- */
         const obsField = document.getElementById('obs-field');
         const obsContainer = document.getElementById('obs-container');
 
-        // Função para ajustar altura automaticamente
         function autoResize() {
-            this.style.height = 'auto'; // Reseta altura
-            this.style.height = this.scrollHeight + 'px'; // Ajusta ao conteúdo
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
 
-            // Controle de visibilidade para impressão
             if (this.value.trim() === '') {
                 obsContainer.classList.add('empty-obs');
             } else {
                 obsContainer.classList.remove('empty-obs');
             }
         }
-
         obsField.addEventListener('input', autoResize);
-        // Roda uma vez no início para garantir estado correto
-        window.addEventListener('load', () => autoResize.call(obsField));
 
-
-        // --- 3. LÓGICA GERAL (TÍTULO E MODO) ---
+        /* --- LÓGICA GERAL --- */
         function updateDocTitle(type) {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
             const month = String(today.getMonth() + 1).padStart(2, '0');
             const year = String(today.getFullYear()).slice(-2);
-
-            const newTitle = `Proposta ${type} NJRE${day}${month}${year}`;
-            document.title = newTitle;
+            document.title = `Proposta ${type} NJRE${day}${month}${year}`;
         }
 
         function setMode(mode) {
@@ -674,7 +750,6 @@
             const termsVenda = document.getElementById('terms-venda');
             const btnLocacao = document.getElementById('btn-locacao');
             const btnVenda = document.getElementById('btn-venda');
-
             const propTitle = document.getElementById('prop-title');
             const propLabel = document.getElementById('prop-label');
             const propSignInput = document.getElementById('prop-sign-input');
@@ -687,18 +762,11 @@
                 propSignInput.placeholder = 'PROPONENTE';
                 propSignLabel.textContent = 'PROPONENTE - DE ACORDO';
 
-                boxLocacao.classList.remove('hidden');
-                detailsLocacao.classList.remove('hidden');
-                termsLocacao.classList.remove('hidden');
-                boxVenda.classList.add('hidden');
-                detailsVenda.classList.add('hidden');
-                termsVenda.classList.add('hidden');
+                boxLocacao.classList.remove('hidden'); detailsLocacao.classList.remove('hidden'); termsLocacao.classList.remove('hidden');
+                boxVenda.classList.add('hidden'); detailsVenda.classList.add('hidden'); termsVenda.classList.add('hidden');
 
-                btnLocacao.classList.add('active', 'bg-white', 'text-nj-blue');
-                btnLocacao.classList.remove('text-white');
-                btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue');
-                btnVenda.classList.add('text-white');
-
+                btnLocacao.classList.add('active', 'bg-white', 'text-nj-blue'); btnLocacao.classList.remove('text-white');
+                btnVenda.classList.remove('active', 'bg-white', 'text-nj-blue'); btnVenda.classList.add('text-white');
                 updateDocTitle('Locacao');
             } else {
                 title.textContent = 'Proposta de Compra';
@@ -707,23 +775,19 @@
                 propSignInput.placeholder = 'COMPRADOR';
                 propSignLabel.textContent = 'COMPRADOR - DE ACORDO';
 
-                boxVenda.classList.remove('hidden');
-                detailsVenda.classList.remove('hidden');
-                termsVenda.classList.remove('hidden');
-                boxLocacao.classList.add('hidden');
-                detailsLocacao.classList.add('hidden');
-                termsLocacao.classList.add('hidden');
+                boxVenda.classList.remove('hidden'); detailsVenda.classList.remove('hidden'); termsVenda.classList.remove('hidden');
+                boxLocacao.classList.add('hidden'); detailsLocacao.classList.add('hidden'); termsLocacao.classList.add('hidden');
 
-                btnVenda.classList.add('active', 'bg-white', 'text-nj-blue');
-                btnVenda.classList.remove('text-white');
-                btnLocacao.classList.remove('active', 'bg-white', 'text-nj-blue');
-                btnLocacao.classList.add('text-white');
-
+                btnVenda.classList.add('active', 'bg-white', 'text-nj-blue'); btnVenda.classList.remove('text-white');
+                btnLocacao.classList.remove('active', 'bg-white', 'text-nj-blue'); btnLocacao.classList.add('text-white');
                 updateDocTitle('Venda');
             }
         }
 
-        window.addEventListener('load', () => updateDocTitle('Locacao'));
+        window.addEventListener('load', () => {
+            updateDocTitle('Locacao');
+            autoResize.call(obsField);
+        });
 
         window.addEventListener('beforeprint', () => {
             const dateInputs = document.querySelectorAll('input[type="date"]');
@@ -739,9 +803,7 @@
 
         window.addEventListener('afterprint', () => {
             const dateInputs = document.querySelectorAll('input[data-old-type="date"]');
-            dateInputs.forEach(input => {
-                input.type = 'date';
-            });
+            dateInputs.forEach(input => { input.type = 'date'; });
         });
     </script>
 </body>
