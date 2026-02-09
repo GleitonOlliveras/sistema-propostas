@@ -222,7 +222,6 @@
             resize: none;
         }
 
-        /* Estilo dos Novos Botões */
         .btn-action {
             display: flex;
             align-items: center;
@@ -268,7 +267,32 @@
     </style>
 </head>
 
-<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white">
+<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white relative">
+
+    <div id="info-box"
+        class="no-print fixed top-24 right-4 w-60 bg-yellow-50 border-l-4 border-yellow-500 shadow-xl p-4 rounded z-40 hidden xl:block transition-all opacity-90 hover:opacity-100">
+        <div class="flex justify-between items-start mb-3 border-b border-yellow-200 pb-2">
+            <h3 class="font-bold text-nj-blue text-xs uppercase flex items-center gap-2">
+                ⚠️ Instruções de Uso
+            </h3>
+            <button onclick="document.getElementById('info-box').style.display='none'"
+                class="text-gray-400 hover:text-red-500 font-bold text-sm" title="Fechar aviso">✕</button>
+        </div>
+        <ul class="text-[11px] space-y-3 text-gray-700 font-sans">
+            <li class="leading-tight">
+                <strong class="block text-green-600 mb-1 text-xs">💾 BOTÃO SALVAR</strong>
+                Use se <u>não tiver certeza</u>. Baixa um arquivo no seu PC para você enviar ao Gerente revisar.
+            </li>
+            <li class="leading-tight">
+                <strong class="block text-orange-500 mb-1 text-xs">📂 BOTÃO CARREGAR</strong>
+                O Gerente usa este botão para abrir o arquivo enviado pelo corretor e fazer correções.
+            </li>
+            <li class="leading-tight bg-blue-100 p-2 rounded border border-blue-200">
+                <strong class="block text-nj-blue mb-1 text-xs">🖨️ SALVAR PDF</strong>
+                Clique aqui <u>apenas</u> se a proposta estiver 100% correta e finalizada para enviar ao cliente.
+            </li>
+        </ul>
+    </div>
 
     <input type="file" id="file-input" accept=".nj,.json" style="display: none;" onchange="loadFromFile(this)">
 
