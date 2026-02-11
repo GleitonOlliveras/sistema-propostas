@@ -276,15 +276,16 @@
     </div>
 
     <div
-        class="page-container bg-white w-full max-w-[210mm] min-h-[297mm] shadow-xl print:shadow-none p-8 mt-24 md:mt-16 print:mt-0 relative text-gray-800 flex flex-col gap-3">
+        class="page-container bg-white w-full max-w-[210mm] min-h-[297mm] shadow-xl print:shadow-none p-4 md:p-8 mt-24 md:mt-16 print:mt-0 relative text-gray-800 flex flex-col gap-3">
 
-        <header class="flex justify-between items-end border-b-2 border-nj-blue pb-2">
-            <div>
+        <header
+            class="flex flex-col md:flex-row justify-between items-center md:items-end border-b-2 border-nj-blue pb-2 gap-2 md:gap-0">
+            <div class="text-center md:text-left">
                 <img src="https://res.cloudinary.com/dslkn4i7d/image/upload/v1769186774/2_zpjwvm.png" alt="Neto Junior"
-                    class="h-10 object-contain mb-1">
+                    class="h-10 object-contain mb-1 mx-auto md:mx-0">
                 <h1 class="text-lg font-bold text-nj-blue uppercase leading-none">Checklist - Processo de Locação</h1>
             </div>
-            <div class="text-right flex flex-col gap-1 w-1/3">
+            <div class="text-right flex flex-col gap-1 w-full md:w-1/3">
                 <div class="flex gap-2"><span class="text-[10px] font-bold">DATA:</span> <input type="date"
                         class="input-line text-right"></div>
                 <div class="flex gap-2"><span class="text-[10px] font-bold">CORRETOR:</span> <input type="text"
@@ -294,7 +295,7 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4">
 
             <div class="border border-gray-200 p-2 rounded">
                 <div class="section-header print-section-header">Dados do Imóvel</div>
@@ -336,11 +337,14 @@
                         <input type="text" class="input-line">
                     </div>
                 </div>
-                <div class="mt-2 flex gap-4 text-[9px] items-center">
-                    <span class="font-bold text-nj-blue">NOTA FISCAL?</span>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> SIM</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> NÃO</label>
-                    <input type="text" class="input-line w-1/3 ml-auto text-center font-bold text-nj-blue"
+                <div class="mt-2 flex flex-wrap gap-2 text-[9px] items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-nj-blue">NOTA FISCAL?</span>
+                        <label class="flex items-center"><input type="checkbox" class="mr-1"> SIM</label>
+                        <label class="flex items-center"><input type="checkbox" class="mr-1"> NÃO</label>
+                    </div>
+                    <input type="text"
+                        class="input-line flex-1 md:w-1/3 md:flex-none text-center font-bold text-nj-blue min-w-[80px]"
                         placeholder="Prazo (Meses)">
                 </div>
             </div>
@@ -355,7 +359,7 @@
         </div>
 
         <div class="border border-gray-200 p-2 rounded">
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4">
                 <div>
                     <div class="section-header print-section-header bg-nj-blue">Locatário (Inquilino)</div>
                     <input type="text" class="input-line mb-1" placeholder="Nome Completo">
@@ -375,7 +379,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-3">
             <div class="border border-gray-200 p-2 rounded bg-slate-50">
                 <div class="section-header print-section-header">Locatário P. Física</div>
                 <div class="flex flex-col gap-1">
