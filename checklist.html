@@ -310,6 +310,7 @@
         </header>
 
         <div class="grid grid-cols-2 gap-4">
+
             <div class="border border-gray-200 p-2 rounded">
                 <div class="section-header print-section-header">Dados do Imóvel</div>
                 <div class="grid grid-cols-1 gap-1">
@@ -324,8 +325,9 @@
                         <input type="text" class="input-line w-1/3" placeholder="CEP">
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" class="input-line" placeholder="Cidade/UF" value="São Paulo - SP">
-                        <input type="text" class="input-line" placeholder="Vagas de Garagem">
+                        <input type="text" class="input-line w-1/3" placeholder="Cidade/UF" value="São Paulo - SP">
+                        <input type="text" class="input-line w-1/3" placeholder="Vagas de Garagem">
+                        <input type="text" class="input-line w-1/3 font-bold text-nj-blue" placeholder="Prazo (Meses)">
                     </div>
                 </div>
             </div>
@@ -511,6 +513,7 @@
                 }
             });
 
+            // Criar e baixar arquivo
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -584,7 +587,7 @@
         }
         obsField.addEventListener('input', autoResize);
 
-        /* --- TOGGLE INFO BOX (NOVO) --- */
+        /* --- TOGGLE INFO BOX --- */
         function toggleInfoBox() {
             const box = document.getElementById('info-box');
             if (box.classList.contains('hidden')) {
