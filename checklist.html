@@ -73,13 +73,11 @@
                 margin: 0;
             }
 
-            /* Correção Texto Apagado */
             .text-gray-500,
             .text-gray-400 {
                 color: #000 !important;
             }
 
-            /* Checkbox Customizado */
             input[type="checkbox"] {
                 appearance: none !important;
                 display: inline-flex !important;
@@ -111,7 +109,6 @@
                 -webkit-print-color-adjust: exact;
             }
 
-            /* Auto-hide Obs */
             .obs-container.empty-obs {
                 display: none !important;
             }
@@ -175,10 +172,9 @@
         .auto-textarea {
             overflow: hidden;
             resize: none;
-            min-height: 20px;
+            min-height: 30px;
         }
 
-        /* Botões de Ação Unificados */
         .btn-action {
             display: flex;
             align-items: center;
@@ -224,7 +220,7 @@
     </style>
 </head>
 
-<body class="bg-gray-200 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white relative">
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-4 md:py-8 print:py-0 print:bg-white relative">
 
     <div id="info-box"
         class="no-print fixed z-40 bg-yellow-50 border-l-4 border-yellow-500 shadow-xl rounded transition-all p-5 hidden xl:block top-[60px] left-2 right-2 md:top-24 md:right-4 md:left-auto md:w-80">
@@ -259,23 +255,14 @@
         <div class="flex items-center gap-2 w-full md:w-auto justify-center md:justify-start">
             <div class="font-bold tracking-widest pl-2 md:pl-4">CHECKLIST NJ</div>
             <button onclick="toggleInfoBox()" class="ml-2 text-blue-200 hover:text-white text-lg leading-none"
-                title="Ver Instruções">
-                ℹ️
-            </button>
+                title="Ver Instruções">ℹ️</button>
         </div>
 
         <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto justify-center pb-1 md:pb-0">
-
-            <button onclick="saveData()" class="btn-action btn-save" title="Salvar checklist">
-                💾 Salvar
-            </button>
+            <button onclick="saveData()" class="btn-action btn-save" title="Salvar checklist">💾 Salvar</button>
             <button onclick="document.getElementById('file-input').click()" class="btn-action btn-load"
-                title="Carregar checklist">
-                📂 Carregar
-            </button>
-
+                title="Carregar checklist">📂 Carregar</button>
             <div class="h-6 w-px bg-blue-800 mx-1"></div>
-
             <div class="flex items-center bg-blue-900/50 rounded px-2 py-1 gap-2">
                 <button onclick="adjustZoom(-5)"
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A-</button>
@@ -283,10 +270,8 @@
                 <button onclick="adjustZoom(5)"
                     class="text-white hover:text-yellow-400 font-bold text-lg leading-none">A+</button>
             </div>
-
-            <button onclick="window.print()" class="btn-action btn-pdf px-4 py-1.5 shadow text-xs">
-                🖨️ SALVAR PDF
-            </button>
+            <button onclick="window.print()" class="btn-action btn-pdf px-4 py-1.5 shadow text-xs">🖨️ SALVAR
+                PDF</button>
         </div>
     </div>
 
@@ -325,9 +310,8 @@
                         <input type="text" class="input-line w-1/3" placeholder="CEP">
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" class="input-line w-1/3" placeholder="Cidade/UF" value="São Paulo - SP">
+                        <input type="text" class="input-line w-2/3" placeholder="Cidade/UF" value="São Paulo - SP">
                         <input type="text" class="input-line w-1/3" placeholder="Vagas de Garagem">
-                        <input type="text" class="input-line w-1/3 font-bold text-nj-blue" placeholder="Prazo (Meses)">
                     </div>
                 </div>
             </div>
@@ -352,19 +336,28 @@
                         <input type="text" class="input-line">
                     </div>
                 </div>
-                <div class="mt-2 flex gap-4 text-[9px]">
+                <div class="mt-2 flex gap-4 text-[9px] items-center">
                     <span class="font-bold text-nj-blue">NOTA FISCAL?</span>
                     <label class="flex items-center"><input type="checkbox" class="mr-1"> SIM</label>
                     <label class="flex items-center"><input type="checkbox" class="mr-1"> NÃO</label>
+                    <input type="text" class="input-line w-1/3 ml-auto text-center font-bold text-nj-blue"
+                        placeholder="Prazo (Meses)">
                 </div>
-                <input type="text" class="input-line mt-1" placeholder="Obs / Carência">
             </div>
+        </div>
+
+        <div id="obs-main-container" class="border border-gray-200 p-2 rounded bg-nj-bg">
+            <div class="section-header print-section-header bg-gray-500">Observações / Carência</div>
+            <textarea id="obs-field"
+                class="auto-textarea w-full border-b border-gray-300 text-xs bg-transparent outline-none py-1"
+                placeholder="Descreva aqui detalhes da carência, observações sobre o imóvel ou negociação..."
+                rows="2"></textarea>
         </div>
 
         <div class="border border-gray-200 p-2 rounded">
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <div class="section-header print-section-header bg-gray-500">Locatário (Inquilino)</div>
+                    <div class="section-header print-section-header bg-nj-blue">Locatário (Inquilino)</div>
                     <input type="text" class="input-line mb-1" placeholder="Nome Completo">
                     <div class="flex gap-2">
                         <input type="text" class="input-line" placeholder="Telefone">
@@ -372,7 +365,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="section-header print-section-header bg-gray-500">Proprietário</div>
+                    <div class="section-header print-section-header bg-nj-blue">Proprietário</div>
                     <input type="text" class="input-line mb-1" placeholder="Nome Completo">
                     <div class="flex gap-2">
                         <input type="text" class="input-line" placeholder="Telefone">
@@ -471,23 +464,6 @@
             </div>
         </div>
 
-        <div id="obs-container" class="obs-container border border-gray-200 p-2 rounded w-full mb-2">
-            <div class="section-header print-section-header bg-nj-silver text-white">Status do Processo & Observações
-            </div>
-            <div class="grid grid-cols-4 gap-4 text-[9px] text-center uppercase font-bold text-gray-500 mb-2">
-                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Análise
-                        Aprovada</label></div>
-                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Contrato
-                        Enviado</label></div>
-                <div class="border-r border-gray-200"><label class="cursor-pointer"><input type="checkbox"> Chaves
-                        Entregues</label></div>
-                <div><label class="cursor-pointer"><input type="checkbox"> Finalizado</label></div>
-            </div>
-            <textarea id="obs-field"
-                class="auto-textarea w-full border-t border-gray-200 pt-2 text-xs bg-transparent outline-none"
-                placeholder="Digite observações importantes aqui..." rows="1"></textarea>
-        </div>
-
         <footer class="mt-auto pt-2 border-t border-gray-300 text-center text-[8px] text-gray-500">
             <p class="font-bold text-nj-blue">NETO JUNIOR REAL ESTATE</p>
             <p>Rua Henri Dunant, 792 - Torre Office - Conjunto 307 - Chácara Santo Antônio, São Paulo-SP</p>
@@ -496,69 +472,44 @@
     </div>
 
     <script>
-        /* --- SISTEMA DE ARQUIVOS (Checklist) --- */
         function saveData() {
             const inputs = document.querySelectorAll('input, textarea, select');
-            const data = {
-                type: 'checklist',
-                values: []
-            };
-
-            // Salva o estado de todos os inputs (texto e checkboxes)
+            const data = { type: 'checklist', values: [] };
             inputs.forEach(input => {
-                if (input.type === 'checkbox') {
-                    data.values.push(input.checked);
-                } else {
-                    data.values.push(input.value);
-                }
+                if (input.type === 'checkbox') data.values.push(input.checked);
+                else data.values.push(input.value);
             });
-
-            // Criar e baixar arquivo
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-
             const now = new Date();
             const filename = `Checklist_NJ_${now.getDate()}-${now.getMonth() + 1}_${now.getHours()}h.nj`;
-
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            a.href = url; a.download = filename;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function loadFromFile(input) {
             const file = input.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function (e) {
                 try {
                     const data = JSON.parse(e.target.result);
-
                     const inputs = document.querySelectorAll('input, textarea, select');
                     inputs.forEach((input, index) => {
                         if (index < data.values.length) {
-                            if (input.type === 'checkbox') {
-                                input.checked = data.values[index];
-                            } else {
-                                input.value = data.values[index];
-                            }
+                            if (input.type === 'checkbox') input.checked = data.values[index];
+                            else input.value = data.values[index];
                         }
                     });
-
                     autoResize.call(document.getElementById('obs-field'));
                     alert('Checklist carregado com sucesso!');
-                } catch (err) {
-                    alert('Erro ao carregar. Verifique se o arquivo é válido.');
-                }
+                } catch (err) { alert('Erro ao carregar.'); }
             };
             reader.readAsText(file);
             input.value = '';
         }
 
-        /* --- ZOOM --- */
         let currentZoom = 85;
         const zoomDisplay = document.getElementById('zoom-display');
         const root = document.documentElement;
@@ -571,9 +522,8 @@
             zoomDisplay.textContent = currentZoom + '%';
         }
 
-        /* --- AUTO-RESIZE --- */
         const obsField = document.getElementById('obs-field');
-        const obsContainer = document.getElementById('obs-container');
+        const obsContainer = document.getElementById('obs-main-container');
 
         function autoResize() {
             this.style.height = 'auto';
@@ -587,28 +537,22 @@
         }
         obsField.addEventListener('input', autoResize);
 
-        /* --- TOGGLE INFO BOX --- */
         function toggleInfoBox() {
             const box = document.getElementById('info-box');
             if (box.classList.contains('hidden')) {
-                box.classList.remove('hidden');
-                box.classList.add('block');
+                box.classList.remove('hidden'); box.classList.add('block');
             } else {
-                box.classList.add('hidden');
-                box.classList.remove('block');
+                box.classList.add('hidden'); box.classList.remove('block');
             }
             box.classList.toggle('xl:block');
         }
 
-        /* --- INICIALIZAÇÃO --- */
         window.addEventListener('load', () => {
             const today = new Date();
             const dateStr = today.toLocaleDateString('pt-BR').replace(/\//g, '');
             document.title = `Checklist NJ${dateStr}`;
-
             const dateInputs = document.querySelectorAll('input[type="date"]');
             dateInputs.forEach(input => { input.valueAsDate = new Date(); });
-
             autoResize.call(obsField);
         });
     </script>
