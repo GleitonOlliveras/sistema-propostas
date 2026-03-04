@@ -112,6 +112,11 @@
             .obs-container.empty-obs {
                 display: none !important;
             }
+
+            /* Garante que blocos escondidos via JS continuem escondidos na impressão */
+            .hidden-print {
+                display: none !important;
+            }
         }
 
         .input-line {
@@ -216,6 +221,11 @@
 
         .btn-pdf:hover {
             background-color: #e5e7eb;
+        }
+
+        /* Animação suave para os campos dinâmicos */
+        .dynamic-field {
+            transition: all 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -333,7 +343,7 @@
                         <input type="text" class="input-line">
                     </div>
                     <div>
-                        <label class="text-[9px] font-bold text-nj-blue">COMISSÃO (Qtde)</label>
+                        <label class="text-[9px] font-bold text-nj-blue">COMISSÃO (%)</label>
                         <input type="text" class="input-line">
                     </div>
                 </div>
@@ -438,19 +448,38 @@
 
             <div class="border border-gray-200 p-2 rounded bg-slate-50">
                 <div class="section-header print-section-header">Garantia Selecionada</div>
-                <div class="grid grid-cols-2 gap-1 mb-2 text-[8px]">
+
+                <div class="grid grid-cols-2 gap-1 mb-2 text-[9px]">
                     <label class="flex items-center"><input type="checkbox" class="mr-1"> Caução ($)</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Seg. Fiança</label>
-                    <label class="flex items-center"><input type="checkbox" class="mr-1"> Fiador</label>
-                    <div class="flex items-center text-[9px] col-span-1">
-                        <input type="checkbox" class="mr-1"> <span class="mr-1">Tít. Cap.</span>
-                        <input type="text"
-                            class="border-b border-gray-400 w-12 text-center font-bold bg-transparent outline-none h-3"
-                            placeholder="(Valor)">
-                    </div>
+                    <label class="flex items-center"><input type="checkbox" id="chk-seguro" class="mr-1"
+                            onchange="toggleGarantia('seguro')"> Seg. Fiança</label>
+                    <label class="flex items-center"><input type="checkbox" id="chk-fiador" class="mr-1"
+                            onchange="toggleGarantia('fiador')"> Fiador</label>
+                    <label class="flex items-center"><input type="checkbox" id="chk-cap" class="mr-1"
+                            onchange="toggleGarantia('cap')"> Tít. Cap.</label>
                 </div>
 
-                <div class="group-title">Documentos do Fiador</div>
+                <div id="div-seguro"
+                    class="dynamic-field hidden mb-2 p-1.5 border-l-2 border-nj-blue bg-white text-[9px] print:hidden-print">
+                    <span class="font-bold text-nj-blue uppercase text-[8px]">Detalhes Seguro Fiança</span>
+                    <input type="text" class="input-line mb-1 mt-1" placeholder="O que abrange a cobertura?">
+                    <input type="text" class="input-line" placeholder="Comissão Parceiro (Sim/Não - Quem?)">
+                </div>
+
+                <div id="div-fiador"
+                    class="dynamic-field hidden mb-2 p-1.5 border-l-2 border-nj-blue bg-white text-[9px] print:hidden-print">
+                    <span class="font-bold text-nj-blue uppercase text-[8px]">Dados do Fiador</span>
+                    <input type="text" class="input-line mb-1 mt-1" placeholder="Nome do Fiador">
+                    <input type="text" class="input-line" placeholder="E-mail do Fiador">
+                </div>
+
+                <div id="div-cap"
+                    class="dynamic-field hidden mb-2 p-1.5 border-l-2 border-nj-blue bg-white text-[9px] print:hidden-print">
+                    <span class="font-bold text-nj-blue uppercase text-[8px]">Título de Capitalização</span>
+                    <input type="text" class="input-line mt-1" placeholder="Qtd. Aluguéis ou Pacotes negociados">
+                </div>
+
+                <div class="group-title mt-2">Documentos do Fiador</div>
                 <div class="flex flex-col gap-1">
                     <label class="check-item"><input type="checkbox" class="check-input"><span
                             class="check-label">Matrícula Imóvel (Ônus)</span></label>
@@ -476,6 +505,22 @@
     </div>
 
     <script>
+        // Função para mostrar/esconder campos dinâmicos da Garantia
+        function toggleGarantia(type) {
+            const chk = document.getElementById('chk-' + type);
+            const div = document.getElementById('div-' + type);
+
+            if (chk && div) {
+                if (chk.checked) {
+                    div.classList.remove('hidden');
+                    div.classList.remove('print:hidden-print');
+                } else {
+                    div.classList.add('hidden');
+                    div.classList.add('print:hidden-print');
+                }
+            }
+        }
+
         function saveData() {
             const inputs = document.querySelectorAll('input, textarea, select');
             const data = { type: 'checklist', values: [] };
@@ -506,6 +551,12 @@
                             else input.value = data.values[index];
                         }
                     });
+
+                    // Força a validação das garantias para abrir os campos se estiverem marcados no arquivo carregado
+                    toggleGarantia('fiador');
+                    toggleGarantia('seguro');
+                    toggleGarantia('cap');
+
                     autoResize.call(document.getElementById('obs-field'));
                     alert('Checklist carregado com sucesso!');
                 } catch (err) { alert('Erro ao carregar.'); }
@@ -558,6 +609,11 @@
             const dateInputs = document.querySelectorAll('input[type="date"]');
             dateInputs.forEach(input => { input.valueAsDate = new Date(); });
             autoResize.call(obsField);
+
+            // Garante o estado inicial dos campos dinâmicos
+            toggleGarantia('fiador');
+            toggleGarantia('seguro');
+            toggleGarantia('cap');
         });
     </script>
 
